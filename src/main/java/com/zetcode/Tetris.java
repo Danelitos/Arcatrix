@@ -2,8 +2,7 @@ package com.zetcode;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
+import javax.swing.*;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -30,15 +29,23 @@ public class Tetris extends JFrame {
 
     private void initUI() {
 
+        getContentPane().setLayout(null);
+
         statusbar = new JLabel(" 0");
-        add(statusbar, BorderLayout.SOUTH);
+        statusbar.setBounds(0, 344, 264, 28);
+        getContentPane().add(statusbar);
 
         var board = new Board(this);
-        add(board);
+        board.setBounds(0, 0, 264, 344);
+        getContentPane().add(board);
+
+        JButton btnNewButton = new JButton("Guardar");
+        btnNewButton.setBounds(159, 344, 105, 28);
+        getContentPane().add(btnNewButton);
         board.start();
 
         setTitle("Tetris");
-        setSize(200, 400);
+        setSize(278, 412);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
     }
