@@ -1,6 +1,7 @@
 package vista;
 
 import com.zetcode.Tetris;
+import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,7 +12,7 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-public class VentanaNivelElegido extends JFrame implements ActionListener {
+public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;
     JLabel texto;
     JPanel panel;
@@ -54,7 +55,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
         btnEmpPartida.setBackground(new Color(245, 52, 52));
         btnEmpPartida.setFocusPainted(false);
         panel.add(btnEmpPartida);
-        btnEmpPartida.addActionListener(this);
+        btnEmpPartida.addMouseListener(ControladorVentanaNivelElegido.getInstance());
 
         //boton atras
 
@@ -67,19 +68,4 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
         return miNivelElegido;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==btnEmpPartida){
-
-            //ToDo
-            //crear instancia partida con nivel como param
-
-            System.out.println("START !!");
-            this.setVisible(false);
-
-            //INICIAR JUEGO TETRIS
-            new Tetris();
-
-        }
-    }
 }

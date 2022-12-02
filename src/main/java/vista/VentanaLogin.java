@@ -22,7 +22,7 @@ public class VentanaLogin extends JFrame{
         super("ARCATRIX");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-        setMinimumSize(new Dimension(300,400));
+        setMinimumSize(new Dimension(500,500));
 
         panelLogin=new JPanel();
 
