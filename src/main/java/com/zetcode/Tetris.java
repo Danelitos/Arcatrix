@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vista.VentanaElegirNivel;
 import vista.VentanaLogin;
 
 /*
@@ -22,8 +23,9 @@ public class Tetris extends JFrame {
     private JLabel statusbar;
 
     public Tetris() {
-
+        logger.info("Playing");
         initUI();
+        this.setVisible(true);
     }
 
     private void initUI() {
@@ -46,13 +48,4 @@ public class Tetris extends JFrame {
         return statusbar;
     }
 
-    public static void main(String[] args) {
-
-    	logger.info("Playing");
-        EventQueue.invokeLater(() -> {
-
-            var game = VentanaLogin.getInstance();
-            game.setVisible(true);
-        });
-    }
 }

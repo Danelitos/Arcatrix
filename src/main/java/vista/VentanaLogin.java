@@ -1,10 +1,11 @@
 package vista;
 
+import controlador.ControladorVentanaLogin;
+
 import javax.swing.*;
 import java.awt.*;
-import java.util.Objects;
 
-public class VentanaLogin<JPanelFondo> extends JFrame{
+public class VentanaLogin extends JFrame{
     private static VentanaLogin miMenu;
 
     private JPanel panelLogin;
@@ -25,13 +26,12 @@ public class VentanaLogin<JPanelFondo> extends JFrame{
 
         panelLogin=new JPanel();
 
-        panelLogin.setLayout(null);
-        setLocationRelativeTo(null);
-        getContentPane().add(panelLogin);
+        panelLogin.setLayout(new GridLayout(6,1,0,0));
+        getContentPane().add(panelLogin,BorderLayout.CENTER);
 
         setLocationRelativeTo(null);
 
-        loginButton=getBoton("INICIAR SESIÓN");
+        loginButton=getBoton("INICIAR SESION");
         registrarse=getBoton("REGISTRARSE");
         usuario=new JTextField();
         password= new JPasswordField();
@@ -58,6 +58,7 @@ public class VentanaLogin<JPanelFondo> extends JFrame{
 
     private JButton getBoton(String text){
         JButton boton = new JButton(text);
+        boton.addMouseListener(ControladorVentanaLogin.getInstance());
         boton.setHorizontalAlignment(SwingConstants.CENTER);
 
         return boton;

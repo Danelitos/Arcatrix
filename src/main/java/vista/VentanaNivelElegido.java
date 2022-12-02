@@ -11,12 +11,13 @@ import javax.swing.border.Border;
 import javax.swing.plaf.basic.BasicBorders;
 import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
-public class NivelElegido extends JFrame implements ActionListener {
+public class VentanaNivelElegido extends JFrame implements ActionListener {
+    private static VentanaNivelElegido miNivelElegido;
     JLabel texto;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
-    public NivelElegido(String nivel){
+    public VentanaNivelElegido(String nivel){
 
         // crear ventana
         setTitle("Tetris");
@@ -59,6 +60,12 @@ public class NivelElegido extends JFrame implements ActionListener {
 
     }
 
+    public static VentanaNivelElegido getInstance(String nivelElegido) {
+        if(miNivelElegido==null){
+            miNivelElegido=new VentanaNivelElegido(nivelElegido);
+        }
+        return miNivelElegido;
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
