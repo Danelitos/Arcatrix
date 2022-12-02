@@ -44,4 +44,6 @@ public class Usuario {
 
         }
     }*/
+
+    public int getCodUsuario(){return this.codUsuario;}
 }
