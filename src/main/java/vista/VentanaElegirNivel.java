@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class VentanaElegirNivel extends JFrame implements ActionListener {
+public class VentanaElegirNivel extends JFrame {
     private static VentanaElegirNivel miVentanaElegirNivel;
     private JButton btnFacil, btnMedio, btnDificil;
     private JPanel panel;
@@ -83,29 +83,4 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         return VentanaElegirNivel.miVentanaElegirNivel;
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        nivel="nada";
-        Object source = e.getSource();
-        if (btnFacil.equals(source)) {
-            nivel = "facil";
-        } else if (btnMedio.equals(source)) {
-            nivel = "medio";
-        } else if (btnDificil.equals(source)) {
-            nivel = "dificil";
-        }
-
-        System.out.println("Nivel elegido: " + nivel);
-
-
-
-        //habilitar siguiente interfaz
-        this.setVisible(false);
-        var panelElegido = new VentanaNivelElegido(nivel);
-        //this.setVisible(false);
-        //panelElegido.setVisible(true);
-
-
-
-    }
 }
