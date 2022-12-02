@@ -7,6 +7,7 @@ import javax.swing.JLabel;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import vista.VentanaLogin;
 
 /*
 Java Tetris game clone
@@ -50,7 +51,7 @@ public class Tetris extends JFrame {
     	logger.info("Playing");
         EventQueue.invokeLater(() -> {
 
-            var game = new Tetris();
+            var game = VentanaLogin.getInstance();
             game.setVisible(true);
         });
     }
