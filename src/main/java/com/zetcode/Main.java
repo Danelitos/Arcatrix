@@ -1,6 +1,8 @@
 package com.zetcode;
 
 import vista.VentanaLogin;
+import vista.VentanaRecuperarContrasena;
+import vista.VentanaRegistro;
 
 import java.awt.*;
 
