@@ -12,7 +12,7 @@ public class VentanaElegirNivel extends JFrame {
     private JButton btnFacil, btnMedio, btnDificil;
     private JPanel panel;
 
-    private String nivel;
+    public static String nivel;
 
 
     private VentanaElegirNivel(){

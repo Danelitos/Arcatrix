@@ -14,12 +14,13 @@ import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;
-    JLabel texto;
+    public static String nivelElegido;
+    JLabel texto,numero;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
     public VentanaNivelElegido(String nivel){
-
+        nivelElegido=nivel;
         // crear ventana
         setTitle("Tetris");
         setSize(500, 500);
@@ -33,18 +34,30 @@ public class VentanaNivelElegido extends JFrame {
     private void setComponentes(String nivel){
         // crear panel
         panel = new JPanel();
-        panel.setLayout(null);
         panel.setBackground(Color.darkGray);
         this.getContentPane().add(panel);
+        panel.setLayout(null);
+        panel.setVisible(true);
 
         //texto del nivel elegido
         texto = new JLabel();
         texto.setText("NIVEL " + nivel.toUpperCase());
         texto.setForeground(Color.white);
-        texto.setBounds(150,300,200,20);
+        texto.setBounds(50,250,400,100);
         texto.setHorizontalAlignment(SwingConstants.CENTER);
-        texto.setFont(new Font("arial", Font.BOLD, 15));
+        texto.setFont(new Font("arial", Font.BOLD, 50));
         panel.add(texto);
+
+        //numero cuenta
+        numero = new JLabel();
+
+        numero.setForeground(Color.white);
+
+        numero.setBounds(75,75,350,200);
+        numero.setHorizontalAlignment(SwingConstants.CENTER);
+        numero.setFont(new Font("arial", Font.BOLD, 150));
+        panel.add(numero);
+        numero.setVisible(false);
 
         //boton empezar partida
         btnEmpPartida = new JButton();
@@ -66,6 +79,46 @@ public class VentanaNivelElegido extends JFrame {
             miNivelElegido=new VentanaNivelElegido(nivelElegido);
         }
         return miNivelElegido;
+    }
+
+    public void cuentaAtras(){
+
+
+
+        try {
+            btnEmpPartida.setVisible(false);
+
+
+
+
+
+
+            System.out.println("3");
+            numero.setVisible(true);
+            numero.setText("3");
+
+            this.paint(this.getGraphics());
+
+            Thread.sleep(1000);
+            numero.setText("2");
+
+            //this.update(this.getGraphics());
+            this.paint(this.getGraphics());
+            Thread.sleep(1000);
+            System.out.println("");
+            numero.setText("1");
+
+
+            this.paint(this.getGraphics());
+            Thread.sleep(1000);
+            System.out.println("1");
+            numero.setText("GO!");
+
+            this.paint(this.getGraphics());
+
+
+        }
+        catch (InterruptedException e) {}
     }
 
 }

@@ -3,14 +3,15 @@ package com.zetcode;
 public class Partida {
     private int codPartida;
     private ListaLadrillos lista;
-    private Nivel nivel;
-    private InfoPartida info;
+    private String nivel;
+    private int puntos;
     private Ranking rankings;
 
-    public Partida(int pCodPartida, ListaLadrillos pLista, Nivel pNivel, InfoPartida pInfo,Ranking pRankings){
+    public Partida(int pCodPartida, ListaLadrillos pLista, String pNivel, int pPuntos,Ranking pRankings){
         this.codPartida = pCodPartida;
         this.lista = pLista;
         this.nivel = pNivel;
+        this.puntos=pPuntos;
         this.rankings = pRankings;
     }
 
