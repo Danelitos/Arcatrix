@@ -1,5 +1,6 @@
 package com.zetcode;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class Usuario {
@@ -7,14 +8,14 @@ public class Usuario {
     private String nombre;
     private String password;
     private DatosPersonalizacion personalizacion;
-    //private ListaPartidasGuardadas partidasGuardadas;
+
+    private ArrayList<PartidaGuardada> listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
 
     public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion){
         codUsuario=pCodUsuario;
         nombre=pNombre;
         password=pPassword;
         personalizacion=pPersonalizacion;
-
     }
 
     public boolean esUsuario(String pNombre,String pPassword){
@@ -46,4 +47,8 @@ public class Usuario {
     }*/
 
     public int getCodUsuario(){return this.codUsuario;}
+
+    public ArrayList<PartidaGuardada> getListaPartidasGuardadas() {
+        return listaPartidasGuardadas;
+    }
 }
