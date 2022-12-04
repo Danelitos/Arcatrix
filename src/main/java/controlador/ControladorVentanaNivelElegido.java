@@ -1,7 +1,11 @@
 package controlador;
 
+import com.zetcode.ListaLadrillos;
+import com.zetcode.Partida;
+import com.zetcode.Ranking;
 import com.zetcode.Tetris;
 import vista.VentanaElegirNivel;
+import vista.VentanaLogin;
 import vista.VentanaNivelElegido;
 
 import javax.swing.*;
@@ -9,6 +13,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Random;
 
 public class ControladorVentanaNivelElegido implements MouseListener, ItemListener {
     private static ControladorVentanaNivelElegido miControladorVentanaNivelElegidol;
@@ -29,7 +34,20 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
         if(e.getSource() instanceof JButton){
             JButton boton = (JButton) e.getSource();
             if (boton.getText().equals("START")){
-                new Tetris();
+                //coger nivel elegido
+                String nivel= VentanaNivelElegido.getInstance("Nada").nivelElegido;
+
+                //crear la partida
+                Random randomizer= new Random();
+                int codPartida= randomizer.nextInt();
+                Partida partida= new Partida(codPartida,new ListaLadrillos(),nivel,0,new Ranking());
+                //añadirle la partida al usuario
+
+                //hacer cuenta atras
+                VentanaNivelElegido.getInstance("Nada").cuentaAtras();
+
+                //crear interfaz del juego
+                new Tetris(codPartida,nivel);
                 VentanaNivelElegido.getInstance("Nada").setVisible(false);
             }
             else{
@@ -59,4 +77,6 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
     public void itemStateChanged(ItemEvent e) {
 
     }
+
+
 }

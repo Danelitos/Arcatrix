@@ -21,13 +21,13 @@ public class Tetris extends JFrame {
 
     private JLabel statusbar;
 
-    public Tetris() {
+    public Tetris(int codPartida, String nivel) {
         logger.info("Playing");
-        initUI();
+        initUI(codPartida, nivel);
         this.setVisible(true);
     }
 
-    private void initUI() {
+    private void initUI(int codPartida, String nivel) {
 
         getContentPane().setLayout(null);
 
@@ -35,7 +35,7 @@ public class Tetris extends JFrame {
         statusbar.setBounds(0, 344, 264, 28);
         getContentPane().add(statusbar);
 
-        var board = new Board(this);
+        var board = new Board(this, codPartida, nivel);
         board.setBounds(0, 0, 264, 344);
         getContentPane().add(board);
 
