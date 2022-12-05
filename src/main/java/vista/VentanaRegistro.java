@@ -1,5 +1,7 @@
 package vista;
 
+import controlador.ControladorVentanaRegistro;
+
 import javax.swing.*;
 import java.awt.*;
 
@@ -33,7 +35,7 @@ public class VentanaRegistro extends JFrame {
 
         setLocationRelativeTo(null);
         ;
-        registrarse=getBoton("REGISTRARSE");
+        registrarse=getBoton("CREAR CUENTA");
         usuario=new JTextField();
         correo=new JTextField();
         password= new JPasswordField();
@@ -66,7 +68,7 @@ public class VentanaRegistro extends JFrame {
 
     private JButton getBoton(String text){
         JButton boton = new JButton(text);
-        //boton.addMouseListener(ControladorVentanaLogin.getInstance());
+        boton.addMouseListener(ControladorVentanaRegistro.getInstance());
         boton.setHorizontalAlignment(SwingConstants.CENTER);
 
         return boton;
