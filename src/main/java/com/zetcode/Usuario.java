@@ -1,7 +1,7 @@
 package com.zetcode;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 
 public class Usuario {
     private int codUsuario;
@@ -50,5 +50,19 @@ public class Usuario {
 
     public ArrayList<PartidaGuardada> getListaPartidasGuardadas() {
         return listaPartidasGuardadas;
+    }
+
+    public void partidasGuardadasUsuario(){
+        Iterator<PartidaGuardada> itr = this.getIterador();
+        PartidaGuardada partida = null;
+
+        while (itr.hasNext()) {
+            partida = itr.next();
+            partida.devJSONPartidaGuardada();
+        }
+    }
+
+    private Iterator<PartidaGuardada> getIterador() {
+        return (this.listaPartidasGuardadas.iterator());
     }
 }

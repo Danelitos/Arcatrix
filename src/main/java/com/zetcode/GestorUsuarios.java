@@ -51,9 +51,9 @@ public class GestorUsuarios {
         return  laPartidaGuardada;
     }
 
-    //public JSON_1 partidasGuardadas(Usuario elUsuario){
-
-    //}
+    public void partidasGuardadas(Usuario elUsuario){
+        elUsuario.partidasGuardadasUsuario();
+    }
 
 
 }

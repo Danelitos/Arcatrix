@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import javax.swing.*;
 
+import controlador.ControladorTetris;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import vista.VentanaElegirNivel;
@@ -40,6 +41,7 @@ public class Tetris extends JFrame {
         getContentPane().add(board);
 
         JButton btnNewButton = new JButton("Guardar");
+        btnNewButton.addMouseListener(ControladorTetris.getInstance());
         btnNewButton.setBounds(159, 344, 105, 28);
         getContentPane().add(btnNewButton);
         board.start();
