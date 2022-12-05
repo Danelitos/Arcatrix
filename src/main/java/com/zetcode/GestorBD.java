@@ -8,6 +8,7 @@ public class GestorBD {
     public GestorBD() throws SQLException {
 
         //prueba para base de datos
+
         String sURL = "jdbc:mysql://localhost/Tetris";
         con = DriverManager.getConnection(sURL,"root","");
 
