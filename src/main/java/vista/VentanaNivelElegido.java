@@ -1,16 +1,9 @@
 package vista;
 
-import com.zetcode.Tetris;
 import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.Border;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;

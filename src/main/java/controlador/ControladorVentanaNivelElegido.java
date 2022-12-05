@@ -3,9 +3,7 @@ package controlador;
 import com.zetcode.ListaLadrillos;
 import com.zetcode.Partida;
 import com.zetcode.Ranking;
-import com.zetcode.Tetris;
-import vista.VentanaElegirNivel;
-import vista.VentanaLogin;
+import vista.Tetris;
 import vista.VentanaNivelElegido;
 
 import javax.swing.*;

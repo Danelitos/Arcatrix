@@ -18,7 +18,10 @@ public class Central {
     }
 
     public void guardarPartida(int codUsuario, Partida laPartida){
-
+        Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
+        PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida,user);
+        GestorUsuarios.getInstance().anadirPartidaGuardada(user,partidaCreada);
+        //FALTA LO DEL SGBD
     }
 
     public void cargarPartida(int codUsuario, int codPartida, String fechaHora){

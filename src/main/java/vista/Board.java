@@ -1,6 +1,8 @@
-package com.zetcode;
+package vista;
 
+import com.zetcode.Shape;
 import com.zetcode.Shape.Tetrominoe;
+import vista.Tetris;
 
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -28,7 +30,7 @@ public class Board extends JPanel {
     private Shape curPiece;
     private Tetrominoe[] board;
 
-    public Board(Tetris parent,int codPartida, String nivel) {
+    public Board(Tetris parent, int codPartida, String nivel) {
         setTamanoYVelocidad(nivel);
         initBoard(parent);
 
@@ -80,7 +82,7 @@ public class Board extends JPanel {
         return board[(y * BOARD_WIDTH) + x];
     }
 
-    void start() {
+    public void start() {
 
         curPiece = new Shape();
         board = new Tetrominoe[BOARD_WIDTH * BOARD_HEIGHT];

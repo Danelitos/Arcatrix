@@ -46,8 +46,8 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										com.zetcode.Tetris
-									</mainClass>
+                                        vista.Tetris
+                                    </mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>

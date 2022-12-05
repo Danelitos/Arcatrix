@@ -1,8 +1,7 @@
 package controlador;
 
-import com.zetcode.Tetris;
+import vista.Tetris;
 import vista.VentanaElegirNivel;
-import vista.VentanaLogin;
 import vista.VentanaNivelElegido;
 
 import javax.swing.*;
@@ -29,7 +28,8 @@ public class ControladorTetris implements MouseListener, ItemListener {
     @Override
     public void mouseClicked(MouseEvent e) {
         if(e.getSource() instanceof JButton){
-            VentanaLogin.getInstance();
+            VentanaElegirNivel.getInstance();
+            //FALTA CERRAR JUEGO Y LLAMAR A CENTRAL
         }
         else{
             System.exit(0);
