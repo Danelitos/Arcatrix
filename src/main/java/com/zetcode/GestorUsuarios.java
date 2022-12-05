@@ -11,7 +11,7 @@ public class GestorUsuarios {
 
     private GestorUsuarios(){
         lista = new ArrayList<Usuario>();
-        Usuario admin = new Usuario(0,"admin","test",null);
+        Usuario admin = new Usuario(0,"admin","test",null,null,null);
         lista.add(admin);
     }
     public static GestorUsuarios getInstance(){
@@ -47,13 +47,14 @@ public class GestorUsuarios {
     public PartidaGuardada anadirPartidaGuardada(Usuario elUsuario, PartidaGuardada laPartidaGuardada){
         if (this.buscarUsuario(elUsuario.getCodUsuario()) != null){
             elUsuario.getListaPartidasGuardadas().add(laPartidaGuardada);
+
         }
         return  laPartidaGuardada;
     }
 
-    //public JSON_1 partidasGuardadas(Usuario elUsuario){
-
-    //}
+    public void partidasGuardadas(Usuario elUsuario){
+        elUsuario.partidasGuardadasUsuario();
+    }
 
 
 }

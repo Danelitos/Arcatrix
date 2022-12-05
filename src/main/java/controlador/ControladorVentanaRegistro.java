@@ -10,15 +10,15 @@ import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-public class ControladorVentanaLogin implements MouseListener, ItemListener {
-    private static ControladorVentanaLogin controlador;
+public class ControladorVentanaRegistro implements MouseListener, ItemListener {
+    private static ControladorVentanaRegistro controladorVentanaRegistro;
 
 
-    private ControladorVentanaLogin(){}
+    private ControladorVentanaRegistro(){}
 
-    public static ControladorVentanaLogin getInstance(){
-        if(controlador == null) controlador = new ControladorVentanaLogin();
-        return controlador;
+    public static ControladorVentanaRegistro getInstance(){
+        if(controladorVentanaRegistro == null) controladorVentanaRegistro = new ControladorVentanaRegistro();
+        return controladorVentanaRegistro;
     }
 
     @Override
@@ -29,16 +29,10 @@ public class ControladorVentanaLogin implements MouseListener, ItemListener {
 
         if(e.getSource() instanceof JButton){
             JButton boton = (JButton) e.getSource();
-            if (boton.getText().equals("INICIAR SESION")){
-                System.out.println("ENTRA");
-                //De momento así para que funcione
-                VentanaElegirNivel.getInstance(0);
-                VentanaLogin.getInstance().setVisible(false);
-            }
-            else if(boton.getText().equals("REGISTRARSE")){
-                System.out.println("Pasa a registrarse");
-                VentanaRegistro.getInstance().setVisible(true);
-                VentanaLogin.getInstance().setVisible(false);
+            if (boton.getText().equals("CREAR CUENTA")){
+                System.out.println("LOGIN");
+                VentanaLogin.getInstance().setVisible(true);
+                VentanaRegistro.getInstance().setVisible(false);
             }
             else{
                 System.exit(0);

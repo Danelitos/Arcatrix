@@ -7,10 +7,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JList;
-import java.awt.Color;
 import javax.swing.JButton;
 
-public class PartidasGuardadas extends JFrame {
+public class VentanaPartidasGuardadas extends JFrame {
 
     private JPanel contentPane;
 
@@ -21,7 +20,7 @@ public class PartidasGuardadas extends JFrame {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    PartidasGuardadas frame = new PartidasGuardadas();
+                    VentanaPartidasGuardadas frame = new VentanaPartidasGuardadas();
                     frame.setVisible(true);
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -33,7 +32,7 @@ public class PartidasGuardadas extends JFrame {
     /**
      * Create the frame.
      */
-    public PartidasGuardadas() {
+    public VentanaPartidasGuardadas() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 674, 398);
         contentPane = new JPanel();

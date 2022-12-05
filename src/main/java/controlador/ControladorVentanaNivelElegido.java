@@ -1,11 +1,6 @@
 package controlador;
 
-import com.zetcode.ListaLadrillos;
-import com.zetcode.Partida;
-import com.zetcode.Ranking;
-import com.zetcode.Tetris;
-import vista.VentanaElegirNivel;
-import vista.VentanaLogin;
+import com.zetcode.*;
 import vista.VentanaNivelElegido;
 
 import javax.swing.*;
@@ -35,20 +30,22 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
             JButton boton = (JButton) e.getSource();
             if (boton.getText().equals("START")){
                 //coger nivel elegido
-                String nivel= VentanaNivelElegido.getInstance("Nada").nivelElegido;
+                String nivel= VentanaNivelElegido.getInstance(0,"Nada").nivelElegido;
 
                 //crear la partida
                 Random randomizer= new Random();
                 int codPartida= randomizer.nextInt();
                 Partida partida= new Partida(codPartida,new ListaLadrillos(),nivel,0,new Ranking());
                 //añadirle la partida al usuario
-
+                int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
+                Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
+                user.asignarPartida(partida);
                 //hacer cuenta atras
-                VentanaNivelElegido.getInstance("Nada").cuentaAtras();
+                VentanaNivelElegido.getInstance(0,"Nada").cuentaAtras();
 
                 //crear interfaz del juego
-                new Tetris(codPartida,nivel);
-                VentanaNivelElegido.getInstance("Nada").setVisible(false);
+                new Tetris(0,codPartida,nivel);
+                VentanaNivelElegido.getInstance(0,"Nada").setVisible(false);
             }
             else{
                 System.exit(0);

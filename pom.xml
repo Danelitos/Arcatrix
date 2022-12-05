@@ -25,7 +25,12 @@
 			<version>4.13.2</version>
 			<scope>test</scope>
 		</dependency>
-	</dependencies>
+	  <dependency>
+		  <groupId>com.google.code.gson</groupId>
+		  <artifactId>gson</artifactId>
+		  <version>2.10</version>
+	  </dependency>
+  </dependencies>
 	<build>
 		<plugins>
 			<plugin>
@@ -41,8 +46,8 @@
 							<archive>
 								<manifest>
 									<mainClass>
-										com.zetcode.Tetris
-									</mainClass>
+                                        com.zetcode.Tetris
+                                    </mainClass>
 								</manifest>
 							</archive>
 							<descriptorRefs>

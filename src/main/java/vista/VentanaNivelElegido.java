@@ -4,22 +4,18 @@ import com.zetcode.Tetris;
 import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import javax.swing.border.Border;
-import javax.swing.plaf.basic.BasicBorders;
-import javax.swing.plaf.basic.BasicTabbedPaneUI;
 
 public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
+    public static int codigoUsuario;
     JLabel texto,numero;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
-    public VentanaNivelElegido(String nivel){
+    public VentanaNivelElegido(int codUsuario,String nivel){
+        codigoUsuario = codUsuario;
         nivelElegido=nivel;
         // crear ventana
         setTitle("Tetris");
@@ -74,24 +70,16 @@ public class VentanaNivelElegido extends JFrame {
 
     }
 
-    public static VentanaNivelElegido getInstance(String nivelElegido) {
+    public static VentanaNivelElegido getInstance(int codigoUsuario,String nivelElegido) {
         if(miNivelElegido==null){
-            miNivelElegido=new VentanaNivelElegido(nivelElegido);
+            miNivelElegido=new VentanaNivelElegido(codigoUsuario,nivelElegido);
         }
         return miNivelElegido;
     }
 
     public void cuentaAtras(){
-
-
-
         try {
             btnEmpPartida.setVisible(false);
-
-
-
-
-
 
             System.out.println("3");
             numero.setVisible(true);

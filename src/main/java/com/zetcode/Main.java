@@ -1,6 +1,7 @@
 package com.zetcode;
 
 import vista.VentanaLogin;
+import vista.VentanaPersonalizacion;
 import vista.VentanaRecuperarContrasena;
 import vista.VentanaRegistro;
 

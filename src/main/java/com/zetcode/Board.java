@@ -1,18 +1,14 @@
 package com.zetcode;
 
 import com.zetcode.Shape.Tetrominoe;
+import vista.VentanaElegirNivel;
 
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.Timer;
+import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.KeyAdapter;
-import java.awt.event.KeyEvent;
+import java.awt.event.*;
 
-public class Board extends JPanel {
+public class Board extends JPanel implements MouseListener {
 
     private int BOARD_WIDTH; //F-10 M-15 D-20
     private int BOARD_HEIGHT; // F-22 M-27 D-32
@@ -27,8 +23,15 @@ public class Board extends JPanel {
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
+    private Tetris parent;
 
-    public Board(Tetris parent,int codPartida, String nivel) {
+    private int codPartida;
+    private String nivel;
+
+    public Board(Tetris pParent, int pCodPartida, String pNivel) {
+        parent = pParent;
+        codPartida = pCodPartida;
+        nivel = pNivel;
         setTamanoYVelocidad(nivel);
         initBoard(parent);
 
@@ -80,7 +83,7 @@ public class Board extends JPanel {
         return board[(y * BOARD_WIDTH) + x];
     }
 
-    void start() {
+    public void start() {
 
         curPiece = new Shape();
         board = new Tetrominoe[BOARD_WIDTH * BOARD_HEIGHT];
@@ -303,6 +306,42 @@ public class Board extends JPanel {
                 x + squareWidth() - 1, y + 1);
     }
 
+    @Override
+    public void mouseClicked(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        if(e.getSource() instanceof JButton){
+            VentanaElegirNivel.getInstance(parent.codigoUsuario).setVisible(true);
+            parent.setVisible(false);
+            Central central = new Central();
+            central.guardarPartida(parent.codigoUsuario,parent.codigoPartida);
+            GestorUsuarios.getInstance().buscarUsuario(parent.codigoUsuario).eliminarPartidaAsignada(parent.codigoPartida);
+        }
+        else{
+            System.exit(0);
+        }
+        System.out.println("Partida guardada");
+
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+
+    }
+
     private class GameCycle implements ActionListener {
 
         @Override
@@ -360,4 +399,5 @@ public class Board extends JPanel {
             }
         }
     }
+
 }

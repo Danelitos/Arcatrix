@@ -26,19 +26,20 @@ public class ControladorVentanaElegirNivel implements MouseListener, ItemListene
 
     @Override
     public void mousePressed(MouseEvent e) {
+        int codigoUsuario = VentanaElegirNivel.getInstance(0).codUsuario;
         if(e.getSource() instanceof JButton){
             JButton boton = (JButton) e.getSource();
             if (boton.getText().equals("Facil")){
-                VentanaNivelElegido.getInstance(boton.getText());
-                VentanaElegirNivel.getInstance().setVisible(false);
+                VentanaNivelElegido.getInstance(codigoUsuario,boton.getText());
+                VentanaElegirNivel.getInstance(codigoUsuario).setVisible(false);
             }
             else if (boton.getText().equals("Medio")){
-                VentanaNivelElegido.getInstance(boton.getText());
-                VentanaElegirNivel.getInstance().setVisible(false);
+                VentanaNivelElegido.getInstance(codigoUsuario,boton.getText());
+                VentanaElegirNivel.getInstance(codigoUsuario).setVisible(false);
             }
             else if (boton.getText().equals("Dificil")){
-                VentanaNivelElegido.getInstance(boton.getText());
-                VentanaElegirNivel.getInstance().setVisible(false);
+                VentanaNivelElegido.getInstance(codigoUsuario,boton.getText());
+                VentanaElegirNivel.getInstance(codigoUsuario).setVisible(false);
             }
             else{
                 System.exit(0);

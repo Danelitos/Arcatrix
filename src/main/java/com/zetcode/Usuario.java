@@ -1,7 +1,7 @@
 package com.zetcode;
 
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Iterator;
 
 public class Usuario {
     private int codUsuario;
@@ -10,12 +10,16 @@ public class Usuario {
     private DatosPersonalizacion personalizacion;
 
     private ArrayList<PartidaGuardada> listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
+    private Partida enJuego;
 
-    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion){
+
+    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion, ArrayList<PartidaGuardada> pLista, Partida pEnJuego){
         codUsuario=pCodUsuario;
         nombre=pNombre;
         password=pPassword;
         personalizacion=pPersonalizacion;
+        listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
+        enJuego = null;
     }
 
     public boolean esUsuario(String pNombre,String pPassword){
@@ -51,4 +55,28 @@ public class Usuario {
     public ArrayList<PartidaGuardada> getListaPartidasGuardadas() {
         return listaPartidasGuardadas;
     }
+
+    public void partidasGuardadasUsuario(){
+        //Iterator<PartidaGuardada> itr = this.getIterador();
+        //PartidaGuardada partida = null;
+
+        //while (itr.hasNext()) {
+            //partida = itr.next();
+            //partida.devJSONPartidaGuardada();
+        //}
+        //System.out.println(this.listaPartidasGuardadas.get(0));
+    }
+
+    private Iterator<PartidaGuardada> getIterador() {
+        return (this.listaPartidasGuardadas.iterator());
+    }
+
+    public void asignarPartida(Partida laPartida){
+        this.enJuego = laPartida;
+    }
+
+    public void eliminarPartidaAsignada(int codPartida){
+        if(codPartida == this.enJuego.getCodPartida()){this.enJuego = null;}}
+
+    public Partida getEnJuego(){return enJuego;}
 }

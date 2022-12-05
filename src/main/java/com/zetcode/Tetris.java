@@ -1,13 +1,9 @@
 package com.zetcode;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
-import javax.swing.*;
-
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import vista.VentanaElegirNivel;
-import vista.VentanaLogin;
+
+import javax.swing.*;
 
 /*
 Java Tetris game clone
@@ -18,14 +14,20 @@ Website: https://zetcode.com
 public class Tetris extends JFrame {
 	
 	private static final Logger logger = LogManager.getLogger(Tetris.class);
-
+    public int codigoPartida;
+    public String nivel;
+    public int codigoUsuario;
     private JLabel statusbar;
 
-    public Tetris(int codPartida, String nivel) {
+    public Tetris(int codUsuario,int codPartida, String pNivel) {
+        codigoUsuario = codUsuario;
+        codigoPartida = codPartida;
+        nivel = pNivel;
         logger.info("Playing");
         initUI(codPartida, nivel);
         this.setVisible(true);
     }
+
 
     private void initUI(int codPartida, String nivel) {
 
@@ -40,6 +42,7 @@ public class Tetris extends JFrame {
         getContentPane().add(board);
 
         JButton btnNewButton = new JButton("Guardar");
+        btnNewButton.addMouseListener(board);
         btnNewButton.setBounds(159, 344, 105, 28);
         getContentPane().add(btnNewButton);
         board.start();
@@ -50,9 +53,8 @@ public class Tetris extends JFrame {
         setLocationRelativeTo(null);
     }
 
-    JLabel getStatusBar() {
+    public JLabel getStatusBar() {
 
         return statusbar;
     }
-
 }
