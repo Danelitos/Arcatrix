@@ -23,11 +23,13 @@ public class Board extends JPanel implements MouseListener {
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
+    private Tetris parent;
 
     private int codPartida;
     private String nivel;
 
-    public Board(Tetris parent, int pCodPartida, String pNivel) {
+    public Board(Tetris pParent, int pCodPartida, String pNivel) {
+        parent = pParent;
         codPartida = pCodPartida;
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
@@ -312,10 +314,11 @@ public class Board extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if(e.getSource() instanceof JButton){
-            VentanaElegirNivel.getInstance().setVisible(true);
-            getParent().setVisible(false);
+            VentanaElegirNivel.getInstance(parent.codigoUsuario).setVisible(true);
+            parent.setVisible(false);
             Central central = new Central();
-            //central.guardarPartida(0,);
+            central.guardarPartida(parent.codigoUsuario,parent.codigoPartida);
+            GestorUsuarios.getInstance().buscarUsuario(parent.codigoUsuario).eliminarPartidaAsignada(parent.codigoPartida);
         }
         else{
             System.exit(0);

@@ -47,6 +47,7 @@ public class GestorUsuarios {
     public PartidaGuardada anadirPartidaGuardada(Usuario elUsuario, PartidaGuardada laPartidaGuardada){
         if (this.buscarUsuario(elUsuario.getCodUsuario()) != null){
             elUsuario.getListaPartidasGuardadas().add(laPartidaGuardada);
+
         }
         return  laPartidaGuardada;
     }

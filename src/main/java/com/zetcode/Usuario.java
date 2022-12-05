@@ -57,16 +57,26 @@ public class Usuario {
     }
 
     public void partidasGuardadasUsuario(){
-        Iterator<PartidaGuardada> itr = this.getIterador();
-        PartidaGuardada partida = null;
+        //Iterator<PartidaGuardada> itr = this.getIterador();
+        //PartidaGuardada partida = null;
 
-        while (itr.hasNext()) {
-            partida = itr.next();
-            partida.devJSONPartidaGuardada();
-        }
+        //while (itr.hasNext()) {
+            //partida = itr.next();
+            //partida.devJSONPartidaGuardada();
+        //}
+        //System.out.println(this.listaPartidasGuardadas.get(0));
     }
 
     private Iterator<PartidaGuardada> getIterador() {
         return (this.listaPartidasGuardadas.iterator());
     }
+
+    public void asignarPartida(Partida laPartida){
+        this.enJuego = laPartida;
+    }
+
+    public void eliminarPartidaAsignada(int codPartida){
+        if(codPartida == this.enJuego.getCodPartida()){this.enJuego = null;}}
+
+    public Partida getEnJuego(){return enJuego;}
 }

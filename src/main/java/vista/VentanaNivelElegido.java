@@ -78,16 +78,8 @@ public class VentanaNivelElegido extends JFrame {
     }
 
     public void cuentaAtras(){
-
-
-
         try {
             btnEmpPartida.setVisible(false);
-
-
-
-
-
 
             System.out.println("3");
             numero.setVisible(true);

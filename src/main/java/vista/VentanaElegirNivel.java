@@ -13,9 +13,10 @@ public class VentanaElegirNivel extends JFrame {
     private JPanel panel;
 
     public static String nivel;
+    public static int codUsuario;
 
 
-    private VentanaElegirNivel(){
+    private VentanaElegirNivel(int codUsuario){
 
         // crear ventana
         setTitle("Tetris");
@@ -76,9 +77,9 @@ public class VentanaElegirNivel extends JFrame {
 
     }
 
-    public static VentanaElegirNivel getInstance(){
+    public static VentanaElegirNivel getInstance(int codUsuario){
         if(VentanaElegirNivel.miVentanaElegirNivel==null){
-            VentanaElegirNivel.miVentanaElegirNivel=new VentanaElegirNivel();
+            VentanaElegirNivel.miVentanaElegirNivel=new VentanaElegirNivel(codUsuario);
         }
         return VentanaElegirNivel.miVentanaElegirNivel;
     }

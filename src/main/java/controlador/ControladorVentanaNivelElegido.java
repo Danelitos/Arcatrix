@@ -1,9 +1,6 @@
 package controlador;
 
-import com.zetcode.ListaLadrillos;
-import com.zetcode.Partida;
-import com.zetcode.Ranking;
-import com.zetcode.Tetris;
+import com.zetcode.*;
 import vista.VentanaNivelElegido;
 
 import javax.swing.*;
@@ -40,7 +37,9 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 int codPartida= randomizer.nextInt();
                 Partida partida= new Partida(codPartida,new ListaLadrillos(),nivel,0,new Ranking());
                 //añadirle la partida al usuario
-
+                int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
+                Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
+                user.asignarPartida(partida);
                 //hacer cuenta atras
                 VentanaNivelElegido.getInstance(0,"Nada").cuentaAtras();
 
