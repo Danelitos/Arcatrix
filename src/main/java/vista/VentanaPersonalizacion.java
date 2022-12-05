@@ -1,13 +1,9 @@
 package vista;
 
-import controlador.ControladorVentanaElegirNivel;
 import controlador.ControladorVentanaPersonaliza;
-import controlador.ControladorVentanaRegistro;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ItemListener;
-import java.awt.event.MouseListener;
 
 public class VentanaPersonalizacion extends JFrame{
     private static VentanaPersonalizacion miVentanaPersonalizacion;
@@ -94,11 +90,11 @@ public class VentanaPersonalizacion extends JFrame{
         //crear BOTONES
         guardarPersonalizacion= new JButton();
         guardarPersonalizacion.setBounds(150,400,200,35);
-        guardarPersonalizacion.setText("Guardar personalizacion");
+        guardarPersonalizacion.setText("Guardar Personalización");
         guardarPersonalizacion.setBackground(new Color(51,159,221));
         guardarPersonalizacion.setFocusPainted(false);
         panelPersonalizacion.add(guardarPersonalizacion);
-        //guardarPersonalizacion.addMouseListener(ControladorVentanaPersonaliza.getInstance());
+        guardarPersonalizacion.addMouseListener(ControladorVentanaPersonaliza.getInstance());
 
     }
 

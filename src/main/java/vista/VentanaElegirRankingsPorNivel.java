@@ -4,19 +4,18 @@ import controlador.ControladorVentanaElegirNivel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-public class VentanaElegirRanckingsPorNivel extends JFrame {
+
+public class VentanaElegirRankingsPorNivel extends JFrame {
 
 
-    private static VentanaElegirRanckingsPorNivel miVentanaElegirRanckingsPorNivel;
+    private static VentanaElegirRankingsPorNivel miVentanaElegirRankingsPorNivel;
     private JButton btnGeneral, btnPorNiveles, btnMiRancking;
     private JPanel panel;
 
     public static int codUsuario;
 
 
-    private VentanaElegirRanckingsPorNivel(int codUsuario){
+    private VentanaElegirRankingsPorNivel(int codUsuario){
 
         // crear ventana
         setTitle("Tetris");
@@ -74,11 +73,11 @@ public class VentanaElegirRanckingsPorNivel extends JFrame {
 
     }
 
-    public static VentanaElegirRanckingsPorNivel getInstance(int codUsuario){
-        if(VentanaElegirRanckingsPorNivel.miVentanaElegirRanckingsPorNivel==null){
-            VentanaElegirRanckingsPorNivel.miVentanaElegirRanckingsPorNivel= new VentanaElegirRanckingsPorNivel(codUsuario);
+    public static VentanaElegirRankingsPorNivel getInstance(int codUsuario){
+        if(VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel ==null){
+            VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel = new VentanaElegirRankingsPorNivel(codUsuario);
         }
-        return VentanaElegirRanckingsPorNivel.miVentanaElegirRanckingsPorNivel;
+        return VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel;
     }
 }
 

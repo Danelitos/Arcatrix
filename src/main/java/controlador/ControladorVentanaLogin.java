@@ -2,6 +2,7 @@ package controlador;
 
 import vista.VentanaElegirNivel;
 import vista.VentanaLogin;
+import vista.VentanaMenu;
 import vista.VentanaRegistro;
 
 import javax.swing.*;
@@ -32,7 +33,7 @@ public class ControladorVentanaLogin implements MouseListener, ItemListener {
             if (boton.getText().equals("INICIAR SESION")){
                 System.out.println("ENTRA");
                 //De momento así para que funcione
-                VentanaElegirNivel.getInstance(0);
+                VentanaMenu.getInstance().setVisible(true);
                 VentanaLogin.getInstance().setVisible(false);
             }
             else if(boton.getText().equals("REGISTRARSE")){
