@@ -10,12 +10,16 @@ public class Usuario {
     private DatosPersonalizacion personalizacion;
 
     private ArrayList<PartidaGuardada> listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
+    private Partida enJuego;
 
-    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion){
+
+    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion, ArrayList<PartidaGuardada> pLista, Partida pEnJuego){
         codUsuario=pCodUsuario;
         nombre=pNombre;
         password=pPassword;
         personalizacion=pPersonalizacion;
+        listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
+        enJuego = null;
     }
 
     public boolean esUsuario(String pNombre,String pPassword){

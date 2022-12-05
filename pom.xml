@@ -46,7 +46,7 @@
 							<archive>
 								<manifest>
 									<mainClass>
-                                        vista.Tetris
+                                        com.zetcode.Tetris
                                     </mainClass>
 								</manifest>
 							</archive>

@@ -1,7 +1,5 @@
-package vista;
+package com.zetcode;
 
-import controlador.ControladorTetris;
-import controlador.ControladorVentanaNivelElegido;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -16,20 +14,13 @@ Website: https://zetcode.com
 public class Tetris extends JFrame {
 	
 	private static final Logger logger = LogManager.getLogger(Tetris.class);
-
-    private static Tetris miTetris;
-
-    public static Tetris getInstance(int codPartida, String nivel){
-        if(miTetris == null) miTetris = new Tetris(codPartida, nivel);
-        return miTetris;
-    }
-
     public int codigoPartida;
     public String nivel;
-
+    public int codigoUsuario;
     private JLabel statusbar;
 
-    public Tetris(int codPartida, String pNivel) {
+    public Tetris(int codUsuario,int codPartida, String pNivel) {
+        codigoUsuario = codUsuario;
         codigoPartida = codPartida;
         nivel = pNivel;
         logger.info("Playing");
@@ -51,7 +42,7 @@ public class Tetris extends JFrame {
         getContentPane().add(board);
 
         JButton btnNewButton = new JButton("Guardar");
-        btnNewButton.addMouseListener(ControladorTetris.getInstance());
+        btnNewButton.addMouseListener(board);
         btnNewButton.setBounds(159, 344, 105, 28);
         getContentPane().add(btnNewButton);
         board.start();

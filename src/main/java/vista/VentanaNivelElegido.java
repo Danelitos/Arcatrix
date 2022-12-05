@@ -1,5 +1,6 @@
 package vista;
 
+import com.zetcode.Tetris;
 import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
@@ -8,11 +9,13 @@ import java.awt.*;
 public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
+    public static int codigoUsuario;
     JLabel texto,numero;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
-    public VentanaNivelElegido(String nivel){
+    public VentanaNivelElegido(int codUsuario,String nivel){
+        codigoUsuario = codUsuario;
         nivelElegido=nivel;
         // crear ventana
         setTitle("Tetris");
@@ -67,9 +70,9 @@ public class VentanaNivelElegido extends JFrame {
 
     }
 
-    public static VentanaNivelElegido getInstance(String nivelElegido) {
+    public static VentanaNivelElegido getInstance(int codigoUsuario,String nivelElegido) {
         if(miNivelElegido==null){
-            miNivelElegido=new VentanaNivelElegido(nivelElegido);
+            miNivelElegido=new VentanaNivelElegido(codigoUsuario,nivelElegido);
         }
         return miNivelElegido;
     }
