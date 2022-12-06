@@ -1,18 +1,18 @@
 package vista;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.zetcode.Central;
+import com.zetcode.PartidaGuardada;
 import controlador.ControladorVentanaPartidasGuardadas;
 
 import java.awt.BorderLayout;
-import java.awt.EventQueue;
 import java.util.ArrayList;
 
-import javax.swing.JFrame;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JList;
-import javax.swing.JButton;
 
 public class VentanaPartidasGuardadas extends JFrame {
 
@@ -47,9 +47,21 @@ public class VentanaPartidasGuardadas extends JFrame {
         JList list = new JList();
         list.setBounds(408, 347, -403, -343);
         panel.add(list);
-        ArrayList<JsonArray> listaJSON = new ArrayList<>();
+        list.setVisible(true);
+        //JsonArray listaJSON = new JsonArray();
+        JsonArray array;
+        DefaultListModel listModel = new DefaultListModel();
         Central central = new Central();
-        central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
+        array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
+        //Asociar el modelo de lista al JList
+        list.setModel(listModel);
+        listModel.removeAllElements();
+        for (int i = 0; i < array.size(); i++) {
+            JsonObject object = array.getAsJsonObject();
+            Gson gson = new Gson();
+            PartidaGuardada p = gson.fromJson(object, PartidaGuardada.class);
+            listModel.addElement(p);
+        }
     }
 
     public static VentanaPartidasGuardadas getInstance() {

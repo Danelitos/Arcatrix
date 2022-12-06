@@ -36,14 +36,14 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 //crear la partida
                 int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
 
-                //añadir partida a la base datos
-                int codPartida;
-                try {
-                    GestorBD gestorBD= new GestorBD();
-                    codPartida=gestorBD.insertPartida(codUsuario,nivel,0);
-                } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
-                }
+                //añadir partida a la base datos (he comentado porque da error)
+                int codPartida = 0;
+                //try {
+                    //GestorBD gestorBD= new GestorBD();
+                    //codPartida=gestorBD.insertPartida(codUsuario,nivel,0);
+                //} catch (SQLException ex) {
+                    //throw new RuntimeException(ex);
+                //}
 
                 //crear la instancia partida
                 Partida partida= new Partida(codPartida,codUsuario,new ListaLadrillos(),nivel,0,new Ranking());
