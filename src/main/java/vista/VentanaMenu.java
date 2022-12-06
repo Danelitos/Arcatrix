@@ -4,6 +4,7 @@ import controlador.ControladorVentanaMenu;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Objects;
 
 public class VentanaMenu extends JFrame {
     private static VentanaMenu miVentanaMenu;
@@ -29,6 +30,7 @@ public class VentanaMenu extends JFrame {
         //inicar componentes
         this.setVisible(true);
         setComponentes();
+        this.pack();
     }
 
     public static VentanaMenu getInstance(int codigoUsuario) {
@@ -42,11 +44,19 @@ public class VentanaMenu extends JFrame {
         //crear panel
         panelMenu = new JPanel();
         //TODO MIRAR ESTO (DANEL)
-        //fondo=new JPanelImagen("MENU");
-        //this.getContentPane().add(fondo,BorderLayout.CENTER);
-        this.getContentPane().add(panelMenu);
-        panelMenu.setLayout(null);
-        panelMenu.setVisible(true);
+        fondo=new JPanelImagen("MENU");
+        //this.getContentPane().add(fondo,BorderLayout.EAST);
+
+        //this.getContentPane().add(panelMenu);
+        //panelMenu.setLayout(null);
+        //panelMenu.setVisible(true);
+
+        //TODO UNA MANERA
+        panelMenu.setLayout(new GridLayout(5, 1, 5, 5));
+        getContentPane().add(panelMenu, BorderLayout.EAST);
+
+        setLocationRelativeTo(null);
+        getContentPane().add(fondo,BorderLayout.WEST);
 
 
         //crear BOTONES
@@ -74,14 +84,6 @@ public class VentanaMenu extends JFrame {
         panelMenu.add(personalizacion);
         personalizacion.addMouseListener(ControladorVentanaMenu.getInstance());
 
-        cerrarSesion = new JButton();
-        cerrarSesion.setBounds(355, 10, 125, 35);
-        cerrarSesion.setText("Cerrar Sesión");
-        cerrarSesion.setBackground(new Color(51, 159, 221));
-        cerrarSesion.setFocusPainted(false);
-        panelMenu.add(cerrarSesion);
-        cerrarSesion.addMouseListener(ControladorVentanaMenu.getInstance());
-
         rankings = new JButton();
         rankings.setBounds(150, 400, 200, 35);
         rankings.setText("Rankings");
@@ -89,16 +91,24 @@ public class VentanaMenu extends JFrame {
         rankings.setFocusPainted(false);
         panelMenu.add(rankings);
         rankings.addMouseListener(ControladorVentanaMenu.getInstance());
+
+        cerrarSesion = new JButton();
+        cerrarSesion.setBounds(355, 10, 125, 35);
+        cerrarSesion.setText("Cerrar Sesión");
+        cerrarSesion.setBackground(new Color(51, 159, 221));
+        cerrarSesion.setFocusPainted(false);
+        panelMenu.add(cerrarSesion);
+        cerrarSesion.addMouseListener(ControladorVentanaMenu.getInstance());
     }
 
-    class ImagenFondo extends JPanel{
+    static class ImagenFondo extends JPanel{
         private Image imagen;
 
         public void paint(Graphics g){
-            imagen=new ImageIcon(getClass().getResource("/main/java/img/tetrisFondo.png")).getImage();
+            imagen=new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/java/img/tetrisFondo.png"))).getImage();
             g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
-            setOpaque(false);
-            super.paint(g);
+            //setOpaque(false);
+            super.paintChildren(g);
         }
     }
 }

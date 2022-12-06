@@ -18,6 +18,7 @@ public class JPanelImagen extends JPanel {
         JLabel message = null;
         ImageIcon imageIcon = GaleriaIconos.getInstance().obtenerImagen(tipoVentana);
 
+
         display.setIcon(imageIcon);
 
         add(display);

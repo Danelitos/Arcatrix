@@ -3,11 +3,10 @@ package com.zetcode;
 import javax.swing.*;
 import java.util.ArrayList;
 import java.util.Objects;
-import java.util.Random;
 
 public class GaleriaIconos {
     private  static GaleriaIconos miGaleria;
-    private String path="src/main/java/img/";
+    private String path="/img/";
 
     private final String[] imagenes={"tetrisFondo.png"};
 
@@ -40,7 +39,8 @@ public class GaleriaIconos {
     }
 
     public ImageIcon crearImagen(String pInformacion){
-        return new ImageIcon(Objects.requireNonNull(getClass().getResource("C:\\Users\\Danel\\UNI\\INGENIERIA INFOR\\3.Curso\\Análisis y Diseño de Sistemas de Información\\Arcatrix\\src\\main\\java\\img\\tetrisFondo.png")));
+        System.out.println("Hola");
+        return new ImageIcon(Objects.requireNonNull(getClass().getResource(path + pInformacion)));
     }
 
 }
