@@ -17,6 +17,14 @@ public class PartidaGuardada {
         this.cuando = pCuando;
     }
 
+    public Usuario getElUsuario() {
+        return elUsuario;
+    }
+
+    public void setElUsuario(Usuario elUsuario) {
+        this.elUsuario = elUsuario;
+    }
+
     public int obtCodUsuario(){
         return this.elUsuario.getCodUsuario();
     }

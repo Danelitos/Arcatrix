@@ -35,7 +35,7 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
 
                 //crear la partida
                 int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
-
+                
                 //añadir partida a la base datos
                 int codPartida;
                 try {
