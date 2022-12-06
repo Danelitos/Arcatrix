@@ -39,8 +39,7 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 //añadir partida a la base datos
                 int codPartida;
                 try {
-                    GestorBD gestorBD= new GestorBD();
-                    codPartida=gestorBD.insertPartida(codUsuario,nivel,0);
+                    codPartida=GestorBD.getInstance().insertPartida(codUsuario,nivel,0);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
