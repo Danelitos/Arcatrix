@@ -8,6 +8,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.Random;
 
 public class ControladorVentanaNivelElegido implements MouseListener, ItemListener {
@@ -33,11 +34,21 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 String nivel= VentanaNivelElegido.getInstance(0,"Nada").nivelElegido;
 
                 //crear la partida
-                Random randomizer= new Random();
-                int codPartida= randomizer.nextInt();
-                Partida partida= new Partida(codPartida,new ListaLadrillos(),nivel,0,new Ranking());
-                //añadirle la partida al usuario
                 int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
+
+                //añadir partida a la base datos
+                int codPartida;
+                try {
+                    GestorBD gestorBD= new GestorBD();
+                    codPartida=gestorBD.insertPartida(codUsuario,nivel,0);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+
+                //crear la instancia partida
+                Partida partida= new Partida(codPartida,codUsuario,new ListaLadrillos(),nivel,0,new Ranking());
+                System.out.println("partida instancia: " + partida.getCodPartida());
+                //añadirle la partida al usuario
                 Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
                 user.asignarPartida(partida);
                 //hacer cuenta atras
