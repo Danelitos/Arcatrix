@@ -10,6 +10,7 @@ import controlador.ControladorVentanaPartidasGuardadas;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -44,28 +45,25 @@ public class VentanaPartidasGuardadas extends JFrame {
         panel.add(volver);
         volver.addMouseListener(ControladorVentanaPartidasGuardadas.getInstance());
 
-        String [] ejemplo = {"Hola", "Adiós"};
-        JList<String> listaEjemplo = new JList<String>(ejemplo);
-        listaEjemplo.setBackground(Color.red);
-        listaEjemplo.setBounds(408, 347, -403, -343);
+        //String [] ejemplo = {"Hola", "Adiós"};
+        JsonArray array = new JsonArray();
+        DefaultListModel listModel = new DefaultListModel();
+        Central central = new Central();
+        array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
+        //Asociar el modelo de lista al JList
+        for (int i = 0; i < array.size(); i++) {
+            JsonObject object = array.getAsJsonObject();
+            Gson gson = new Gson();
+            Date p = gson.fromJson(object, PartidaGuardada.class).obtFechaHora();
+            String s = p.toString();
+            listModel.add(i,s);
+        }
+        JList<String> listaEjemplo = new JList<String>(listModel);
+        listaEjemplo.setModel(listModel);
+        listaEjemplo.setBounds(10, 10, 300, 300);
         listaEjemplo.setVisibleRowCount(4);
         JScrollPane lamDesp = new JScrollPane(listaEjemplo);
         panel.add(listaEjemplo);
-        panel.setVisible(true);
-        listaEjemplo.setVisible(true);
-        this.paint(this.getGraphics());
-        //JsonArray array;
-        //DefaultListModel listModel = new DefaultListModel();
-        //Central central = new Central();
-        //array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
-        //Asociar el modelo de lista al JList
-        //list.setModel(listModel);
-        //for (int i = 0; i < array.size(); i++) {
-        //    JsonObject object = array.getAsJsonObject();
-        //    Gson gson = new Gson();
-        //    PartidaGuardada p = gson.fromJson(object, PartidaGuardada.class);
-        //    listModel.addElement(p);
-        //}
     }
 
     public static VentanaPartidasGuardadas getInstance() {
