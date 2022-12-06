@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: localhost
--- Tiempo de generación: 05-12-2022 a las 17:33:28
+-- Tiempo de generación: 05-12-2022 a las 22:59:51
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.1.12
 
@@ -31,15 +31,39 @@ CREATE TABLE `Partida` (
   `codPartida` int(30) NOT NULL,
   `codUsuario` int(30) NOT NULL,
   `nivel` varchar(10) NOT NULL,
-  `listaLadrillos` varchar(10) NOT NULL
+  `puntos` int(30) NOT NULL,
+  `listaLadrillos` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `Partida`
 --
 
-INSERT INTO `Partida` (`codPartida`, `codUsuario`, `nivel`, `listaLadrillos`) VALUES
-(3, 5, 'dificil', 'ladrillos');
+INSERT INTO `Partida` (`codPartida`, `codUsuario`, `nivel`, `puntos`, `listaLadrillos`) VALUES
+(1, 0, 'Facil', 0, 'ladrillos'),
+(2, 0, 'Facil', 0, 'ladrillos'),
+(3, 0, 'Medio', 0, 'ladrillos'),
+(4, 0, 'Facil', 0, 'ladrillos');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `Partida`
+--
+ALTER TABLE `Partida`
+  ADD PRIMARY KEY (`codPartida`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `Partida`
+--
+ALTER TABLE `Partida`
+  MODIFY `codPartida` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
