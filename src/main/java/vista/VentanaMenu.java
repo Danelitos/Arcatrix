@@ -17,8 +17,9 @@ public class VentanaMenu extends JFrame {
     private JButton personalizacion;
     private JButton cerrarSesion;
     private JButton rankings;
+    public static int codigoUsuario;
 
-    private VentanaMenu() {
+    private VentanaMenu(int codigoUsuario) {
         super("ARCATRIX - MENÚ");
         // crear ventana
         setSize(500, 500);
@@ -30,9 +31,9 @@ public class VentanaMenu extends JFrame {
         setComponentes();
     }
 
-    public static VentanaMenu getInstance() {
+    public static VentanaMenu getInstance(int codigoUsuario) {
         if (miVentanaMenu == null) {
-            miVentanaMenu = new VentanaMenu();
+            miVentanaMenu = new VentanaMenu(codigoUsuario);
         }
         return miVentanaMenu;
     }

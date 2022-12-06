@@ -32,28 +32,28 @@ public class ControladorVentanaMenu implements MouseListener, ItemListener {
                 System.out.println("ENTRA");
                 //TODO De momento así para que funcione
                 VentanaElegirNivel.getInstance(0);
-                VentanaMenu.getInstance().setVisible(false);
+                VentanaMenu.getInstance(0).setVisible(false);
             }
             else if(boton.getText().equals("Cargar Partida")){
                 System.out.println("Pasa a cargar partida");
-                //VentanaPartidasGuardadas.getInstance();
-                VentanaMenu.getInstance().setVisible(false);
+                VentanaPartidasGuardadas.getInstance().setVisible(true);
+                VentanaMenu.getInstance(0).setVisible(false);
             }
             else if(boton.getText().equals("Personalización")){
                 System.out.println("Pasa a personalizar");
                 VentanaPersonalizacion.getInstance().setVisible(true);
-                VentanaMenu.getInstance().setVisible(false);
+                VentanaMenu.getInstance(0).setVisible(false);
             }
             else if(boton.getText().equals("Rankings")){
                 System.out.println("Pasa a ver los rankings");
                 //TODO De momento así para que funcione
                 VentanaElegirRanking.getInstance(0).setVisible(true);
-                VentanaMenu.getInstance().setVisible(false);
+                VentanaMenu.getInstance(0).setVisible(false);
             }
             else if(boton.getText().equals("Cerrar Sesión")){
                 System.out.println("Se cierra la sesion del usuario");
                 VentanaLogin.getInstance().setVisible(true);
-                VentanaMenu.getInstance().setVisible(false);
+                VentanaMenu.getInstance(0).setVisible(false);
             }
             else{
                 System.exit(0);

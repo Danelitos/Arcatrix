@@ -1,7 +1,11 @@
 package vista;
 
+import com.google.gson.JsonArray;
+import com.zetcode.Central;
+
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -12,27 +16,12 @@ import javax.swing.JButton;
 public class VentanaPartidasGuardadas extends JFrame {
 
     private JPanel contentPane;
-
-    /**
-     * Launch the application.
-     */
-    public static void main(String[] args) {
-        EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                try {
-                    VentanaPartidasGuardadas frame = new VentanaPartidasGuardadas();
-                    frame.setVisible(true);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-    }
+    private static VentanaPartidasGuardadas miVentana;
 
     /**
      * Create the frame.
      */
-    public VentanaPartidasGuardadas() {
+    private VentanaPartidasGuardadas() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 674, 398);
         contentPane = new JPanel();
@@ -45,11 +34,21 @@ public class VentanaPartidasGuardadas extends JFrame {
         panel.setLayout(null);
 
         JButton btnNewButton = new JButton("Cargar Partida");
-        btnNewButton.setBounds(438, 256, 107, 38);
+        btnNewButton.setBounds(438, 256, 120, 38);
         panel.add(btnNewButton);
 
         JList list = new JList();
         list.setBounds(408, 347, -403, -343);
         panel.add(list);
+        ArrayList<JsonArray> listaJSON = new ArrayList<>();
+        Central central = new Central();
+        central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
+    }
+
+    public static VentanaPartidasGuardadas getInstance() {
+        if (miVentana == null) {
+            miVentana = new VentanaPartidasGuardadas();
+        }
+        return miVentana;
     }
 }

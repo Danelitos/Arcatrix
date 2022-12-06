@@ -1,6 +1,8 @@
 package com.zetcode;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.Date;
 
@@ -24,11 +26,4 @@ public class PartidaGuardada {
     }
 
     public Date obtFechaHora(){return this.cuando;}
-
-    public void devJSONPartidaGuardada(){
-        Gson json = new Gson();
-        //String representacionJSON = json.toJson(this.);
-    }
-
-
 }

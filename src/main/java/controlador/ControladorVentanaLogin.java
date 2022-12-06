@@ -33,7 +33,7 @@ public class ControladorVentanaLogin implements MouseListener, ItemListener {
             if (boton.getText().equals("INICIAR SESION")){
                 System.out.println("ENTRA");
                 //De momento así para que funcione
-                VentanaMenu.getInstance().setVisible(true);
+                VentanaMenu.getInstance(0).setVisible(true);
                 VentanaLogin.getInstance().setVisible(false);
             }
             else if(boton.getText().equals("REGISTRARSE")){

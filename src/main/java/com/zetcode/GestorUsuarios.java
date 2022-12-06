@@ -1,5 +1,7 @@
 package com.zetcode;
 
+import com.google.gson.JsonArray;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
@@ -52,8 +54,8 @@ public class GestorUsuarios {
         return  laPartidaGuardada;
     }
 
-    public void partidasGuardadas(Usuario elUsuario){
-        elUsuario.partidasGuardadasUsuario();
+    public ArrayList<PartidaGuardada> partidasGuardadas(Usuario elUsuario){
+        return elUsuario.partidasGuardadasUsuario();
     }
 
 

@@ -1,5 +1,8 @@
 package com.zetcode;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
@@ -56,15 +59,15 @@ public class Usuario {
         return listaPartidasGuardadas;
     }
 
-    public void partidasGuardadasUsuario(){
-        //Iterator<PartidaGuardada> itr = this.getIterador();
-        //PartidaGuardada partida = null;
-
-        //while (itr.hasNext()) {
-            //partida = itr.next();
-            //partida.devJSONPartidaGuardada();
-        //}
-        //System.out.println(this.listaPartidasGuardadas.get(0));
+    public ArrayList<PartidaGuardada> partidasGuardadasUsuario(){
+        Iterator<PartidaGuardada> itr = this.getIterador();
+        PartidaGuardada partida = null;
+        ArrayList<PartidaGuardada> listaPartidas = new ArrayList<>();
+        while (itr.hasNext()) {
+            partida = itr.next();
+            listaPartidas.add(partida);
+        }
+        return listaPartidas;
     }
 
     private Iterator<PartidaGuardada> getIterador() {

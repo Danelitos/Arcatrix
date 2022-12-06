@@ -2,6 +2,7 @@ package com.zetcode;
 
 import com.zetcode.Shape.Tetrominoe;
 import vista.VentanaElegirNivel;
+import vista.VentanaMenu;
 
 import javax.swing.*;
 import java.awt.Color;
@@ -314,7 +315,7 @@ public class Board extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if(e.getSource() instanceof JButton){
-            VentanaElegirNivel.getInstance(parent.codigoUsuario).setVisible(true);
+            VentanaMenu.getInstance(0).setVisible(true);
             parent.setVisible(false);
             Central central = new Central();
             central.guardarPartida(parent.codigoUsuario,parent.codigoPartida);
