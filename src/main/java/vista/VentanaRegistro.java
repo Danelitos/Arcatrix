@@ -1,9 +1,10 @@
 package vista;
 
-import controlador.ControladorVentanaRegistro;
+import com.zetcode.GestorBD;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class VentanaRegistro extends JFrame {
     private static VentanaRegistro miMenu;
@@ -34,13 +35,20 @@ public class VentanaRegistro extends JFrame {
         getContentPane().add(panelRegistro,BorderLayout.CENTER);
 
         setLocationRelativeTo(null);
-        ;
-        registrarse=getBoton("CREAR CUENTA");
+
+        registrarse=new JButton("CREAR CUENTA");
+        registrarse.addActionListener(evento -> {
+            try {
+                this.registro();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
         usuario=new JTextField();
         correo=new JTextField();
         password= new JPasswordField();
         repetirPassword = new JPasswordField();
-        usuarioText=new JLabel("Usuario");
+        usuarioText=new JLabel("Nombre");
         correoText=new JLabel("Correo electrónico");
         passwordText=new JLabel("Contraseña");
         repetirPasswordText=new JLabel("Repetir contraseña");
@@ -66,11 +74,26 @@ public class VentanaRegistro extends JFrame {
         return VentanaRegistro.miMenu;
     }
 
-    private JButton getBoton(String text){
-        JButton boton = new JButton(text);
-        boton.addMouseListener(ControladorVentanaRegistro.getInstance());
-        boton.setHorizontalAlignment(SwingConstants.CENTER);
 
-        return boton;
+    private void registro() throws SQLException {
+        String usuarioInsert=usuario.getText();
+        String correoInsert=correo.getText();
+        String passwordInsert=new String(password.getPassword());
+        String repetirPInsert=new String(repetirPassword.getPassword());
+        if(passwordInsert.equals(repetirPInsert)){
+            boolean registroCorrecto=GestorBD.getInstance().addUsuario(usuarioInsert,correoInsert,passwordInsert);
+            if (registroCorrecto){
+                JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"El registro ha sido exitoso","REGISTRO EXITOSO",JOptionPane.INFORMATION_MESSAGE);
+            }
+            else {
+                JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"Ha habido un error al registrarse","REGISTRO ERRONEO",JOptionPane.ERROR_MESSAGE);
+            }
+            VentanaRegistro.getInstance().setVisible(false);
+            VentanaLogin.getInstance().setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"Las contraseñas no coinciden.\nVuelve a escribir la contraseña","CONTRASEÑA INVALIDA",JOptionPane.ERROR_MESSAGE);
+        }
     }
+
 }
