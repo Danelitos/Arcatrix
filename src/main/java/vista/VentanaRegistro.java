@@ -22,6 +22,7 @@ public class VentanaRegistro extends JFrame {
     private JPasswordField repetirPassword;
 
     private JButton registrarse;
+    private JButton volver;
 
     private VentanaRegistro(){
         super("ARCATRIX - REGISTRO");
@@ -36,7 +37,7 @@ public class VentanaRegistro extends JFrame {
 
         setLocationRelativeTo(null);
 
-        registrarse=new JButton("CREAR CUENTA");
+        registrarse=new JButton("Crear cuenta");
         registrarse.addActionListener(evento -> {
             try {
                 this.registro();
@@ -44,6 +45,8 @@ public class VentanaRegistro extends JFrame {
                 throwables.printStackTrace();
             }
         });
+        volver=new JButton("Volver");
+        volver.addActionListener(evento -> volver());
         usuario=new JTextField();
         correo=new JTextField();
         password= new JPasswordField();
@@ -62,6 +65,7 @@ public class VentanaRegistro extends JFrame {
         panelRegistro.add(repetirPasswordText, BorderLayout.CENTER);
         panelRegistro.add(repetirPassword,BorderLayout.CENTER);
         panelRegistro.add(registrarse,BorderLayout.LINE_END);
+        panelRegistro.add(volver,BorderLayout.LINE_END);
 
 
         setVisible(true);
@@ -94,6 +98,11 @@ public class VentanaRegistro extends JFrame {
         else{
             JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"Las contraseñas no coinciden.\nVuelve a escribir la contraseña","CONTRASEÑA INVALIDA",JOptionPane.ERROR_MESSAGE);
         }
+    }
+
+    public void volver(){
+        VentanaRegistro.getInstance().setVisible(false);
+        VentanaLogin.getInstance().setVisible(true);
     }
 
 }

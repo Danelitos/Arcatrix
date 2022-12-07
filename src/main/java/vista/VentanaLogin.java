@@ -1,9 +1,11 @@
 package vista;
 
+import com.zetcode.GestorBD;
 import controlador.ControladorVentanaLogin;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class VentanaLogin extends JFrame{
     private static VentanaLogin miMenu;
@@ -31,8 +33,16 @@ public class VentanaLogin extends JFrame{
 
         setLocationRelativeTo(null);
 
-        loginButton=getBoton("INICIAR SESION");
-        registrarse=getBoton("REGISTRARSE");
+        loginButton=new JButton("INICIAR SESION");
+        loginButton.addActionListener(evento -> {
+            try {
+                login();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+        registrarse=new JButton("REGISTRARSE");
+        registrarse.addActionListener(evento -> registro());
         usuario=new JTextField();
         password= new JPasswordField();
         usuarioText=new JLabel("Usuario");
@@ -56,11 +66,26 @@ public class VentanaLogin extends JFrame{
         return VentanaLogin.miMenu;
     }
 
-    private JButton getBoton(String text){
-        JButton boton = new JButton(text);
-        boton.addMouseListener(ControladorVentanaLogin.getInstance());
-        boton.setHorizontalAlignment(SwingConstants.CENTER);
+    public void login() throws SQLException {
+        String usuarioVerificar=usuario.getText();
+        String passwordVerificar=new String(password.getPassword());
+        int loginCorrecto=GestorBD.getInstance().verificarLogin(usuarioVerificar,passwordVerificar);
+        if(loginCorrecto!=0){
+            System.out.println(loginCorrecto);
+            VentanaLogin.getInstance().setVisible(false);
+            VentanaMenu.getInstance(loginCorrecto).setVisible(true);
+        }
+        else{
+            JOptionPane.showMessageDialog(VentanaLogin.getInstance(),"Ha habido un error al logearse","LOGIN ERRONEO",JOptionPane.ERROR_MESSAGE);
+        }
 
-        return boton;
     }
+
+    public void registro(){
+        VentanaLogin.getInstance().setVisible(false);
+        VentanaRegistro.getInstance().setVisible(true);
+    }
+
+
+
 }
