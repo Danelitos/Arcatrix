@@ -7,6 +7,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class VentanaNivelElegido extends JFrame implements ActionListener {
     private static VentanaNivelElegido miNivelElegido;
@@ -115,14 +116,15 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnEmpPartida){
 
-            int codPartida = 0;
+            int codPartida;
             //INSERTAR PARTIDA EN BASE DATOS
-            //try {
-            //    codPartida=GestorBD.getInstance().insertPartida(codUsuario,nivel,0);
-            //} catch (SQLException ex) {
-            //    throw new RuntimeException(ex);
-            //}
-
+            try {
+                codPartida=GestorBD.getInstance().insertPartida(codigoUsuario,nivelElegido,0);
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            //Para probar
+            codigoUsuario = 9;
             //crear objeto partida
             Partida partida= new Partida(codPartida,codigoUsuario,new ListaLadrillos(),nivelElegido,0,new Ranking());
             System.out.println("partida instancia: " + partida.getCodPartida());
