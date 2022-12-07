@@ -1,9 +1,10 @@
 package vista;
 
-import controlador.ControladorVentanaPersonaliza;
+import com.zetcode.GestorBD;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 
 public class VentanaPersonalizacion extends JFrame{
     private static VentanaPersonalizacion miVentanaPersonalizacion;
@@ -76,6 +77,11 @@ public class VentanaPersonalizacion extends JFrame{
         panelPersonalizacion.add(colorLadrillosText);
 
         colorLadrillos= new JComboBox<>();
+        colorLadrillos.addItem("Rojo");
+        colorLadrillos.addItem("Azul");
+        colorLadrillos.addItem("Amarillo");
+        colorLadrillos.addItem("Verde");
+        colorLadrillos.addItem("Negro");
         colorLadrillos.setBounds(10,180,150,20);
         panelPersonalizacion.add(colorLadrillos);
 
@@ -98,8 +104,13 @@ public class VentanaPersonalizacion extends JFrame{
         guardarPersonalizacion.setBackground(new Color(51,159,221));
         guardarPersonalizacion.setFocusPainted(false);
         panelPersonalizacion.add(guardarPersonalizacion);
-        guardarPersonalizacion.addMouseListener(ControladorVentanaPersonaliza.getInstance());
-        guardarPersonalizacion.addActionListener(evento -> actualizarPersonalizacion());
+        guardarPersonalizacion.addActionListener(evento -> {
+            try {
+                actualizarPersonalizacion();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
         volver= new JButton();
         volver.setBounds(150,400,200,35);
@@ -115,10 +126,18 @@ public class VentanaPersonalizacion extends JFrame{
         VentanaMenu.getInstance(codUsu).setVisible(true);
     }
 
-    public void actualizarPersonalizacion(){
-        String colorFondoAtualizado=colorFondo.getName();
-        String colorLadrillosActualizado=colorLadrillos.getName();
+    public void actualizarPersonalizacion() throws SQLException {
+        String colorFondoAtualizado=colorFondo.getSelectedItem().toString();
+        String colorLadrillosActualizado=colorLadrillos.getSelectedItem().toString();
         String sonidoActualizado=sonido.getText();
+        boolean personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorLadrillosActualizado,sonidoActualizado,codUsu);
+        if (personActualizado){
+            JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Se ha actualizado con exito","ACTUALIZACIÓN EXITOSO",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Ha habido un error al actualizar los datos","ACTUALIZACIÓN ERRONEO",JOptionPane.ERROR_MESSAGE);
+        }
+
     }
 
 }
