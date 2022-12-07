@@ -64,5 +64,19 @@ public class GestorBD {
 
      }
 
+     public int verificarLogin(String usuarioLogin, String password) throws SQLException {
+         int codigoUsu=0;
+         PreparedStatement sql= con.prepareStatement("select Id, Nombre, Contraseña from usuario where Nombre=? and Contraseña=?");
+         sql.setString(1,usuarioLogin);
+         sql.setString(2,password);
+         ResultSet rs=sql.executeQuery();
+         if(rs.next()){
+             String nombre=rs.getString("Nombre");
+             String contraseña=rs.getString("Contraseña");
+             codigoUsu=rs.getInt("Id");
+         }
+         return codigoUsu;
+     }
+
 
 }
