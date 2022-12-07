@@ -19,9 +19,13 @@ public class VentanaPersonalizacion extends JFrame{
     private JTextField sonido;
 
     private JButton guardarPersonalizacion;
+    private JButton volver;
 
-    private VentanaPersonalizacion(){
+    private int codUsu;
+
+    private VentanaPersonalizacion(int codigoUsu){
         super("ARCATRIX - PERSONALIZACIÓN");
+        codUsu=codigoUsu;
         // crear ventana
         setSize(500, 500);
         setDefaultCloseOperation(EXIT_ON_CLOSE);  //darle a la X, se acaba el proceso
@@ -32,9 +36,9 @@ public class VentanaPersonalizacion extends JFrame{
         setComponentes();
     }
 
-    public static VentanaPersonalizacion getInstance(){
+    public static VentanaPersonalizacion getInstance(int codUsu){
         if(miVentanaPersonalizacion==null){
-            miVentanaPersonalizacion=new VentanaPersonalizacion();
+            miVentanaPersonalizacion=new VentanaPersonalizacion(codUsu);
         }
         return miVentanaPersonalizacion;
     }
@@ -89,13 +93,32 @@ public class VentanaPersonalizacion extends JFrame{
 
         //crear BOTONES
         guardarPersonalizacion= new JButton();
-        guardarPersonalizacion.setBounds(150,400,200,35);
+        guardarPersonalizacion.setBounds(150,350,200,35);
         guardarPersonalizacion.setText("Guardar Personalización");
         guardarPersonalizacion.setBackground(new Color(51,159,221));
         guardarPersonalizacion.setFocusPainted(false);
         panelPersonalizacion.add(guardarPersonalizacion);
         guardarPersonalizacion.addMouseListener(ControladorVentanaPersonaliza.getInstance());
+        guardarPersonalizacion.addActionListener(evento -> actualizarPersonalizacion());
 
+        volver= new JButton();
+        volver.setBounds(150,400,200,35);
+        volver.setText("Volver");
+        volver.setBackground(new Color(51,159,221));
+        volver.setFocusPainted(false);
+        panelPersonalizacion.add(volver);
+        volver.addActionListener(evento -> volverMenu());
+    }
+
+    public void volverMenu(){
+        VentanaPersonalizacion.getInstance(codUsu).setVisible(false);
+        VentanaMenu.getInstance(codUsu).setVisible(true);
+    }
+
+    public void actualizarPersonalizacion(){
+        String colorFondoAtualizado=colorFondo.getName();
+        String colorLadrillosActualizado=colorLadrillos.getName();
+        String sonidoActualizado=sonido.getText();
     }
 
 }

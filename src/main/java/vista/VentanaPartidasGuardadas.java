@@ -50,7 +50,7 @@ public class VentanaPartidasGuardadas extends JFrame {
         JsonArray array = new JsonArray();
         //DefaultListModel listModel = new DefaultListModel();
         Central central = new Central();
-        array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).codigoUsuario);
+        array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).getCodigoUsu());
         //Asociar el modelo de lista al JList
         List<String> exampleList = new ArrayList<String>();
         for (int i = 0; i < array.size(); i++) {

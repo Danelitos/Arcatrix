@@ -13,7 +13,7 @@ public class GestorUsuarios {
 
     private GestorUsuarios(){
         lista = new ArrayList<Usuario>();
-        Usuario admin = new Usuario(0,"admin","test",null,null,null);
+        Usuario admin = new Usuario(1,"admin","test",null,null,null);
         lista.add(admin);
     }
     public static GestorUsuarios getInstance(){

@@ -37,6 +37,7 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 int codUsuario = VentanaNivelElegido.getInstance(0,"Nada").codigoUsuario;
 
                 //añadir partida a la base datos
+                //TODO Coger codPartida del usuario logeado
                 int codPartida = 0;
                 //try {
                 //    codPartida=GestorBD.getInstance().insertPartida(codUsuario,nivel,0);
@@ -51,11 +52,11 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
                 user.asignarPartida(partida);
                 //hacer cuenta atras
-                VentanaNivelElegido.getInstance(0,"Nada").cuentaAtras();
+                VentanaNivelElegido.getInstance(codUsuario,"Nada").cuentaAtras();
 
                 //crear interfaz del juego
-                new Tetris(0,codPartida,nivel);
-                VentanaNivelElegido.getInstance(0,"Nada").setVisible(false);
+                new Tetris(codUsuario,codPartida,nivel);
+                VentanaNivelElegido.getInstance(codUsuario,"Nada").setVisible(false);
                 //Añadido para probar sin BD
                 codPartida++;
             }

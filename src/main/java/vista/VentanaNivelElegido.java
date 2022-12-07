@@ -9,7 +9,7 @@ import java.awt.*;
 public class VentanaNivelElegido extends JFrame {
     private static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
-    public static int codigoUsuario;
+    public int codigoUsuario;
     JLabel texto,numero;
     JPanel panel;
     JButton btnEmpPartida;
