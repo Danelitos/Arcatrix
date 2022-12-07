@@ -1,9 +1,12 @@
 package com.zetcode;
 
+import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 
 public class Usuario {
@@ -59,15 +62,21 @@ public class Usuario {
         return listaPartidasGuardadas;
     }
 
-    public ArrayList<PartidaGuardada> partidasGuardadasUsuario(){
+    public JsonArray partidasGuardadasUsuario(){
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partida = null;
-        ArrayList<PartidaGuardada> listaPartidas = new ArrayList<>();
+        //String [] listaFechas;
+        //listaFechas = new String[this.listaPartidasGuardadas.size()];
+        int i = 0;
+        JsonArray array = new JsonArray();
         while (itr.hasNext()) {
             partida = itr.next();
-            listaPartidas.add(partida);
+            Date fechaHora = partida.obtFechaHora();
+            String s = fechaHora.toString();
+            //i++;
+            array.add(s);
         }
-        return listaPartidas;
+        return array;
     }
 
     private Iterator<PartidaGuardada> getIterador() {

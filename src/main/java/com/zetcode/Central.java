@@ -5,6 +5,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Central {
     public void iniciarSesion(String nombre, String password){
@@ -35,10 +36,19 @@ public class Central {
 
     public JsonArray obtPartidasGuardadas(int codUsuario){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        //Devolvemos un array de Json pero los convertimos aquí
-        ArrayList<PartidaGuardada> miLista = GestorUsuarios.getInstance().partidasGuardadas(user); // list filled with objects
-        Gson json = new GsonBuilder().create();
-        JsonArray arrayJson = json.toJsonTree(miLista).getAsJsonArray();
+        JsonArray arrayJson = GestorUsuarios.getInstance().partidasGuardadas(user);
+        System.out.println(arrayJson.size());
+        //Probando
+        List<String> exampleList = new ArrayList<String>();
+        for (int i = 0; i < arrayJson.size(); i++) {
+            exampleList.add(arrayJson.get(i).getAsString());
+        }
+        int size = exampleList.size();
+        String[] stringArray = exampleList.toArray(new String[size]);
+        for (int i = 0; i < arrayJson.size(); i++) {
+            System.out.println(stringArray[i]);
+            System.out.println("He hecho algo");
+        }
         return arrayJson;
     }
 
