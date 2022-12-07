@@ -1,12 +1,14 @@
 package vista;
 
-import com.zetcode.Tetris;
+import com.zetcode.*;
 import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VentanaNivelElegido extends JFrame {
+public class VentanaNivelElegido extends JFrame implements ActionListener {
     private static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
     public int codigoUsuario;
@@ -64,8 +66,8 @@ public class VentanaNivelElegido extends JFrame {
         btnEmpPartida.setBackground(new Color(245, 52, 52));
         btnEmpPartida.setFocusPainted(false);
         panel.add(btnEmpPartida);
-        btnEmpPartida.addMouseListener(ControladorVentanaNivelElegido.getInstance());
-
+        //btnEmpPartida.addMouseListener(ControladorVentanaNivelElegido.getInstance());
+        btnEmpPartida.addActionListener(this);
         //boton atras
 
     }
@@ -107,6 +109,39 @@ public class VentanaNivelElegido extends JFrame {
 
         }
         catch (InterruptedException e) {}
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==btnEmpPartida){
+
+            int codPartida = 0;
+            //INSERTAR PARTIDA EN BASE DATOS
+            //try {
+            //    codPartida=GestorBD.getInstance().insertPartida(codUsuario,nivel,0);
+            //} catch (SQLException ex) {
+            //    throw new RuntimeException(ex);
+            //}
+
+            //crear objeto partida
+            Partida partida= new Partida(codPartida,codigoUsuario,new ListaLadrillos(),nivelElegido,0,new Ranking());
+            System.out.println("partida instancia: " + partida.getCodPartida());
+            //añadirle la partida al usuario
+            Usuario user = GestorUsuarios.getInstance().buscarUsuario(codigoUsuario);
+            user.asignarPartida(partida);
+            //hacer cuenta atras
+            VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
+
+            //ToDo
+            //crear instancia partida con nivel como param
+
+            System.out.println("START  jeje!!");
+            this.setVisible(false);
+
+            //INICIAR JUEGO TETRIS
+            new Tetris(codigoUsuario,codPartida,nivelElegido);
+
+        }
     }
 
 }
