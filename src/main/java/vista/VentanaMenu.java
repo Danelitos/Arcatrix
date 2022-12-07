@@ -133,7 +133,7 @@ public class VentanaMenu extends JFrame {
 
     public void personalizar(){
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
-        VentanaPersonalizacion.getInstance(0).setVisible(true);
+        VentanaPersonalizacion.getInstance(codigoUsu).setVisible(true);
     }
 
     public void verRankings(){

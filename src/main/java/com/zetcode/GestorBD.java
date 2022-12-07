@@ -41,7 +41,7 @@ public class GestorBD {
         return codPartida;
     }
 
-    //TODO AÑADIR REGISTRO
+    //TODO REGISTRO
     public boolean addUsuario(String nombreUsuario,String correo, String password) throws SQLException {
         int codigoPersonalizacion;
         Statement s = con.createStatement();
@@ -50,17 +50,26 @@ public class GestorBD {
             codigoPersonalizacion=rs.getInt("CodigoPersonalizacion");
         }
         else {
-            codigoPersonalizacion=1;
+            codigoPersonalizacion=0;
         }
 
-        PreparedStatement sql= con.prepareStatement("INSERT INTO Usuario(Nombre,Email, Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)");
+        PreparedStatement sql1= con.prepareStatement("INSERT INTO DatosPersonalizacion(CodigoPersonalizacion,ColorFondo,ColorLadrillos,Sonido) VALUES(?,?,?,?)");
 
-        sql.setString(1,nombreUsuario);
-        sql.setString(2,correo);
-        sql.setString(3,password);
-        sql.setInt(4,codigoPersonalizacion);
+        sql1.setInt(1,codigoPersonalizacion+1);
+        sql1.setString(2,"Azul");
+        sql1.setString(3,"Azul");
+        sql1.setString(4,"sonido");
 
-        return sql.executeUpdate()>0?true:false;
+        sql1.executeUpdate();
+
+        PreparedStatement sql2= con.prepareStatement("INSERT INTO Usuario(Nombre,Email, Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)");
+
+        sql2.setString(1,nombreUsuario);
+        sql2.setString(2,correo);
+        sql2.setString(3,password);
+        sql2.setInt(4,codigoPersonalizacion+1);
+
+        return sql2.executeUpdate()>0?true:false;
 
      }
 
@@ -76,6 +85,25 @@ public class GestorBD {
              codigoUsu=rs.getInt("Id");
          }
          return codigoUsu;
+     }
+
+     public boolean actualizarPersonalizacion(String colorFondo,String colorLadrillos,String sonido,int codigoUsu) throws SQLException {
+         int codigoPersonalizacion = 0;
+         PreparedStatement sql1= con.prepareStatement("select CodigoPersonalizacion from usuario where Id=?");
+         sql1.setInt(1,codigoUsu);
+         ResultSet rs=sql1.executeQuery();
+         if(rs.next()){
+             codigoPersonalizacion=rs.getInt("CodigoPersonalizacion");
+             System.out.println(codigoPersonalizacion);
+         }
+
+         PreparedStatement sql2= con.prepareStatement("Update DatosPersonalizacion set ColorFondo=?,ColorLadrillos=?,Sonido=? where CodigoPersonalizacion=?");
+
+         sql2.setString(1,colorFondo);
+         sql2.setString(2,colorLadrillos);
+         sql2.setString(3,sonido);
+         sql2.setInt(4,codigoPersonalizacion);
+         return sql2.executeUpdate()>0?true:false;
      }
 
 

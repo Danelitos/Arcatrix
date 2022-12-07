@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-12-2022 a las 21:38:55
+-- Tiempo de generación: 07-12-2022 a las 17:41:33
 -- Versión del servidor: 10.4.22-MariaDB
 -- Versión de PHP: 8.1.2
 
@@ -24,6 +24,19 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `datospersonalizacion`
+--
+
+CREATE TABLE `datospersonalizacion` (
+  `CodigoPersonalizacion` int(11) NOT NULL,
+  `ColorFondo` varchar(40) NOT NULL,
+  `ColorLadrillos` varchar(40) NOT NULL,
+  `Sonido` varchar(40) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `partida`
 --
 
@@ -34,16 +47,6 @@ CREATE TABLE `partida` (
   `puntos` int(30) NOT NULL,
   `listaLadrillos` varchar(30) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Volcado de datos para la tabla `partida`
---
-
-INSERT INTO `partida` (`codPartida`, `codUsuario`, `nivel`, `puntos`, `listaLadrillos`) VALUES
-(1, 0, 'Facil', 0, 'ladrillos'),
-(2, 0, 'Facil', 0, 'ladrillos'),
-(3, 0, 'Medio', 0, 'ladrillos'),
-(4, 0, 'Facil', 0, 'ladrillos');
 
 -- --------------------------------------------------------
 
@@ -62,6 +65,12 @@ CREATE TABLE `usuario` (
 --
 -- Índices para tablas volcadas
 --
+
+--
+-- Indices de la tabla `datospersonalizacion`
+--
+ALTER TABLE `datospersonalizacion`
+  ADD PRIMARY KEY (`CodigoPersonalizacion`);
 
 --
 -- Indices de la tabla `partida`
@@ -83,13 +92,13 @@ ALTER TABLE `usuario`
 -- AUTO_INCREMENT de la tabla `partida`
 --
 ALTER TABLE `partida`
-  MODIFY `codPartida` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `codPartida` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
 ALTER TABLE `usuario`
-  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
