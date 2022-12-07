@@ -46,11 +46,8 @@ public class VentanaPartidasGuardadas extends JFrame {
         panel.add(volver);
         volver.addMouseListener(ControladorVentanaPartidasGuardadas.getInstance());
 
-        //String [] ejemplo = {"Hola", "Adiós"};
         JsonArray array = new JsonArray();
-        //DefaultListModel listModel = new DefaultListModel();
-        Central central = new Central();
-        array = central.obtPartidasGuardadas(VentanaMenu.getInstance(0).getCodigoUsu());
+        array = Central.getInstance().obtPartidasGuardadas(VentanaMenu.getInstance(0).getCodigoUsu());
         //Asociar el modelo de lista al JList
         List<String> exampleList = new ArrayList<String>();
         for (int i = 0; i < array.size(); i++) {

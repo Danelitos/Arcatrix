@@ -8,6 +8,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Central {
+
+    private static Central miCentral;
+
+    public static Central getInstance(){
+        if(miCentral == null) miCentral = new Central();
+        return miCentral;
+    }
     public void iniciarSesion(String nombre, String password){
 
     }
@@ -37,8 +44,6 @@ public class Central {
     public JsonArray obtPartidasGuardadas(int codUsuario){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         JsonArray arrayJson = GestorUsuarios.getInstance().partidasGuardadas(user);
-        System.out.println(arrayJson.size());
-        //Probando
         List<String> exampleList = new ArrayList<String>();
         for (int i = 0; i < arrayJson.size(); i++) {
             exampleList.add(arrayJson.get(i).getAsString());
