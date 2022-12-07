@@ -31,7 +31,7 @@ public class ControladorVentanaMenu implements MouseListener, ItemListener {
             if (boton.getText().equals("Iniciar Partida")){
                 System.out.println("ENTRA");
                 //TODO De momento así para que funcione
-                VentanaElegirNivel.getInstance(0);
+                VentanaElegirNivel.getInstance(0).setVisible(true);
                 VentanaMenu.getInstance(0).setVisible(false);
             }
             else if(boton.getText().equals("Cargar Partida")){

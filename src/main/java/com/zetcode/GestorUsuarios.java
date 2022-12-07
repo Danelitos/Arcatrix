@@ -54,7 +54,7 @@ public class GestorUsuarios {
         return  laPartidaGuardada;
     }
 
-    public ArrayList<PartidaGuardada> partidasGuardadas(Usuario elUsuario){
+    public JsonArray partidasGuardadas(Usuario elUsuario){
         return elUsuario.partidasGuardadasUsuario();
     }
 
