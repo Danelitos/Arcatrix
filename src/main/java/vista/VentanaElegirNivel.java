@@ -16,8 +16,8 @@ public class VentanaElegirNivel extends JFrame {
     public static int codUsuario;
 
 
-    private VentanaElegirNivel(int codUsuario){
-
+    private VentanaElegirNivel(int codigoUsuario){
+        codUsuario=codigoUsuario;
         // crear ventana
         setTitle("Tetris");
         setSize(500, 500);

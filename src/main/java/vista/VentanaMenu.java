@@ -1,6 +1,6 @@
 package vista;
 
-import controlador.ControladorVentanaMenu;
+import com.zetcode.Tetris;
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,7 +18,7 @@ public class VentanaMenu extends JFrame {
     private JButton personalizacion;
     private JButton cerrarSesion;
     private JButton rankings;
-    public static int codigoUsuario;
+    public int codigoUsu;
 
     private VentanaMenu(int codigoUsuario) {
         super("ARCATRIX - MENÚ");
@@ -31,6 +31,7 @@ public class VentanaMenu extends JFrame {
         this.setVisible(true);
         setComponentes();
         this.pack();
+        codigoUsu=codigoUsuario;
     }
 
     public static VentanaMenu getInstance(int codigoUsuario) {
@@ -38,6 +39,14 @@ public class VentanaMenu extends JFrame {
             miVentanaMenu = new VentanaMenu(codigoUsuario);
         }
         return miVentanaMenu;
+    }
+
+    public static void setCodigoUsu(int codigoUsu) {
+        codigoUsu = codigoUsu;
+    }
+
+    public int getCodigoUsu() {
+        return codigoUsu;
     }
 
     private void setComponentes() {
@@ -66,7 +75,7 @@ public class VentanaMenu extends JFrame {
         iniciarPartida.setBackground(new Color(51, 159, 221));
         iniciarPartida.setFocusPainted(false);
         panelMenu.add(iniciarPartida);
-        iniciarPartida.addMouseListener(ControladorVentanaMenu.getInstance());
+        iniciarPartida.addActionListener(evento -> jugar());
 
         cargarPartida = new JButton();
         cargarPartida.setBounds(150, 300, 200, 35);
@@ -74,7 +83,7 @@ public class VentanaMenu extends JFrame {
         cargarPartida.setBackground(new Color(51, 159, 221));
         cargarPartida.setFocusPainted(false);
         panelMenu.add(cargarPartida);
-        cargarPartida.addMouseListener(ControladorVentanaMenu.getInstance());
+        cargarPartida.addActionListener(evento -> cargar());
 
         personalizacion = new JButton();
         personalizacion.setBounds(150, 350, 200, 35);
@@ -82,7 +91,7 @@ public class VentanaMenu extends JFrame {
         personalizacion.setBackground(new Color(51, 159, 221));
         personalizacion.setFocusPainted(false);
         panelMenu.add(personalizacion);
-        personalizacion.addMouseListener(ControladorVentanaMenu.getInstance());
+        personalizacion.addActionListener(evento -> personalizar());
 
         rankings = new JButton();
         rankings.setBounds(150, 400, 200, 35);
@@ -90,7 +99,7 @@ public class VentanaMenu extends JFrame {
         rankings.setBackground(new Color(51, 159, 221));
         rankings.setFocusPainted(false);
         panelMenu.add(rankings);
-        rankings.addMouseListener(ControladorVentanaMenu.getInstance());
+        rankings.addActionListener(evento -> verRankings());
 
         cerrarSesion = new JButton();
         cerrarSesion.setBounds(355, 10, 125, 35);
@@ -98,7 +107,7 @@ public class VentanaMenu extends JFrame {
         cerrarSesion.setBackground(new Color(51, 159, 221));
         cerrarSesion.setFocusPainted(false);
         panelMenu.add(cerrarSesion);
-        cerrarSesion.addMouseListener(ControladorVentanaMenu.getInstance());
+        cerrarSesion.addActionListener(evento -> logOut());
     }
 
     static class ImagenFondo extends JPanel{
@@ -110,5 +119,31 @@ public class VentanaMenu extends JFrame {
             //setOpaque(false);
             super.paintChildren(g);
         }
+    }
+
+    public void jugar(){
+        VentanaMenu.getInstance(codigoUsu).setVisible(false);
+        VentanaElegirNivel.getInstance(codigoUsu).setVisible(true);
+    }
+
+    public void cargar(){
+        VentanaMenu.getInstance(codigoUsu).setVisible(false);
+        VentanaPartidasGuardadas.getInstance().setVisible(true);
+    }
+
+    public void personalizar(){
+        VentanaMenu.getInstance(codigoUsu).setVisible(false);
+        VentanaPersonalizacion.getInstance(0).setVisible(true);
+    }
+
+    public void verRankings(){
+        VentanaMenu.getInstance(codigoUsu).setVisible(false);
+        VentanaElegirRanking.getInstance(codigoUsu).setVisible(true);
+    }
+
+    public void logOut(){
+        System.out.println(codigoUsu);
+        VentanaMenu.getInstance(codigoUsu).setVisible(false);
+        VentanaLogin.getInstance().setVisible(true);
     }
 }

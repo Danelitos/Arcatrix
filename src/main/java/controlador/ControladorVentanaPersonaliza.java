@@ -30,7 +30,7 @@ public class ControladorVentanaPersonaliza implements MouseListener, ItemListene
             if (boton.getText().equals("Guardar Personalización")){
                 System.out.println("Se guarda");
                 VentanaMenu.getInstance(0).setVisible(true);
-                VentanaPersonalizacion.getInstance().setVisible(false);
+                VentanaPersonalizacion.getInstance(0).setVisible(false);
             }
             else{
                 System.exit(0);

@@ -1,7 +1,6 @@
 package vista;
 
 import com.zetcode.GestorBD;
-import controlador.ControladorVentanaLogin;
 
 import javax.swing.*;
 import java.awt.*;
@@ -74,6 +73,7 @@ public class VentanaLogin extends JFrame{
             System.out.println(loginCorrecto);
             VentanaLogin.getInstance().setVisible(false);
             VentanaMenu.getInstance(loginCorrecto).setVisible(true);
+            VentanaMenu.setCodigoUsu(loginCorrecto);
         }
         else{
             JOptionPane.showMessageDialog(VentanaLogin.getInstance(),"Ha habido un error al logearse","LOGIN ERRONEO",JOptionPane.ERROR_MESSAGE);
