@@ -18,14 +18,13 @@ public class Board extends JPanel implements MouseListener {
     private Timer timer;
     private boolean isFallingFinished = false;
     private boolean isPaused = false;
-    private int numLinesRemoved = 0;
+    private int numLinesRemoved = 0; //Este es el número de puntos de la partida
     private int curX = 0;
     private int curY = 0;
     private JLabel statusbar;
     private Shape curPiece;
     private Tetrominoe[] board;
     private Tetris parent;
-
     private int codPartida;
     private String nivel;
 
@@ -38,6 +37,7 @@ public class Board extends JPanel implements MouseListener {
 
     }
 
+    public Tetrominoe[] getBoard(){return board;}
     private void setTamanoYVelocidad(String nivel){
 
         switch (nivel.toLowerCase()){
@@ -215,6 +215,7 @@ public class Board extends JPanel implements MouseListener {
             var msg = String.format("Game over. Score: %d", numLinesRemoved);
             statusbar.setText(msg);
         }
+        //ACTUALIZAR RANKINGS
     }
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
@@ -317,8 +318,7 @@ public class Board extends JPanel implements MouseListener {
         if(e.getSource() instanceof JButton){
             VentanaMenu.getInstance(0).setVisible(true);
             parent.setVisible(false);
-            Central central = new Central();
-            central.guardarPartida(parent.codigoUsuario,parent.codigoPartida);
+            Central.getInstance().guardarPartida(parent.codigoUsuario,parent);
             GestorUsuarios.getInstance().buscarUsuario(parent.codigoUsuario).eliminarPartidaAsignada(parent.codigoPartida);
         }
         else{

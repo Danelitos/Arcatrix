@@ -1,6 +1,7 @@
 package vista;
 
 import com.zetcode.*;
+import com.zetcode.Shape;
 import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
@@ -126,7 +127,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             //Para probar
             codigoUsuario = 9;
             //crear objeto partida
-            Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido,new ,0);
+            Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido, null,0);
             System.out.println("partida instancia: " + partida.getCodPartida());
             //añadirle la partida al usuario
             Usuario user = GestorUsuarios.getInstance().buscarUsuario(codigoUsuario);
@@ -141,7 +142,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             this.setVisible(false);
 
             //INICIAR JUEGO TETRIS
-            new Tetris(codigoUsuario,codPartida,nivelElegido,new ,0);
+            new Tetris(codigoUsuario,codPartida,nivelElegido,null ,0);
 
         }
     }

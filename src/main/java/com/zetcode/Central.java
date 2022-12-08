@@ -31,9 +31,9 @@ public class Central {
 
     }
 
-    public void guardarPartida(int codUsuario, int codPartida){
+    public void guardarPartida(int codUsuario, Tetris laPartida){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        if(user.getEnJuego().getCodPartida() == codPartida) {
+        if(user.getEnJuego().getCodPartida() == laPartida.codigoPartida) {
             PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(user.getEnJuego(), user);
             GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
             //FALTA LO DEL SGBD

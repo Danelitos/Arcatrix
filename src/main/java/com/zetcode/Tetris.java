@@ -18,24 +18,24 @@ public class Tetris extends JFrame {
 
     public String nivel;
     public int codigoUsuario;
-    private String[][] casillasOcupadas;
+    private Shape.Tetrominoe[] casillasOcupadas;
     private int puntos;
     private Ranking rankings;
     private JLabel statusbar;
 
-    public Tetris(int codUsuario,int codPartida, String pNivel,  pCasillasOcupadas, int pPuntos) {
+    public Tetris(int codUsuario,int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) {
         codigoUsuario = codUsuario;
         codigoPartida = codPartida;
         nivel = pNivel;
         casillasOcupadas = pCasillasOcupadas;
         puntos = pPuntos;
         logger.info("Playing");
-        initUI(codPartida, nivel,casillasOcupadas);
+        this.casillasOcupadas = initUI(codPartida, nivel, casillasOcupadas);
         this.setVisible(true);
     }
 
 
-    private void initUI(int codPartida, String nivel,  casillasOcupadas) {
+    private Shape.Tetrominoe[] initUI(int codPartida, String nivel, Shape.Tetrominoe[] casillasOcupadas) {
 
         getContentPane().setLayout(null);
 
@@ -58,6 +58,7 @@ public class Tetris extends JFrame {
         setSize(278, 412);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
+        return board.getBoard();
     }
 
     public JLabel getStatusBar() {
