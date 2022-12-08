@@ -34,4 +34,5 @@ public class PartidaGuardada {
     }
 
     public Date obtFechaHora(){return this.cuando;}
+    public Partida getLaPartida(){return this.laPartida;}
 }

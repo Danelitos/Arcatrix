@@ -58,5 +58,7 @@ public class GestorUsuarios {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-
+    public Partida buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
+        return elUsuario.obtPartida(fechaHora);
+    }
 }

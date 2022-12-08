@@ -65,8 +65,6 @@ public class Usuario {
     public JsonArray partidasGuardadasUsuario(){
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partida = null;
-        //String [] listaFechas;
-        //listaFechas = new String[this.listaPartidasGuardadas.size()];
         int i = 0;
         JsonArray array = new JsonArray();
         while (itr.hasNext()) {
@@ -91,4 +89,19 @@ public class Usuario {
         if(codPartida == this.enJuego.getCodPartida()){this.enJuego = null;}}
 
     public Partida getEnJuego(){return enJuego;}
+
+    public Partida obtPartida(String fechaHora){
+        Iterator<PartidaGuardada> itr = this.getIterador();
+        PartidaGuardada partidaGuardada = null;
+        Partida partida = null;
+        boolean enc = false;
+        while (itr.hasNext() && !enc){
+            partidaGuardada = itr.next();
+            if (partidaGuardada.obtFechaHora().toString().equals(fechaHora)){
+                enc = true;
+                partida = partidaGuardada.getLaPartida();
+            }
+        }
+        return partida;
+    }
 }

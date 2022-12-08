@@ -1,5 +1,6 @@
 package controlador;
 
+import com.zetcode.Central;
 import com.zetcode.Tetris;
 import vista.*;
 
@@ -31,7 +32,12 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
             if (boton.getText().equals("Cargar Partida")){
                 System.out.println("Se carga la partida");
                 //TODO PARA QUE FUNCIONE DE MOMENTO
-                new Tetris(0,0,"Facil");
+                //Obtenemos la fechaHora de la venatana de Partidas guardadas y el código de usuario de la VentanaMenu
+                String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
+                Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
+                //¿Qué código de Partida usamos?
+                //El código de Usuario lo sacamos de VentanaMenu, hay que mirar los ladrillos...
+                new Tetris(VentanaMenu.getInstance(0).codigoUsu,0,"Facil");
                 VentanaPartidasGuardadas.getInstance().setVisible(false);
             }
             else if(boton.getText().equals("Volver")){

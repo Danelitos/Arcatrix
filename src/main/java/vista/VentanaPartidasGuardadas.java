@@ -21,6 +21,8 @@ public class VentanaPartidasGuardadas extends JFrame {
     private JPanel contentPane;
     private static VentanaPartidasGuardadas miVentana;
 
+    public static JList<String> miListaString;
+
     /**
      * Create the frame.
      */
@@ -61,6 +63,7 @@ public class VentanaPartidasGuardadas extends JFrame {
         listaString.setBounds(10, 10, 300, 300);
         panel.add(lamDesp);
         panel.add(listaString);
+        miListaString = listaString;
     }
 
     public static VentanaPartidasGuardadas getInstance() {
@@ -69,4 +72,6 @@ public class VentanaPartidasGuardadas extends JFrame {
         }
         return miVentana;
     }
+
+    public JList<String> getListaString(){return miListaString;}
 }

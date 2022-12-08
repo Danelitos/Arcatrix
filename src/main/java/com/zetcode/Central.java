@@ -57,8 +57,9 @@ public class Central {
         return arrayJson;
     }
 
-    public void cargarPartida(int codUsuario, int codPartida, String fechaHora){
-
+    public void cargarPartida(int codUsuario, String fechaHora){
+        Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
+        Partida partida = user.obtPartida(fechaHora);
     }
 
     public boolean obtPersonalizacion(int codUsu){
