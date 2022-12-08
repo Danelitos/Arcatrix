@@ -37,7 +37,7 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
                 Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
                 //¿Qué código de Partida usamos?
                 //El código de Usuario lo sacamos de VentanaMenu, hay que mirar los ladrillos...
-                new Tetris(VentanaMenu.getInstance(0).codigoUsu,0,"Facil");
+                //new Tetris(VentanaMenu.getInstance(0).codigoUsu,0,"Facil");
                 VentanaPartidasGuardadas.getInstance().setVisible(false);
             }
             else if(boton.getText().equals("Volver")){

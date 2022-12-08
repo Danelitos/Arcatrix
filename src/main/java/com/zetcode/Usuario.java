@@ -16,10 +16,10 @@ public class Usuario {
     private DatosPersonalizacion personalizacion;
 
     private ArrayList<PartidaGuardada> listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
-    private Partida enJuego;
+    private Tetris enJuego;
 
 
-    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion, ArrayList<PartidaGuardada> pLista, Partida pEnJuego){
+    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion, ArrayList<PartidaGuardada> pLista, Tetris pEnJuego){
         codUsuario=pCodUsuario;
         nombre=pNombre;
         password=pPassword;
@@ -81,19 +81,19 @@ public class Usuario {
         return (this.listaPartidasGuardadas.iterator());
     }
 
-    public void asignarPartida(Partida laPartida){
+    public void asignarPartida(Tetris laPartida){
         this.enJuego = laPartida;
     }
 
     public void eliminarPartidaAsignada(int codPartida){
         if(codPartida == this.enJuego.getCodPartida()){this.enJuego = null;}}
 
-    public Partida getEnJuego(){return enJuego;}
+    public Tetris getEnJuego(){return enJuego;}
 
-    public Partida obtPartida(String fechaHora){
+    public Tetris obtPartida(String fechaHora){
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partidaGuardada = null;
-        Partida partida = null;
+        Tetris partida = null;
         boolean enc = false;
         while (itr.hasNext() && !enc){
             partidaGuardada = itr.next();

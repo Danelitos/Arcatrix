@@ -126,7 +126,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             //Para probar
             codigoUsuario = 9;
             //crear objeto partida
-            Partida partida= new Partida(codPartida,codigoUsuario,new ListaLadrillos(),nivelElegido,0,new Ranking());
+            Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido,new ,0);
             System.out.println("partida instancia: " + partida.getCodPartida());
             //añadirle la partida al usuario
             Usuario user = GestorUsuarios.getInstance().buscarUsuario(codigoUsuario);
@@ -141,7 +141,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             this.setVisible(false);
 
             //INICIAR JUEGO TETRIS
-            new Tetris(codigoUsuario,codPartida,nivelElegido);
+            new Tetris(codigoUsuario,codPartida,nivelElegido,new ,0);
 
         }
     }

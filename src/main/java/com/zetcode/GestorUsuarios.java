@@ -40,7 +40,7 @@ public class GestorUsuarios {
         return (this.lista.iterator());
     }
 
-    public PartidaGuardada crearPartidaGuardada(Partida laPartida,Usuario elUsuario){
+    public PartidaGuardada crearPartidaGuardada(Tetris laPartida,Usuario elUsuario){
         Date fechaActual = new Date();
         PartidaGuardada nuevaPartida = new PartidaGuardada(elUsuario,laPartida,fechaActual);
         return nuevaPartida;
@@ -58,7 +58,7 @@ public class GestorUsuarios {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-    public Partida buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
+    public Tetris buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
         return elUsuario.obtPartida(fechaHora);
     }
 }

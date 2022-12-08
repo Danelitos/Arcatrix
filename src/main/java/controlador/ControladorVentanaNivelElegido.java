@@ -46,7 +46,7 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 //}
 
                 //crear la instancia partida
-                Partida partida= new Partida(codPartida,codUsuario,new ListaLadrillos(),nivel,0,new Ranking());
+                Tetris partida= new Tetris(codUsuario,codPartida,nivel,new ,0);
                 System.out.println("partida instancia: " + partida.getCodPartida());
                 //añadirle la partida al usuario
                 Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
@@ -55,7 +55,7 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 VentanaNivelElegido.getInstance(codUsuario,"Nada").cuentaAtras();
 
                 //crear interfaz del juego
-                new Tetris(codUsuario,codPartida,nivel);
+                new Tetris(codUsuario,codPartida,nivel,new ,0);
                 VentanaNivelElegido.getInstance(codUsuario,"Nada").setVisible(false);
                 //Añadido para probar sin BD
                 codPartida++;

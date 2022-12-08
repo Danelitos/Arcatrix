@@ -8,10 +8,10 @@ import java.util.Date;
 
 public class PartidaGuardada {
     private Usuario elUsuario;
-    private Partida laPartida;
+    private Tetris laPartida;
     private Date cuando;
 
-    public PartidaGuardada(Usuario pElUsuario, Partida pLaPartida, Date pCuando){
+    public PartidaGuardada(Usuario pElUsuario, Tetris pLaPartida, Date pCuando){
         this.elUsuario = pElUsuario;
         this.laPartida = pLaPartida;
         this.cuando = pCuando;
@@ -34,5 +34,5 @@ public class PartidaGuardada {
     }
 
     public Date obtFechaHora(){return this.cuando;}
-    public Partida getLaPartida(){return this.laPartida;}
+    public Tetris getLaPartida(){return this.laPartida;}
 }
