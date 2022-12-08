@@ -48,9 +48,6 @@ public class ControladorVentanaNivelElegido implements MouseListener, ItemListen
                 //crear la instancia partida
                 Tetris partida= new Tetris(codUsuario,codPartida,nivel,null ,0);
                 System.out.println("partida instancia: " + partida.getCodPartida());
-                //añadirle la partida al usuario
-                Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-                user.asignarPartida(partida);
                 //hacer cuenta atras
                 VentanaNivelElegido.getInstance(codUsuario,"Nada").cuentaAtras();
 

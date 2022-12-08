@@ -34,6 +34,8 @@ public class Tetris extends JFrame {
         this.setVisible(true);
     }
 
+    public Shape.Tetrominoe[] getCasillasOcupadas(){return casillasOcupadas;}
+    public Integer getPuntos(){return puntos;}
 
     private Shape.Tetrominoe[] initUI(int codPartida, String nivel, Shape.Tetrominoe[] casillasOcupadas) {
 

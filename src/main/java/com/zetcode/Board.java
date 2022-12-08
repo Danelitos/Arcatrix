@@ -319,7 +319,6 @@ public class Board extends JPanel implements MouseListener {
             VentanaMenu.getInstance(0).setVisible(true);
             parent.setVisible(false);
             Central.getInstance().guardarPartida(parent.codigoUsuario,parent);
-            GestorUsuarios.getInstance().buscarUsuario(parent.codigoUsuario).eliminarPartidaAsignada(parent.codigoPartida);
         }
         else{
             System.exit(0);

@@ -1,6 +1,7 @@
 package controlador;
 
 import com.zetcode.Central;
+import com.zetcode.Shape;
 import com.zetcode.Tetris;
 import vista.*;
 
@@ -32,13 +33,18 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
             if (boton.getText().equals("Cargar Partida")){
                 System.out.println("Se carga la partida");
                 //TODO PARA QUE FUNCIONE DE MOMENTO
-                //Obtenemos la fechaHora de la venatana de Partidas guardadas y el código de usuario de la VentanaMenu
-                String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
-                Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
-                //¿Qué código de Partida usamos?
-                //El código de Usuario lo sacamos de VentanaMenu, hay que mirar los ladrillos...
-                //new Tetris(VentanaMenu.getInstance(0).codigoUsu,0,"Facil");
                 VentanaPartidasGuardadas.getInstance().setVisible(false);
+                //Obtenemos la fechaHora de la ventana de Partidas guardadas y el código de usuario de la VentanaMenu
+                String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
+                Tetris laPartida = Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
+                //Crear la partida
+                int n = laPartida.getCodPartida();
+                System.out.println("partida instancia: " + n++);
+                //hacer cuenta atras
+                VentanaNivelElegido.getInstance(laPartida.codigoUsuario,laPartida.nivel).cuentaAtras();
+                //crear interfaz del juego
+                new Tetris(laPartida.codigoUsuario,laPartida.codigoPartida,laPartida.nivel,laPartida.getCasillasOcupadas() ,laPartida.getPuntos());
+                VentanaNivelElegido.getInstance(laPartida.codigoUsuario,laPartida.nivel).setVisible(false);
             }
             else if(boton.getText().equals("Volver")){
                 System.out.println("Vuelve al menu principal");

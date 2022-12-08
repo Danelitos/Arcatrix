@@ -33,11 +33,9 @@ public class Central {
 
     public void guardarPartida(int codUsuario, Tetris laPartida){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        if(user.getEnJuego().getCodPartida() == laPartida.codigoPartida) {
-            PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(user.getEnJuego(), user);
-            GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
-            //FALTA LO DEL SGBD
-        }
+        PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user);
+        GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
+        //FALTA LO DEL SGBD
         user.partidasGuardadasUsuario();
     }
 
@@ -57,9 +55,10 @@ public class Central {
         return arrayJson;
     }
 
-    public void cargarPartida(int codUsuario, String fechaHora){
+    public Tetris cargarPartida(int codUsuario, String fechaHora){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         Tetris partida = user.obtPartida(fechaHora);
+        return partida;
     }
 
     public boolean obtPersonalizacion(int codUsu){

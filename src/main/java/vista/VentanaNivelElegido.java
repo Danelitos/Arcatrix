@@ -129,9 +129,6 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             //crear objeto partida
             Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido, null,0);
             System.out.println("partida instancia: " + partida.getCodPartida());
-            //añadirle la partida al usuario
-            Usuario user = GestorUsuarios.getInstance().buscarUsuario(codigoUsuario);
-            user.asignarPartida(partida);
             //hacer cuenta atras
             VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
 
