@@ -45,7 +45,7 @@ public class GestorBD {
     public boolean addUsuario(String nombreUsuario,String correo, String password) throws SQLException {
         int codigoPersonalizacion;
         Statement s = con.createStatement();
-        ResultSet rs = s.executeQuery ("select CodigoPersonalizacion from usuario order by CodigoPersonalizacion desc limit 1");
+        ResultSet rs = s.executeQuery ("select CodigoPersonalizacion from Usuario order by CodigoPersonalizacion desc limit 1");
         if(rs.next()){
             codigoPersonalizacion=rs.getInt("CodigoPersonalizacion");
         }
@@ -75,7 +75,7 @@ public class GestorBD {
 
      public int verificarLogin(String usuarioLogin, String password) throws SQLException {
          int codigoUsu=0;
-         PreparedStatement sql= con.prepareStatement("select Id, Nombre, Contraseña from usuario where Nombre=? and Contraseña=?");
+         PreparedStatement sql= con.prepareStatement("select Id, Nombre, Contraseña from Usuario where Nombre=? and Contraseña=?");
          sql.setString(1,usuarioLogin);
          sql.setString(2,password);
          ResultSet rs=sql.executeQuery();
@@ -89,7 +89,7 @@ public class GestorBD {
 
      public boolean actualizarPersonalizacion(String colorFondo,String colorLadrillos,String sonido,int codigoUsu) throws SQLException {
          int codigoPersonalizacion = 0;
-         PreparedStatement sql1= con.prepareStatement("select CodigoPersonalizacion from usuario where Id=?");
+         PreparedStatement sql1= con.prepareStatement("select CodigoPersonalizacion from Usuario where Id=?");
          sql1.setInt(1,codigoUsu);
          ResultSet rs=sql1.executeQuery();
          if(rs.next()){

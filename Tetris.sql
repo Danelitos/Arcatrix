@@ -24,10 +24,10 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `datospersonalizacion`
+-- Estructura de tabla para la tabla `DatosPersonalizacion`
 --
 
-CREATE TABLE `datospersonalizacion` (
+CREATE TABLE `DatosPersonalizacion` (
   `CodigoPersonalizacion` int(11) NOT NULL,
   `ColorFondo` varchar(40) NOT NULL,
   `ColorLadrillos` varchar(40) NOT NULL,
@@ -37,10 +37,10 @@ CREATE TABLE `datospersonalizacion` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `partida`
+-- Estructura de tabla para la tabla `Partida`
 --
 
-CREATE TABLE `partida` (
+CREATE TABLE `Partida` (
   `codPartida` int(30) NOT NULL,
   `codUsuario` int(30) NOT NULL,
   `nivel` varchar(10) NOT NULL,
@@ -51,10 +51,10 @@ CREATE TABLE `partida` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuario`
+-- Estructura de tabla para la tabla `Usuario`
 --
 
-CREATE TABLE `usuario` (
+CREATE TABLE `Usuario` (
   `Id` int(11) NOT NULL,
   `Nombre` varchar(30) NOT NULL,
   `Email` varchar(40) NOT NULL,
@@ -67,21 +67,22 @@ CREATE TABLE `usuario` (
 --
 
 --
--- Indices de la tabla `datospersonalizacion`
+-- Indices de la tabla `DatosPersonalizacion`
 --
-ALTER TABLE `datospersonalizacion`
+
+ALTER TABLE DatosPersonalizacion`
   ADD PRIMARY KEY (`CodigoPersonalizacion`);
 
 --
 -- Indices de la tabla `partida`
 --
-ALTER TABLE `partida`
+ALTER TABLE `Partida`
   ADD PRIMARY KEY (`codPartida`);
 
 --
 -- Indices de la tabla `usuario`
 --
-ALTER TABLE `usuario`
+ALTER TABLE `Usuario`
   ADD PRIMARY KEY (`Id`);
 
 --
@@ -91,13 +92,13 @@ ALTER TABLE `usuario`
 --
 -- AUTO_INCREMENT de la tabla `partida`
 --
-ALTER TABLE `partida`
+ALTER TABLE `Partida`
   MODIFY `codPartida` int(30) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT de la tabla `usuario`
 --
-ALTER TABLE `usuario`
+ALTER TABLE `Usuario`
   MODIFY `Id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 COMMIT;
 
