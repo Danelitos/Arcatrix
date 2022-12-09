@@ -22,19 +22,27 @@ public class VentanaLogin extends JFrame{
     private JButton registrarse;
 
     private VentanaLogin(){
-        super("ARCATRIX");
+        super("ARCATRIX - LOGIN");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        setSize(500,500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);  //darle a la X, se acaba el proceso
+        setLocationRelativeTo(null); //en el centro de la pantalla
 
-        setMinimumSize(new Dimension(500,500));
+        //inicar componentes
+        this.setVisible(true);
+        setComponentes();
+    }
 
+    public void setComponentes(){
         panelLogin=new JPanel();
-
-        panelLogin.setLayout(new GridLayout(6,1,0,0));
-        getContentPane().add(panelLogin,BorderLayout.CENTER);
-
-        setLocationRelativeTo(null);
+        getContentPane().add(panelLogin);
+        panelLogin.setLayout(null);
+        panelLogin.setVisible(true);
 
         loginButton=new JButton("INICIAR SESION");
+        loginButton.setBounds(140,300,200,50);
+        loginButton.setBackground(new Color(51,159,221));
+        loginButton.setHorizontalAlignment(SwingConstants.CENTER);
         loginButton.addActionListener(evento -> {
             try {
                 login();
@@ -43,6 +51,9 @@ public class VentanaLogin extends JFrame{
             }
         });
         registrarse=new JButton("REGISTRARSE");
+        registrarse.setBounds(140,375,200,50);
+        registrarse.setBackground(new Color(51,159,221));
+        registrarse.setHorizontalAlignment(SwingConstants.CENTER);
         registrarse.addActionListener(evento -> {
             try {
                 registro();
@@ -50,20 +61,25 @@ public class VentanaLogin extends JFrame{
                 throwables.printStackTrace();
             }
         });
-        usuario=new JTextField();
-        password= new JPasswordField();
         usuarioText=new JLabel("Usuario");
+        usuarioText.setBounds(100,90,150,20);
+        usuarioText.setFont(new Font(null,Font.BOLD,20));
+        usuarioText.setHorizontalAlignment(SwingConstants.CENTER);
+        usuario=new JTextField();
+        usuario.setBounds(140,120,200,30);
         passwordText=new JLabel("Contraseña");
+        passwordText.setBounds(120,170,150,20);
+        passwordText.setFont(new Font(null,Font.BOLD,20));
+        passwordText.setHorizontalAlignment(SwingConstants.CENTER);
+        password= new JPasswordField();
+        password.setBounds(140,200,200,30);
 
-        panelLogin.add(usuarioText, BorderLayout.CENTER);
-        panelLogin.add(usuario, BorderLayout.CENTER);
-        panelLogin.add(passwordText, BorderLayout.CENTER);
-        panelLogin.add(password,BorderLayout.CENTER);
-        panelLogin.add(loginButton,BorderLayout.CENTER);
-        panelLogin.add(registrarse,BorderLayout.CENTER);
-
-
-        setVisible(true);
+        panelLogin.add(usuarioText);
+        panelLogin.add(usuario);
+        panelLogin.add(passwordText);
+        panelLogin.add(password);
+        panelLogin.add(loginButton);
+        panelLogin.add(registrarse);
     }
 
     public static VentanaLogin getInstance(){
