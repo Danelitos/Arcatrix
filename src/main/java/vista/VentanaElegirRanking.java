@@ -1,7 +1,5 @@
 package vista;
 
-import controlador.ControladorVentanaElegirNivel;
-
 import javax.swing.*;
 import java.awt.*;
 
@@ -49,7 +47,7 @@ public class VentanaElegirRanking extends JFrame {
         btnGeneral.setBackground(new Color(146, 248, 133));
         btnGeneral.setFocusPainted(false);
         panel.add(btnGeneral);
-        btnGeneral.addMouseListener(ControladorVentanaElegirNivel.getInstance());
+        //btnGeneral.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
         btnPorNiveles= new JButton();
         btnPorNiveles.setBounds(210,200,80,35);
@@ -58,7 +56,7 @@ public class VentanaElegirRanking extends JFrame {
         btnPorNiveles.setFocusPainted(false);
         panel.add(btnPorNiveles);
         btnPorNiveles.setHorizontalAlignment(SwingConstants.CENTER);
-        btnPorNiveles.addMouseListener(ControladorVentanaElegirNivel.getInstance());
+        //btnPorNiveles.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
         btnMiRancking= new JButton();
         btnMiRancking.setBounds(210,250,80,35);
@@ -66,7 +64,7 @@ public class VentanaElegirRanking extends JFrame {
         btnMiRancking.setBackground(new Color(248, 133, 133));
         btnMiRancking.setFocusPainted(false);
         panel.add(btnMiRancking);
-        btnMiRancking.addMouseListener(ControladorVentanaElegirNivel.getInstance());
+        //btnMiRancking.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
     }
 

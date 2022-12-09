@@ -316,7 +316,8 @@ public class Board extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if(e.getSource() instanceof JButton){
-            VentanaMenu.getInstance(0).setVisible(true);
+            System.out.println(parent.codigoUsuario );
+            VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
             Central.getInstance().guardarPartida(parent.codigoUsuario,parent);
         }
