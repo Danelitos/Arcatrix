@@ -127,6 +127,7 @@ public class VentanaMenu extends JFrame {
     }
 
     public void cargar(){
+        VentanaPartidasGuardadas.miVentana=null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaPartidasGuardadas.getInstance().setVisible(true);
     }

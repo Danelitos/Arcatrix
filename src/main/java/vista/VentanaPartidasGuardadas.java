@@ -19,7 +19,7 @@ import javax.swing.border.EmptyBorder;
 public class VentanaPartidasGuardadas extends JFrame {
 
     private JPanel contentPane,panel;
-    private static VentanaPartidasGuardadas miVentana;
+    public static VentanaPartidasGuardadas miVentana;
 
     public static JList<String> miListaString;
 
