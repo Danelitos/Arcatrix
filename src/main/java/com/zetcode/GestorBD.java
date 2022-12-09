@@ -8,9 +8,49 @@ public class GestorBD {
     Connection con = null;
     private GestorBD() throws SQLException {
         //nos conectamos a la base de datos en phpmyadmin
-        String sURL = "jdbc:mysql://localhost/Tetris";
-        con = DriverManager.getConnection(sURL,"root","");
+        //String sURL = "jdbc:mysql://localhost/Tetris";
+        //con = DriverManager.getConnection(sURL,"root","");
+        String dir= System.getProperty("user.dir");
+        System.out.println(dir);
+        String sURL = "jdbc:h2:"+ dir + "/src/main/resources/baseDatos/tetrisBD";
+        con = DriverManager.getConnection(sURL,"admin","");
+
+        PreparedStatement sql= con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
+        sql.execute();
+
+        //pruebah2();
     }
+    private void pruebah2() throws SQLException {
+        PreparedStatement sql= con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
+        sql.execute();
+
+        sql= con.prepareStatement("INSERT INTO Usuario(Nombre,Email,Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
+
+        sql.setString(1,"hola");
+        sql.setString(2,"jeje");
+        sql.setString(3,"123");
+        sql.setInt(4,4);
+
+
+        sql.executeUpdate();
+        ResultSet generatedKeys = sql.getGeneratedKeys();
+        generatedKeys.next();
+        int codUsuario= generatedKeys.getInt(1);
+        System.out.println(codUsuario);
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery ("select nombre from Usuario where id=1");
+
+        rs.next();
+        String nombre=rs.getString(1);
+
+        System.out.println("nombre: " + nombre);
+
+        //exportar la bd para PROBAR
+        //sql= con.prepareStatement("SCRIPT TO 'bd2.sql'");
+        //sql.execute();
+
+    }
+
 
     public static GestorBD getInstance() throws SQLException {
         if(miBaseDeDatos==null){
@@ -21,7 +61,7 @@ public class GestorBD {
 
     public int insertPartida(int codUsuario, String nivel, int puntos) throws SQLException {
 
-        PreparedStatement sql= con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos) VALUES(?,?,?,?)");
+        PreparedStatement sql= con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos) VALUES(?,?,?,?)",Statement.RETURN_GENERATED_KEYS);
 
         sql.setInt(1,codUsuario);
         sql.setString(2,nivel);
@@ -32,9 +72,9 @@ public class GestorBD {
 
         Statement s = con.createStatement();
         //obtener codigo incremetnal que acaba de crear
-        ResultSet rs = s.executeQuery ("select last_insert_id()");
-        rs.next();
-        int codPartida=rs.getInt(1);
+        ResultSet generatedKeys = sql.getGeneratedKeys();
+        generatedKeys.next();
+        int codPartida= generatedKeys.getInt(1);
 
         System.out.println("codigo Partida: " + codPartida);
         //devuelve el codigo autoincremental de la base de datos
