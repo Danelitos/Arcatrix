@@ -33,6 +33,8 @@ public class Board extends JPanel implements MouseListener {
         codPartida = pCodPartida;
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
+        //TODO FONDO COLOR
+        //setBackground(Color.BLACK);
         initBoard(parent);
         board = pParent.getCasillasOcupadas();
     }
