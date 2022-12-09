@@ -1,6 +1,8 @@
 package vista;
 
+import com.zetcode.Central;
 import com.zetcode.GestorBD;
+import com.zetcode.GestorUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +43,13 @@ public class VentanaLogin extends JFrame{
             }
         });
         registrarse=new JButton("REGISTRARSE");
-        registrarse.addActionListener(evento -> registro());
+        registrarse.addActionListener(evento -> {
+            try {
+                registro();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
         usuario=new JTextField();
         password= new JPasswordField();
         usuarioText=new JLabel("Usuario");
@@ -74,6 +82,8 @@ public class VentanaLogin extends JFrame{
             VentanaLogin.getInstance().setVisible(false);
             VentanaMenu.getInstance(loginCorrecto).setVisible(true);
             VentanaMenu.setCodigoUsu(loginCorrecto);
+            int codUsu=GestorBD.getInstance().buscarUsuario(usuarioVerificar,passwordVerificar);
+            GestorUsuarios.getInstance().crearUsuario(codUsu,usuarioVerificar,passwordVerificar);
         }
         else{
             JOptionPane.showMessageDialog(VentanaLogin.getInstance(),"Ha habido un error al logearse","LOGIN ERRONEO",JOptionPane.ERROR_MESSAGE);
@@ -81,7 +91,7 @@ public class VentanaLogin extends JFrame{
 
     }
 
-    public void registro(){
+    public void registro() throws SQLException {
         VentanaLogin.getInstance().setVisible(false);
         VentanaRegistro.getInstance().setVisible(true);
     }
