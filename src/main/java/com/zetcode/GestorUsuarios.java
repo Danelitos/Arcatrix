@@ -56,7 +56,7 @@ public class GestorUsuarios {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-    public Tetris buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
+    public JsonArray buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
         return elUsuario.obtPartida(fechaHora);
     }
 

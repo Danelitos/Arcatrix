@@ -43,22 +43,12 @@ public class Central {
     public JsonArray obtPartidasGuardadas(int codUsuario){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         JsonArray arrayJson = GestorUsuarios.getInstance().partidasGuardadas(user);
-        List<String> exampleList = new ArrayList<String>();
-        for (int i = 0; i < arrayJson.size(); i++) {
-            exampleList.add(arrayJson.get(i).getAsString());
-        }
-        int size = exampleList.size();
-        String[] stringArray = exampleList.toArray(new String[size]);
-        for (int i = 0; i < arrayJson.size(); i++) {
-            System.out.println(stringArray[i]);
-            System.out.println("He hecho algo");
-        }
         return arrayJson;
     }
 
-    public Tetris cargarPartida(int codUsuario, String fechaHora){
+    public JsonArray cargarPartida(int codUsuario, String fechaHora){
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        Tetris partida = user.obtPartida(fechaHora);
+        JsonArray partida = user.obtPartida(fechaHora);
         return partida;
     }
 

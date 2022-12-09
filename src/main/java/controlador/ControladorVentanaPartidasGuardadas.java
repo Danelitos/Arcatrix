@@ -1,5 +1,7 @@
 package controlador;
 
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
 import com.zetcode.Central;
 import com.zetcode.Shape;
 import com.zetcode.Tetris;
@@ -10,6 +12,8 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemListener {
     private static ControladorVentanaPartidasGuardadas controladorPartidasGuardadas;
@@ -36,15 +40,26 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
                 VentanaPartidasGuardadas.getInstance().setVisible(false);
                 //Obtenemos la fechaHora de la ventana de Partidas guardadas y el código de usuario de la VentanaMenu
                 String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
-                Tetris laPartida = Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
+                JsonArray laPartida = Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu,s);
                 //Crear la partida
-                int n = laPartida.getCodPartida();
-                System.out.println("partida instancia: " + n++);
+                Integer codUsuarioPartida = laPartida.get(0).getAsInt();
+                Integer codigoPartida = laPartida.get(1).getAsInt();
+                String nivel = laPartida.get(2).getAsString();
+                Integer puntos = laPartida.get(3).getAsInt();
+                Shape.Tetrominoe[] board = null;
+                String s1 = laPartida.get(5).toString();
+                System.out.println(s1);
+                //Falla al pasar de String a String[]
+                for (int i=0; i < laPartida.get(4).getAsInt();i++){
+                    //board[i] = Shape.Tetrominoe.valueOf(array[i]);
+                    System.out.println(array[i]);
+                }
+                System.out.println("partida instancia: " + codigoPartida++);
                 //hacer cuenta atras
-                VentanaNivelElegido.getInstance(laPartida.codigoUsuario,laPartida.nivel).cuentaAtras();
+                VentanaNivelElegido.getInstance(codUsuarioPartida,nivel).cuentaAtras();
                 //crear interfaz del juego
-                new Tetris(laPartida.codigoUsuario,laPartida.codigoPartida,laPartida.nivel,laPartida.getCasillasOcupadas() ,laPartida.getPuntos());
-                VentanaNivelElegido.getInstance(laPartida.codigoUsuario,laPartida.nivel).setVisible(false);
+                new Tetris(codUsuarioPartida,codigoPartida++,nivel,board,puntos);
+                VentanaNivelElegido.getInstance(codUsuarioPartida,nivel).setVisible(false);
             }
             else if(boton.getText().equals("Volver")){
                 System.out.println("Vuelve al menu principal");
