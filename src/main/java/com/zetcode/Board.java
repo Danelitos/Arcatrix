@@ -34,7 +34,7 @@ public class Board extends JPanel implements MouseListener {
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
         initBoard(parent);
-
+        board = pParent.getCasillasOcupadas();
     }
 
     public Tetrominoe[] getBoard(){return board;}

@@ -30,14 +30,14 @@ public class Tetris extends JFrame {
         casillasOcupadas = pCasillasOcupadas;
         puntos = pPuntos;
         logger.info("Playing");
-        this.casillasOcupadas = initUI(codPartida, nivel, casillasOcupadas);
+        this.casillasOcupadas = initUI(codPartida, nivel);
         this.setVisible(true);
     }
 
     public Shape.Tetrominoe[] getCasillasOcupadas(){return casillasOcupadas;}
     public Integer getPuntos(){return puntos;}
 
-    private Shape.Tetrominoe[] initUI(int codPartida, String nivel, Shape.Tetrominoe[] casillasOcupadas) {
+    private Shape.Tetrominoe[] initUI(int codPartida, String nivel) {
 
         getContentPane().setLayout(null);
 
