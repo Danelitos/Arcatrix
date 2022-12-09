@@ -19,7 +19,8 @@ public class Central {
 
     }
 
-    public void crearUsuario(String nombre, String correo, String password, String repetirPassword){
+    public void crearUsuario(int codUsu, String nombre, String password, String repetirPassword){
+        GestorUsuarios.getInstance().crearUsuario(codUsu,nombre,password);
 
     }
 

@@ -1,6 +1,8 @@
 package vista;
 
+import com.zetcode.Central;
 import com.zetcode.GestorBD;
+import com.zetcode.GestorUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -88,6 +90,8 @@ public class VentanaRegistro extends JFrame {
             boolean registroCorrecto=GestorBD.getInstance().addUsuario(usuarioInsert,correoInsert,passwordInsert);
             if (registroCorrecto){
                 JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"El registro ha sido exitoso","REGISTRO EXITOSO",JOptionPane.INFORMATION_MESSAGE);
+                int codUsu=GestorBD.getInstance().buscarUsuario(usuarioInsert,passwordInsert);
+                GestorUsuarios.getInstance().crearUsuario(codUsu,usuarioInsert,passwordInsert);
             }
             else {
                 JOptionPane.showMessageDialog(VentanaRegistro.getInstance(),"Ha habido un error al registrarse","REGISTRO ERRONEO",JOptionPane.ERROR_MESSAGE);
