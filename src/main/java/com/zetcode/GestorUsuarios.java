@@ -13,8 +13,6 @@ public class GestorUsuarios {
 
     private GestorUsuarios(){
         lista = new ArrayList<Usuario>();
-        Usuario admin = new Usuario(9,"admin","test",null,null);
-        lista.add(admin);
     }
     public static GestorUsuarios getInstance(){
         if(miGestorUsuarios == null) miGestorUsuarios = new GestorUsuarios();
@@ -60,5 +58,11 @@ public class GestorUsuarios {
 
     public Tetris buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
         return elUsuario.obtPartida(fechaHora);
+    }
+
+    public void crearUsuario(int codUsu, String nombre, String password){
+        System.out.println(codUsu);
+        lista.add(new Usuario(codUsu,nombre,password,new DatosPersonalizacion("Azul","Azul","Sonido")));
+
     }
 }

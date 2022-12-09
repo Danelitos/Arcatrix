@@ -18,7 +18,7 @@ import javax.swing.border.EmptyBorder;
 
 public class VentanaPartidasGuardadas extends JFrame {
 
-    private JPanel contentPane;
+    private JPanel contentPane,panel;
     private static VentanaPartidasGuardadas miVentana;
 
     public static JList<String> miListaString;
@@ -34,7 +34,7 @@ public class VentanaPartidasGuardadas extends JFrame {
         contentPane.setLayout(new BorderLayout(0, 0));
         setContentPane(contentPane);
 
-        JPanel panel = new JPanel();
+        panel = new JPanel();
         contentPane.add(panel, BorderLayout.CENTER);
         panel.setLayout(null);
 
@@ -42,6 +42,7 @@ public class VentanaPartidasGuardadas extends JFrame {
         cargarPartida.setBounds(438, 256, 120, 38);
         panel.add(cargarPartida);
         cargarPartida.addMouseListener(ControladorVentanaPartidasGuardadas.getInstance());
+        this.getPartidasGuardadas();
 
         JButton volver = new JButton("Volver");
         volver.setBounds(438, 300, 120, 38);

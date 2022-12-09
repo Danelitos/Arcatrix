@@ -15,10 +15,10 @@ public class Usuario {
     private String password;
     private DatosPersonalizacion personalizacion;
 
-    private ArrayList<PartidaGuardada> listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
+    private ArrayList<PartidaGuardada> listaPartidasGuardadas;
 
 
-    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion, ArrayList<PartidaGuardada> pLista){
+    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion){
         codUsuario=pCodUsuario;
         nombre=pNombre;
         password=pPassword;
