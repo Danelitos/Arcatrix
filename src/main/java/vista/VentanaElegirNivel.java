@@ -1,7 +1,5 @@
 package vista;
 
-import controlador.ControladorVentanaElegirNivel;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -105,6 +103,7 @@ public class VentanaElegirNivel extends JFrame implements ActionListener{
 
         //habilitar siguiente interfaz
         this.setVisible(false);
+        VentanaNivelElegido.miNivelElegido=null;
         VentanaNivelElegido.getInstance(codUsuario,nivel).setVisible(true);
         //this.setVisible(false);
         //panelElegido.setVisible(true);

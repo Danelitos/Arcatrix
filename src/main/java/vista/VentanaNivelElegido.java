@@ -1,8 +1,6 @@
 package vista;
 
 import com.zetcode.*;
-import com.zetcode.Shape;
-import controlador.ControladorVentanaNivelElegido;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 public class VentanaNivelElegido extends JFrame implements ActionListener {
-    private static VentanaNivelElegido miNivelElegido;
+    public static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
     public int codigoUsuario;
     JLabel texto,numero;
@@ -124,11 +122,9 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
-            //Para probar
-            codigoUsuario = 9;
             //crear objeto partida
-            Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido, null,0);
-            System.out.println("partida instancia: " + partida.getCodPartida());
+            //Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido, null,0);
+            //System.out.println("partida instancia: " + partida.getCodPartida());
             //hacer cuenta atras
             VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
 
