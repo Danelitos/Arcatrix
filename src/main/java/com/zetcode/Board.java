@@ -90,6 +90,9 @@ public class Board extends JPanel implements MouseListener {
         board = new Tetrominoe[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
+        if(parent.getCasillasOcupadas() != null){
+            board = parent.getCasillasOcupadas();
+        }
         newPiece();
 
         timer = new Timer(PERIOD_INTERVAL, new GameCycle());
@@ -316,7 +319,8 @@ public class Board extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if(e.getSource() instanceof JButton){
-            System.out.println(parent.codigoUsuario );
+            this.timer.stop();
+            System.out.println(parent.codigoUsuario);
             VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
             Central.getInstance().guardarPartida(parent.codigoUsuario,parent);

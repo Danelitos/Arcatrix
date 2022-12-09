@@ -47,7 +47,18 @@ public class VentanaPartidasGuardadas extends JFrame {
         volver.setBounds(438, 300, 120, 38);
         panel.add(volver);
         volver.addMouseListener(ControladorVentanaPartidasGuardadas.getInstance());
+    }
 
+    public static VentanaPartidasGuardadas getInstance() {
+        if (miVentana == null) {
+            miVentana = new VentanaPartidasGuardadas();
+        }
+        return miVentana;
+    }
+
+    public JList<String> getListaString(){return miListaString;}
+
+    public void getPartidasGuardadas() {
         JsonArray array = new JsonArray();
         array = Central.getInstance().obtPartidasGuardadas(VentanaMenu.getInstance(0).getCodigoUsu());
         //Asociar el modelo de lista al JList
@@ -65,13 +76,4 @@ public class VentanaPartidasGuardadas extends JFrame {
         panel.add(listaString);
         miListaString = listaString;
     }
-
-    public static VentanaPartidasGuardadas getInstance() {
-        if (miVentana == null) {
-            miVentana = new VentanaPartidasGuardadas();
-        }
-        return miVentana;
-    }
-
-    public JList<String> getListaString(){return miListaString;}
 }
