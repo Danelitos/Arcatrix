@@ -11,7 +11,13 @@
 CREATE TABLE IF NOT EXISTS `DatosPersonalizacion` (
   `CodigoPersonalizacion` int NOT NULL,
   `ColorFondo` varchar(40) NOT NULL,
-  `ColorLadrillos` varchar(40) NOT NULL,
+  `ColorZSHAPE` varchar(40) NOT NULL,
+  `ColorSSHAPE` varchar(40) NOT NULL,
+  `ColorLINESHAPE` varchar(40) NOT NULL,
+  `ColorSQUARESHAPE` varchar(40) NOT NULL,
+  `ColorTSHAPE` varchar(40) NOT NULL,
+  `ColorLSHAPE` varchar(40) NOT NULL,
+  `ColorMIRROREDLSHAPE` varchar(40) NOT NULL,
   `Sonido` varchar(40) NOT NULL,
 PRIMARY KEY(CodigoPersonalizacion)
 

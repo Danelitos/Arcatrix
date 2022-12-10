@@ -93,12 +93,18 @@ public class GestorBD {
             codigoPersonalizacion=0;
         }
 
-        PreparedStatement sql1= con.prepareStatement("INSERT INTO DatosPersonalizacion(CodigoPersonalizacion,ColorFondo,ColorLadrillos,Sonido) VALUES(?,?,?,?)");
+        PreparedStatement sql1= con.prepareStatement("INSERT INTO DatosPersonalizacion(CodigoPersonalizacion,ColorFondo,ColorZSHAPE,ColorSSHAPE,ColorLINESHAPE,ColorSQUARESHAPE,ColorTSHAPE,ColorLSHAPE,ColorMIRROREDLSHAPE,Sonido) VALUES(?,?,?,?,?,?,?,?,?,?)");
 
         sql1.setInt(1,codigoPersonalizacion+1);
         sql1.setString(2,"Azul");
         sql1.setString(3,"Azul");
-        sql1.setString(4,"sonido");
+        sql1.setString(4,"Azul");
+        sql1.setString(5,"Azul");
+        sql1.setString(6,"Azul");
+        sql1.setString(7,"Azul");
+        sql1.setString(8,"Azul");
+        sql1.setString(9,"Azul");
+        sql1.setString(10,"sonido");
 
         sql1.executeUpdate();
 
@@ -127,7 +133,7 @@ public class GestorBD {
          return codigoUsu;
      }
 
-     public boolean actualizarPersonalizacion(String colorFondo,String colorLadrillos,String sonido,int codigoUsu) throws SQLException {
+     public boolean actualizarPersonalizacion(String colorFondo,String colorZSHAPE, String colorSSHAPE, String colorLINESHAPE,String colorTSHAPE, String colorSQUARESHAPE,String colorLSHAPE,String colorMIRROREDLSHAPE,String sonido,int codigoUsu) throws SQLException {
          int codigoPersonalizacion = 0;
          PreparedStatement sql1= con.prepareStatement("select CodigoPersonalizacion from Usuario where Id=?");
          sql1.setInt(1,codigoUsu);
@@ -137,12 +143,18 @@ public class GestorBD {
              System.out.println(codigoPersonalizacion);
          }
 
-         PreparedStatement sql2= con.prepareStatement("Update DatosPersonalizacion set ColorFondo=?,ColorLadrillos=?,Sonido=? where CodigoPersonalizacion=?");
+         PreparedStatement sql2= con.prepareStatement("Update DatosPersonalizacion set ColorFondo=?,ColorZSHAPE=?,ColorSSHAPE=?,ColorLINESHAPE=?,ColorSQUARESHAPE=?,ColorTSHAPE=?,ColorLSHAPE=?,ColorMIRROREDLSHAPE=?,Sonido=? where CodigoPersonalizacion=?");
 
          sql2.setString(1,colorFondo);
-         sql2.setString(2,colorLadrillos);
-         sql2.setString(3,sonido);
-         sql2.setInt(4,codigoPersonalizacion);
+         sql2.setString(2,colorZSHAPE);
+         sql2.setString(3,colorSSHAPE);
+         sql2.setString(4,colorLINESHAPE);
+         sql2.setString(5,colorSQUARESHAPE);
+         sql2.setString(6,colorTSHAPE);
+         sql2.setString(7,colorLSHAPE);
+         sql2.setString(8,colorMIRROREDLSHAPE);
+         sql2.setString(9,sonido);
+         sql2.setInt(10,codigoPersonalizacion);
          return sql2.executeUpdate()>0?true:false;
      }
 
