@@ -51,6 +51,11 @@ public class Central {
         JsonArray partida = user.obtPartida(fechaHora);
         return partida;
     }
+    public String[] obtLadrillos(int codUsuario,int codPartida){
+        Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
+        String[] array = user.getBoard(codPartida);
+        return array;
+    }
 
     public boolean obtPersonalizacion(int codUsu){
         return false;

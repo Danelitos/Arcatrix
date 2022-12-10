@@ -82,15 +82,30 @@ public class Usuario {
                 array.add(partida.codigoPartida);
                 array.add(partida.nivel);
                 array.add(partida.getPuntos());
-                array.add(partida.getCasillasOcupadas().length);
-                String[] pieza = new String[partida.getCasillasOcupadas().length];
-                for (int i=0;i < partida.getCasillasOcupadas().length;i++){
-                    pieza[i] = partida.getCasillasOcupadas()[i].toString();
-                }
-                array.add(Arrays.toString(pieza));
-                System.out.println(array);
             }
         }
         return array;
+    }
+    public String[] getBoard(int codPartida){
+        Tetris partida = obtTetris(codPartida);
+        String[] pieza = new String[partida.getCasillasOcupadas().length];
+        for (int i=0;i < partida.getCasillasOcupadas().length;i++){
+            pieza[i] = partida.getCasillasOcupadas()[i].toString();
+        }
+        return pieza;
+    }
+    public Tetris obtTetris(int codPartida){
+        Tetris partida = null;
+        Iterator<PartidaGuardada> itr = this.getIterador();
+        PartidaGuardada partidaGuardada = null;
+        boolean enc = false;
+        while (itr.hasNext() && !enc) {
+            partidaGuardada = itr.next();
+            if (partidaGuardada.obtCodPartida() == codPartida) {
+                enc = true;
+                partida = partidaGuardada.getLaPartida();
+            }
+        }
+        return partida;
     }
 }

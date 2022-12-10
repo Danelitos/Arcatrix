@@ -1,7 +1,6 @@
 package controlador;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
+import com.google.gson.*;
 import com.zetcode.Central;
 import com.zetcode.Shape;
 import com.zetcode.Tetris;
@@ -46,13 +45,10 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
                 Integer codigoPartida = laPartida.get(1).getAsInt();
                 String nivel = laPartida.get(2).getAsString();
                 Integer puntos = laPartida.get(3).getAsInt();
-                Shape.Tetrominoe[] board = null;
-                String s1 = laPartida.get(5).toString();
-                System.out.println(s1);
-                //Falla al pasar de String a String[]
-                for (int i=0; i < laPartida.get(4).getAsInt();i++){
-                    //board[i] = Shape.Tetrominoe.valueOf(array[i]);
-                    System.out.println(array[i]);
+                String[] array = Central.getInstance().obtLadrillos(codUsuarioPartida,codigoPartida);
+                Shape.Tetrominoe[] board = new Shape.Tetrominoe[array.length];
+                for (int i=0; i < array.length;i++){
+                    board[i] = Shape.Tetrominoe.valueOf(array[i]);
                 }
                 System.out.println("partida instancia: " + codigoPartida++);
                 //hacer cuenta atras
