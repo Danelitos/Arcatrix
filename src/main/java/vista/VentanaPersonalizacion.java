@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.Objects;
 
 public class VentanaPersonalizacion extends JFrame{
-    private static VentanaPersonalizacion miVentanaPersonalizacion;
+    public static VentanaPersonalizacion miVentanaPersonalizacion;
 
     private JPanel panelPersonalizacion;
 
@@ -35,12 +35,21 @@ public class VentanaPersonalizacion extends JFrame{
     private JComboBox<String> MirroredLShape;
     private JTextField sonido;
 
+    //TODO COLORES DE LAS PIEZAS
+    private Color Black=new Color(0,0,0);
+    private Color Blue=new Color(0,66,255);
+    private Color Red=new Color(255,0,0);
+    private Color Green=new Color(42,255,0);
+    private Color Yellow=new Color(232,255,0);
+    private Color Purple=new Color(220,0,255);
+
+
     private JButton guardarPersonalizacion;
     private JButton volver;
 
     private int codUsu;
 
-    private VentanaPersonalizacion(int codigoUsu){
+    private VentanaPersonalizacion(int codigoUsu) throws SQLException {
         super("ARCATRIX - PERSONALIZACIÓN");
         codUsu=codigoUsu;
         // crear ventana
@@ -53,14 +62,14 @@ public class VentanaPersonalizacion extends JFrame{
         setComponentes();
     }
 
-    public static VentanaPersonalizacion getInstance(int codUsu){
+    public static VentanaPersonalizacion getInstance(int codUsu) throws SQLException {
         if(miVentanaPersonalizacion==null){
             miVentanaPersonalizacion=new VentanaPersonalizacion(codUsu);
         }
         return miVentanaPersonalizacion;
     }
 
-    private void setComponentes(){
+    private void setComponentes() throws SQLException {
         //crear panel
         panelPersonalizacion = new JPanel();
         this.getContentPane().add(panelPersonalizacion);
@@ -75,13 +84,15 @@ public class VentanaPersonalizacion extends JFrame{
         colorFondoText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(colorFondoText);
 
-
+        String colorActualFondo=GestorBD.getInstance().obtColorPieza("COLORFONDO",codUsu);
         colorFondo=new JComboBox<>();
+        colorFondo.addItem(colorActualFondo);
         colorFondo.addItem("Rojo");
         colorFondo.addItem("Azul");
         colorFondo.addItem("Amarillo");
         colorFondo.addItem("Verde");
         colorFondo.addItem("Negro");
+        colorFondo.addItem("Morado");
         colorFondo.setBounds(10,50,150,20);
         panelPersonalizacion.add(colorFondo);
 
@@ -100,12 +111,15 @@ public class VentanaPersonalizacion extends JFrame{
         ZShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(ZShapeText);
 
+        String colorZSHAPE=GestorBD.getInstance().obtColorPieza("COLORZSHAPE",codUsu);
         ZShape= new JComboBox<>();
+        ZShape.addItem(colorZSHAPE);
         ZShape.addItem("Rojo");
         ZShape.addItem("Azul");
         ZShape.addItem("Amarillo");
         ZShape.addItem("Verde");
         ZShape.addItem("Negro");
+        ZShape.addItem("Morado");
         ZShape.setBounds(10,140,150,20);
         panelPersonalizacion.add(ZShape);
 
@@ -117,12 +131,15 @@ public class VentanaPersonalizacion extends JFrame{
         SShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(SShapeText);
 
+        String colorSSHAPE=GestorBD.getInstance().obtColorPieza("COLORSSHAPE",codUsu);
         SShape= new JComboBox<>();
+        SShape.addItem(colorSSHAPE);
         SShape.addItem("Rojo");
         SShape.addItem("Azul");
         SShape.addItem("Amarillo");
         SShape.addItem("Verde");
         SShape.addItem("Negro");
+        SShape.addItem("Morado");
         SShape.setBounds(10,180,150,20);
         panelPersonalizacion.add(SShape);
 
@@ -134,12 +151,15 @@ public class VentanaPersonalizacion extends JFrame{
         LineShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(LineShapeText);
 
+        String colorLINESHAPE=GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",codUsu);
         LineShape= new JComboBox<>();
+        LineShape.addItem(colorLINESHAPE);
         LineShape.addItem("Rojo");
         LineShape.addItem("Azul");
         LineShape.addItem("Amarillo");
         LineShape.addItem("Verde");
         LineShape.addItem("Negro");
+        LineShape.addItem("Morado");
         LineShape.setBounds(10,220,150,20);
         panelPersonalizacion.add(LineShape);
 
@@ -151,12 +171,15 @@ public class VentanaPersonalizacion extends JFrame{
         TShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(TShapeText);
 
+        String colorTSHAPE=GestorBD.getInstance().obtColorPieza("COLORTSHAPE",codUsu);
         TShape= new JComboBox<>();
+        TShape.addItem(colorTSHAPE);
         TShape.addItem("Rojo");
         TShape.addItem("Azul");
         TShape.addItem("Amarillo");
         TShape.addItem("Verde");
         TShape.addItem("Negro");
+        TShape.addItem("Morado");
         TShape.setBounds(10,260,150,20);
         panelPersonalizacion.add(TShape);
 
@@ -168,12 +191,15 @@ public class VentanaPersonalizacion extends JFrame{
         SquareShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(SquareShapeText);
 
+        String colorSQUARESHAPE=GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",codUsu);
         SquareShape= new JComboBox<>();
+        SquareShape.addItem(colorSQUARESHAPE);
         SquareShape.addItem("Rojo");
         SquareShape.addItem("Azul");
         SquareShape.addItem("Amarillo");
         SquareShape.addItem("Verde");
         SquareShape.addItem("Negro");
+        SquareShape.addItem("Morado");
         SquareShape.setBounds(250,140,150,20);
         panelPersonalizacion.add(SquareShape);
 
@@ -185,12 +211,15 @@ public class VentanaPersonalizacion extends JFrame{
         LShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(LShapeText);
 
+        String colorLSHAPE=GestorBD.getInstance().obtColorPieza("COLORLSHAPE",codUsu);
         LShape= new JComboBox<>();
+        LShape.addItem(colorLSHAPE);
         LShape.addItem("Rojo");
         LShape.addItem("Azul");
         LShape.addItem("Amarillo");
         LShape.addItem("Verde");
         LShape.addItem("Negro");
+        LShape.addItem("Morado");
         LShape.setBounds(250,180,150,20);
         panelPersonalizacion.add(LShape);
 
@@ -202,12 +231,15 @@ public class VentanaPersonalizacion extends JFrame{
         MirroredLShapeText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(MirroredLShapeText);
 
+        String colorMIRROREDLSHAPE=GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",codUsu);
         MirroredLShape= new JComboBox<>();
+        MirroredLShape.addItem(colorMIRROREDLSHAPE);
         MirroredLShape.addItem("Rojo");
         MirroredLShape.addItem("Azul");
         MirroredLShape.addItem("Amarillo");
         MirroredLShape.addItem("Verde");
         MirroredLShape.addItem("Negro");
+        MirroredLShape.addItem("Morado");
         MirroredLShape.setBounds(250,220,150,20);
         panelPersonalizacion.add(MirroredLShape);
 
@@ -245,10 +277,16 @@ public class VentanaPersonalizacion extends JFrame{
         volver.setBackground(new Color(51,159,221));
         volver.setFocusPainted(false);
         panelPersonalizacion.add(volver);
-        volver.addActionListener(evento -> volverMenu());
+        volver.addActionListener(evento -> {
+            try {
+                volverMenu();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
     }
 
-    public void volverMenu(){
+    public void volverMenu() throws SQLException {
         VentanaPersonalizacion.getInstance(codUsu).setVisible(false);
         VentanaMenu.getInstance(codUsu).setVisible(true);
     }

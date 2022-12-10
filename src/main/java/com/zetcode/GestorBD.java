@@ -172,5 +172,70 @@ public class GestorBD {
 
     }
 
+    public String obtColorPieza(String columna,int codigoUsu) throws SQLException {
+        int codigoPersonalizacion = 0;
+        PreparedStatement sql1 = con.prepareStatement("select CodigoPersonalizacion from Usuario where Id=?");
+        sql1.setInt(1, codigoUsu);
+        ResultSet rs1 = sql1.executeQuery();
+        if (rs1.next()) {
+            codigoPersonalizacion = rs1.getInt("CodigoPersonalizacion");
+            System.out.println(codigoPersonalizacion);
+        }
+
+        String colorFondo=null;
+        String colorZSHAPE=null;
+        String colorSSHAPE=null;
+        String colorLINESHAPE=null;
+        String colorSQUARESHAPE=null;
+        String colorTSHAPE=null;
+        String colorLSHAPE=null;
+        String colorMIRRROREDLSHAPE=null;
+        String sonido=null;
+
+        PreparedStatement sql2 = con.prepareStatement("select * from DatosPersonalizacion where CodigoPersonalizacion=?");
+        sql2.setInt(1, codigoPersonalizacion);
+        ResultSet rs2 = sql2.executeQuery();
+        if (rs2.next()) {
+            colorFondo = rs2.getString("COLORFONDO");
+            colorZSHAPE = rs2.getString("COLORZSHAPE");
+            colorSSHAPE = rs2.getString("COLORSSHAPE");
+            colorLINESHAPE = rs2.getString("COLORLINESHAPE");
+            colorSQUARESHAPE = rs2.getString("COLORSQUARESHAPE");
+            colorTSHAPE = rs2.getString("COLORTSHAPE");
+            colorLSHAPE = rs2.getString("COLORLSHAPE");
+            colorMIRRROREDLSHAPE = rs2.getString("COLORMIRROREDLSHAPE");
+            sonido = rs2.getString("SONIDO");
+            System.out.println(codigoPersonalizacion);
+        }
+        if(columna.equals("COLORFONDO")){
+            return colorFondo;
+        }
+        else if (columna.equals("COLORZSHAPE")){
+            return colorZSHAPE;
+        }
+        else if (columna.equals("COLORSSHAPE")){
+            return colorSSHAPE;
+        }
+        else if (columna.equals("COLORLINESHAPE")){
+            return colorLINESHAPE;
+        }
+        else if (columna.equals("COLORSQUARESHAPE")){
+            return colorSQUARESHAPE;
+        }
+        else if (columna.equals("COLORTSHAPE")){
+            return colorTSHAPE;
+        }
+        else if (columna.equals("COLORLSHAPE")){
+            return colorLSHAPE;
+        }
+        else if (columna.equals("COLORMIRROREDLSHAPE")){
+            return colorMIRRROREDLSHAPE;
+        }
+        else {
+            return sonido;
+        }
+
+    }
+
 
 }

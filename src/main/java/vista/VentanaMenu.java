@@ -4,6 +4,7 @@ import com.zetcode.Tetris;
 
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
 import java.util.Objects;
 
 public class VentanaMenu extends JFrame {
@@ -91,7 +92,13 @@ public class VentanaMenu extends JFrame {
         personalizacion.setBackground(new Color(51, 159, 221));
         personalizacion.setFocusPainted(false);
         panelMenu.add(personalizacion);
-        personalizacion.addActionListener(evento -> personalizar());
+        personalizacion.addActionListener(evento -> {
+            try {
+                personalizar();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
         rankings = new JButton();
         rankings.setBounds(150, 400, 200, 35);
@@ -132,7 +139,8 @@ public class VentanaMenu extends JFrame {
         VentanaPartidasGuardadas.getInstance().setVisible(true);
     }
 
-    public void personalizar(){
+    public void personalizar() throws SQLException {
+        VentanaPersonalizacion.miVentanaPersonalizacion=null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaPersonalizacion.getInstance(codigoUsu).setVisible(true);
     }
