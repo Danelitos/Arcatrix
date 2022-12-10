@@ -1,10 +1,13 @@
 package vista;
 
+import com.sun.jdi.Mirror;
+import com.zetcode.Board;
 import com.zetcode.GestorBD;
 
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Objects;
 
 public class VentanaPersonalizacion extends JFrame{
     private static VentanaPersonalizacion miVentanaPersonalizacion;
@@ -14,9 +17,22 @@ public class VentanaPersonalizacion extends JFrame{
     private JLabel colorFondoText;
     private JLabel colorLadrillosText;
     private JLabel sonidoText;
+    private JLabel ZShapeText;
+    private JLabel SShapeText;
+    private JLabel LineShapeText;
+    private JLabel TShapeText;
+    private JLabel SquareShapeText;
+    private JLabel LShapeText;
+    private JLabel MirroredLShapeText;
 
     private JComboBox<String> colorFondo;
-    private JComboBox<String> colorLadrillos;
+    private JComboBox<String> ZShape;
+    private JComboBox<String> SShape;
+    private JComboBox<String> LineShape;
+    private JComboBox<String> TShape;
+    private JComboBox<String> SquareShape;
+    private JComboBox<String> LShape;
+    private JComboBox<String> MirroredLShape;
     private JTextField sonido;
 
     private JButton guardarPersonalizacion;
@@ -54,8 +70,8 @@ public class VentanaPersonalizacion extends JFrame{
         //crear TEXTO
         colorFondoText = new JLabel();
         colorFondoText.setText("Color del fondo");
-        colorFondoText.setBounds(0,20,150,20);
-        colorFondoText.setFont(new Font(null,Font.PLAIN, 20));
+        colorFondoText.setBounds(10,20,150,20);
+        colorFondoText.setFont(new Font(null,Font.BOLD, 20));
         colorFondoText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(colorFondoText);
 
@@ -71,29 +87,140 @@ public class VentanaPersonalizacion extends JFrame{
 
         colorLadrillosText = new JLabel();
         colorLadrillosText.setText("Color de los ladrillos");
-        colorLadrillosText.setBounds(0,150,200,20);
-        colorLadrillosText.setFont(new Font(null,Font.PLAIN, 20));
+        colorLadrillosText.setBounds(10,90,200,20);
+        colorLadrillosText.setFont(new Font(null,Font.BOLD, 20));
         colorLadrillosText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(colorLadrillosText);
 
-        colorLadrillos= new JComboBox<>();
-        colorLadrillos.addItem("Rojo");
-        colorLadrillos.addItem("Azul");
-        colorLadrillos.addItem("Amarillo");
-        colorLadrillos.addItem("Verde");
-        colorLadrillos.addItem("Negro");
-        colorLadrillos.setBounds(10,180,150,20);
-        panelPersonalizacion.add(colorLadrillos);
+        //ZSHAPE
+        ZShapeText = new JLabel();
+        ZShapeText.setText("ZSHAPE");
+        ZShapeText.setBounds(-60,120,200,20);
+        ZShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        ZShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(ZShapeText);
 
+        ZShape= new JComboBox<>();
+        ZShape.addItem("Rojo");
+        ZShape.addItem("Azul");
+        ZShape.addItem("Amarillo");
+        ZShape.addItem("Verde");
+        ZShape.addItem("Negro");
+        ZShape.setBounds(10,140,150,20);
+        panelPersonalizacion.add(ZShape);
+
+        //SSHAPE
+        SShapeText = new JLabel();
+        SShapeText.setText("SSHAPE");
+        SShapeText.setBounds(-60,160,200,20);
+        SShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        SShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(SShapeText);
+
+        SShape= new JComboBox<>();
+        SShape.addItem("Rojo");
+        SShape.addItem("Azul");
+        SShape.addItem("Amarillo");
+        SShape.addItem("Verde");
+        SShape.addItem("Negro");
+        SShape.setBounds(10,180,150,20);
+        panelPersonalizacion.add(SShape);
+
+        //LINESHAPE
+        LineShapeText = new JLabel();
+        LineShapeText.setText("LINE SHAPE");
+        LineShapeText.setBounds(-45,200,200,20);
+        LineShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        LineShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(LineShapeText);
+
+        LineShape= new JComboBox<>();
+        LineShape.addItem("Rojo");
+        LineShape.addItem("Azul");
+        LineShape.addItem("Amarillo");
+        LineShape.addItem("Verde");
+        LineShape.addItem("Negro");
+        LineShape.setBounds(10,220,150,20);
+        panelPersonalizacion.add(LineShape);
+
+        //TSHAPE
+        TShapeText = new JLabel();
+        TShapeText.setText("LINE SHAPE");
+        TShapeText.setBounds(-45,240,200,20);
+        TShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        TShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(TShapeText);
+
+        TShape= new JComboBox<>();
+        TShape.addItem("Rojo");
+        TShape.addItem("Azul");
+        TShape.addItem("Amarillo");
+        TShape.addItem("Verde");
+        TShape.addItem("Negro");
+        TShape.setBounds(10,260,150,20);
+        panelPersonalizacion.add(TShape);
+
+        //SQUARESHAPE
+        SquareShapeText = new JLabel();
+        SquareShapeText.setText("SQUARE SHAPE");
+        SquareShapeText.setBounds(210,120,200,20);
+        SquareShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        SquareShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(SquareShapeText);
+
+        SquareShape= new JComboBox<>();
+        SquareShape.addItem("Rojo");
+        SquareShape.addItem("Azul");
+        SquareShape.addItem("Amarillo");
+        SquareShape.addItem("Verde");
+        SquareShape.addItem("Negro");
+        SquareShape.setBounds(250,140,150,20);
+        panelPersonalizacion.add(SquareShape);
+
+        //LSHAPE
+        LShapeText = new JLabel();
+        LShapeText.setText("LSHAPE");
+        LShapeText.setBounds(180,160,200,20);
+        LShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        LShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(LShapeText);
+
+        LShape= new JComboBox<>();
+        LShape.addItem("Rojo");
+        LShape.addItem("Azul");
+        LShape.addItem("Amarillo");
+        LShape.addItem("Verde");
+        LShape.addItem("Negro");
+        LShape.setBounds(250,180,150,20);
+        panelPersonalizacion.add(LShape);
+
+        //MIRRORED LSHAPE
+        MirroredLShapeText = new JLabel();
+        MirroredLShapeText.setText("MIRRORED LSHAPE");
+        MirroredLShapeText.setBounds(225,200,200,20);
+        MirroredLShapeText.setFont(new Font(null,Font.PLAIN, 15));
+        MirroredLShapeText.setHorizontalAlignment(SwingConstants.CENTER);
+        panelPersonalizacion.add(MirroredLShapeText);
+
+        MirroredLShape= new JComboBox<>();
+        MirroredLShape.addItem("Rojo");
+        MirroredLShape.addItem("Azul");
+        MirroredLShape.addItem("Amarillo");
+        MirroredLShape.addItem("Verde");
+        MirroredLShape.addItem("Negro");
+        MirroredLShape.setBounds(250,220,150,20);
+        panelPersonalizacion.add(MirroredLShape);
+
+        //SONIDO
         sonidoText = new JLabel();
         sonidoText.setText("Sonido                    ");
-        sonidoText.setBounds(0,280,200,20);
-        sonidoText.setFont(new Font(null,Font.PLAIN, 20));
+        sonidoText.setBounds(0,295,200,20);
+        sonidoText.setFont(new Font(null,Font.BOLD, 20));
         sonidoText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(sonidoText);
 
         sonido=new JTextField();
-        sonido.setBounds(10,310,150,20);
+        sonido.setBounds(10,320,150,20);
         panelPersonalizacion.add(sonido);
 
 
@@ -127,10 +254,18 @@ public class VentanaPersonalizacion extends JFrame{
     }
 
     public void actualizarPersonalizacion() throws SQLException {
-        String colorFondoAtualizado=colorFondo.getSelectedItem().toString();
-        String colorLadrillosActualizado=colorLadrillos.getSelectedItem().toString();
+        String colorFondoAtualizado= Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
+
+        String colorZSHAPE= Objects.requireNonNull(ZShape.getSelectedItem()).toString();
+        String colorSSHAPE= Objects.requireNonNull(SShape.getSelectedItem()).toString();
+        String colorLINESHAPE= Objects.requireNonNull(LineShape.getSelectedItem()).toString();
+        String colorTSHAPE= Objects.requireNonNull(TShape.getSelectedItem()).toString();
+        String colorSQUARESHAPE= Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
+        String colorLSHAPE= Objects.requireNonNull(LShape.getSelectedItem()).toString();
+        String colorMIRROREDLSHAPE= Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
         String sonidoActualizado=sonido.getText();
-        boolean personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorLadrillosActualizado,sonidoActualizado,codUsu);
+
+        boolean personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorZSHAPE,colorSSHAPE,colorLINESHAPE,colorTSHAPE,colorSQUARESHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonidoActualizado,codUsu);
         if (personActualizado){
             JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Se ha actualizado con exito","ACTUALIZACIÓN EXITOSO",JOptionPane.INFORMATION_MESSAGE);
         }
