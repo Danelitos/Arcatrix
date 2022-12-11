@@ -13,6 +13,7 @@ public class VentanaPersonalizacion extends JFrame{
     public static VentanaPersonalizacion miVentanaPersonalizacion;
 
     private JPanel panelPersonalizacion;
+    private JCheckBox classicTetris;
 
     private JLabel colorFondoText;
     private JLabel colorLadrillosText;
@@ -79,6 +80,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorActualFondo=GestorBD.getInstance().obtColorPieza("COLORFONDO",codUsu);
         colorFondo=new JComboBox<>();
         colorFondo.addItem(colorActualFondo);
+        colorFondo.addItem("Classic Color");
         colorFondo.addItem("Rojo");
         colorFondo.addItem("Azul");
         colorFondo.addItem("Amarillo");
@@ -106,6 +108,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorZSHAPE=GestorBD.getInstance().obtColorPieza("COLORZSHAPE",codUsu);
         ZShape= new JComboBox<>();
         ZShape.addItem(colorZSHAPE);
+        ZShape.addItem("Classic Color");
         ZShape.addItem("Rojo");
         ZShape.addItem("Azul");
         ZShape.addItem("Amarillo");
@@ -126,6 +129,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorSSHAPE=GestorBD.getInstance().obtColorPieza("COLORSSHAPE",codUsu);
         SShape= new JComboBox<>();
         SShape.addItem(colorSSHAPE);
+        SShape.addItem("Classic Color");
         SShape.addItem("Rojo");
         SShape.addItem("Azul");
         SShape.addItem("Amarillo");
@@ -146,6 +150,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorLINESHAPE=GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",codUsu);
         LineShape= new JComboBox<>();
         LineShape.addItem(colorLINESHAPE);
+        LineShape.addItem("Classic Color");
         LineShape.addItem("Rojo");
         LineShape.addItem("Azul");
         LineShape.addItem("Amarillo");
@@ -166,6 +171,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorTSHAPE=GestorBD.getInstance().obtColorPieza("COLORTSHAPE",codUsu);
         TShape= new JComboBox<>();
         TShape.addItem(colorTSHAPE);
+        TShape.addItem("Classic Color");
         TShape.addItem("Rojo");
         TShape.addItem("Azul");
         TShape.addItem("Amarillo");
@@ -186,6 +192,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorSQUARESHAPE=GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",codUsu);
         SquareShape= new JComboBox<>();
         SquareShape.addItem(colorSQUARESHAPE);
+        SquareShape.addItem("Classic Color");
         SquareShape.addItem("Rojo");
         SquareShape.addItem("Azul");
         SquareShape.addItem("Amarillo");
@@ -206,6 +213,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorLSHAPE=GestorBD.getInstance().obtColorPieza("COLORLSHAPE",codUsu);
         LShape= new JComboBox<>();
         LShape.addItem(colorLSHAPE);
+        LShape.addItem("Classic Color");
         LShape.addItem("Rojo");
         LShape.addItem("Azul");
         LShape.addItem("Amarillo");
@@ -226,6 +234,7 @@ public class VentanaPersonalizacion extends JFrame{
         String colorMIRROREDLSHAPE=GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",codUsu);
         MirroredLShape= new JComboBox<>();
         MirroredLShape.addItem(colorMIRROREDLSHAPE);
+        MirroredLShape.addItem("Classic Color");
         MirroredLShape.addItem("Rojo");
         MirroredLShape.addItem("Azul");
         MirroredLShape.addItem("Amarillo");
@@ -246,6 +255,12 @@ public class VentanaPersonalizacion extends JFrame{
         sonido=new JTextField();
         sonido.setBounds(10,320,150,20);
         panelPersonalizacion.add(sonido);
+
+        //TETRIS CLASICO
+        classicTetris=new JCheckBox("Tetris clásico");
+        classicTetris.setBounds(250,50,150,20);
+        panelPersonalizacion.add(classicTetris);
+
 
 
         //crear BOTONES
@@ -284,24 +299,31 @@ public class VentanaPersonalizacion extends JFrame{
     }
 
     public void actualizarPersonalizacion() throws SQLException {
-        String colorFondoAtualizado= Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
+        boolean personActualizado;
+        if (!classicTetris.isSelected()){
+            String colorFondoAtualizado= Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
 
-        String colorZSHAPE= Objects.requireNonNull(ZShape.getSelectedItem()).toString();
-        String colorSSHAPE= Objects.requireNonNull(SShape.getSelectedItem()).toString();
-        String colorLINESHAPE= Objects.requireNonNull(LineShape.getSelectedItem()).toString();
-        String colorTSHAPE= Objects.requireNonNull(TShape.getSelectedItem()).toString();
-        String colorSQUARESHAPE= Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
-        String colorLSHAPE= Objects.requireNonNull(LShape.getSelectedItem()).toString();
-        String colorMIRROREDLSHAPE= Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
-        String sonidoActualizado=sonido.getText();
-
-        boolean personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorZSHAPE,colorSSHAPE,colorLINESHAPE,colorTSHAPE,colorSQUARESHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonidoActualizado,codUsu);
+            String colorZSHAPE= Objects.requireNonNull(ZShape.getSelectedItem()).toString();
+            String colorSSHAPE= Objects.requireNonNull(SShape.getSelectedItem()).toString();
+            String colorLINESHAPE= Objects.requireNonNull(LineShape.getSelectedItem()).toString();
+            String colorTSHAPE= Objects.requireNonNull(TShape.getSelectedItem()).toString();
+            String colorSQUARESHAPE= Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
+            String colorLSHAPE= Objects.requireNonNull(LShape.getSelectedItem()).toString();
+            String colorMIRROREDLSHAPE= Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
+            String sonidoActualizado=sonido.getText();
+            personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorZSHAPE,colorSSHAPE,colorLINESHAPE,colorTSHAPE,colorSQUARESHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonidoActualizado,codUsu);
+        }
+        else{
+            String classicColor="Classic Color";
+            personActualizado=GestorBD.getInstance().actualizarPersonalizacion(classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,codUsu);
+        }
         if (personActualizado){
             JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Se ha actualizado con exito","ACTUALIZACIÓN EXITOSO",JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Ha habido un error al actualizar los datos","ACTUALIZACIÓN ERRONEO",JOptionPane.ERROR_MESSAGE);
         }
+
 
     }
 

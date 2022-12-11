@@ -35,7 +35,9 @@ public class Board extends JPanel implements MouseListener {
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
         String colorFondo=GestorBD.getInstance().obtColorPieza("COLORFONDO",parent.codigoUsuario);
-        setBackground(obtColor(colorFondo));
+        if(!colorFondo.equals("Classic Color")){
+            setBackground(obtColorFondo(colorFondo));
+        }
         initBoard(parent);
         board = pParent.getCasillasOcupadas();
     }
@@ -297,13 +299,13 @@ public class Board extends JPanel implements MouseListener {
     private void drawSquare(Graphics g, int x, int y, Tetrominoe shape) throws SQLException {
 
         Color colors[] = {new Color(0, 0, 0),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORZSHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORSSHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORTSHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORLSHAPE",parent.codigoUsuario)),
-                obtColor(GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",parent.codigoUsuario))
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORZSHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSSHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORTSHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLSHAPE",parent.codigoUsuario),shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",parent.codigoUsuario),shape)
         };
 
         var color = colors[shape.ordinal()];
@@ -416,7 +418,7 @@ public class Board extends JPanel implements MouseListener {
         }
     }
 
-    public Color obtColor(String colorNombre){
+    public Color obtColorPieza(String colorNombre,Tetrominoe shape){
         //TODO COLORES DE LAS PIEZAS
         Color Black=new Color(0,0,0);
         Color Blue=new Color(0,66,255);
@@ -424,14 +426,74 @@ public class Board extends JPanel implements MouseListener {
         Color Green=new Color(42,255,0);
         Color Yellow=new Color(232,255,0);
         Color Purple=new Color(220,0,255);
+        Color classicZSHAPE=new Color(204, 102, 102);
+        Color classicSSHAPE=new Color(102, 204, 102);
+        Color classicLINESHAPE=new Color(102, 102, 204);
+        Color classicTSHAPE=new Color(204, 204, 102);
+        Color classicSQUARESHAPE=new Color(204, 102, 204);
+        Color classicLSHAPE=new Color(102, 204, 204);
+        Color classicMIRROREDLSHAPE=new Color(218, 170, 0);
+        if(colorNombre.equals("Negro")){
+            return Black;
+        }
+        else if(colorNombre.equals("Azul")){
+            return Blue;
+        }
+        else if(colorNombre.equals("Rojo")){
+            return Red;
+        }
+        else if(colorNombre.equals("Verde")){
+            return Green;
+        }
+        else if(colorNombre.equals("Amarillo")){
+            return Yellow;
+        }
+        else if(colorNombre.equals("Morado")){
+            return Purple;
+        }
+        else{
+            if(shape.equals(Tetrominoe.ZShape)){
+                return classicZSHAPE;
+            }
+            else if(shape.equals(Tetrominoe.SShape)){
+                return classicSSHAPE;
+            }
+            else if(shape.equals(Tetrominoe.LineShape)){
+                return classicLINESHAPE;
+            }
+            else if(shape.equals(Tetrominoe.SquareShape)){
+                return classicSQUARESHAPE;
+            }
+            else if(shape.equals(Tetrominoe.TShape)){
+                return classicTSHAPE;
+            }
+            else if(shape.equals(Tetrominoe.LShape)){
+                return classicLSHAPE;
+            }
+            else {
+                return classicMIRROREDLSHAPE;
+            }
+
+
+        }
+
+    }
+
+    public Color obtColorFondo(String colorNombre){
+        Color Black = new Color(0, 0, 0);
+        Color Blue = new Color(0, 66, 255);
+        Color Red = new Color(255, 0, 0);
+        Color Green = new Color(42, 255, 0);
+        Color Yellow = new Color(232, 255, 0);
+        Color Purple = new Color(220, 0, 255);
         return switch (colorNombre) {
             case "Negro" -> Black;
             case "Azul" -> Blue;
             case "Rojo" -> Red;
-            case "Morado" -> Purple;
+            case "Verde" -> Green;
             case "Amarillo" -> Yellow;
-            default -> Green;
+            default -> Purple;
         };
-    }
 
+    }
 }
