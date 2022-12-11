@@ -20,37 +20,39 @@ public class Usuario {
     private ArrayList<PartidaGuardada> listaPartidasGuardadas;
 
 
-    public Usuario(int pCodUsuario,String pNombre,String pPassword,DatosPersonalizacion pPersonalizacion){
-        codUsuario=pCodUsuario;
-        nombre=pNombre;
-        password=pPassword;
-        personalizacion=pPersonalizacion;
+    public Usuario(int pCodUsuario, String pNombre, String pPassword, DatosPersonalizacion pPersonalizacion) {
+        codUsuario = pCodUsuario;
+        nombre = pNombre;
+        password = pPassword;
+        personalizacion = pPersonalizacion;
         listaPartidasGuardadas = new ArrayList<PartidaGuardada>();
     }
 
-    public boolean esUsuario(String pNombre,String pPassword){
-        return nombre==pNombre && password==pPassword;
+    public boolean esUsuario(String pNombre, String pPassword) {
+        return nombre == pNombre && password == pPassword;
     }
 
-    public boolean esUsuario(String pNombre){
-        return nombre==pNombre;
+    public boolean esUsuario(String pNombre) {
+        return nombre == pNombre;
     }
 
-    public void actualizarDatosPerosnalizacion(String colorFondo,String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE,String sonido){
-        personalizacion.insertarDatos(colorFondo,colorZHSAPE,colorSSHAPE,colorLINESHAPE,colorSQUARESHAPE,colorTSHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonido);
+    public void actualizarDatosPerosnalizacion(String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
+        personalizacion.insertarDatos(colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
     }
 
     public String getNombre() {
         return nombre;
     }
 
-    public int getCodUsuario(){return this.codUsuario;}
+    public int getCodUsuario() {
+        return this.codUsuario;
+    }
 
     public ArrayList<PartidaGuardada> getListaPartidasGuardadas() {
         return listaPartidasGuardadas;
     }
 
-    public JsonArray partidasGuardadasUsuario(){
+    public JsonArray partidasGuardadasUsuario() {
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partida = null;
         JsonArray array = new JsonArray();
@@ -67,15 +69,15 @@ public class Usuario {
         return (this.listaPartidasGuardadas.iterator());
     }
 
-    public JsonArray obtPartida(String fechaHora){
+    public JsonArray obtPartida(String fechaHora) {
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partidaGuardada = null;
         Tetris partida = null;
         JsonArray array = new JsonArray();
         boolean enc = false;
-        while (itr.hasNext() && !enc){
+        while (itr.hasNext() && !enc) {
             partidaGuardada = itr.next();
-            if (partidaGuardada.obtFechaHora().toString().equals(fechaHora)){
+            if (partidaGuardada.obtFechaHora().toString().equals(fechaHora)) {
                 enc = true;
                 partida = partidaGuardada.getLaPartida();
                 array.add(partida.codigoUsuario);
@@ -86,15 +88,17 @@ public class Usuario {
         }
         return array;
     }
-    public String[] getBoard(int codPartida){
+
+    public String[] getBoard(int codPartida) {
         Tetris partida = obtTetris(codPartida);
         String[] pieza = new String[partida.getCasillasOcupadas().length];
-        for (int i=0;i < partida.getCasillasOcupadas().length;i++){
+        for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
             pieza[i] = partida.getCasillasOcupadas()[i].toString();
         }
         return pieza;
     }
-    public Tetris obtTetris(int codPartida){
+
+    public Tetris obtTetris(int codPartida) {
         Tetris partida = null;
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partidaGuardada = null;
@@ -109,7 +113,7 @@ public class Usuario {
         return partida;
     }
 
-    public void obtPersonalizacion(){
+    public void obtPersonalizacion() {
         personalizacion.obtPersonalizacion(nombre);
     }
 }

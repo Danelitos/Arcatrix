@@ -13,7 +13,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
     public static int codUsuario;
 
 
-    private VentanaElegirRankingsPorNivel(int codUsuario){
+    private VentanaElegirRankingsPorNivel(int codUsuario) {
 
         // crear ventana
         setTitle("Tetris");
@@ -26,7 +26,8 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
         setComponentes();
 
     }
-    private void setComponentes(){
+
+    private void setComponentes() {
         //crear panel
         panel = new JPanel();
         panel.setBackground(Color.darkGray);
@@ -37,23 +38,23 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
         //crear TEXTO
         JLabel texto = new JLabel();
         texto.setText("Tipo de Rancking:");
-        texto.setBounds(150,75,200,20);
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        texto.setBounds(150, 75, 200, 20);
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
 
         //crear BOTONES
-        btnGeneral= new JButton();
-        btnGeneral.setBounds(210,150,80,35);
+        btnGeneral = new JButton();
+        btnGeneral.setBounds(210, 150, 80, 35);
         btnGeneral.setText("Nivel Facil");
         btnGeneral.setBackground(new Color(146, 248, 133));
         btnGeneral.setFocusPainted(false);
         panel.add(btnGeneral);
         //btnGeneral.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
-        btnPorNiveles= new JButton();
-        btnPorNiveles.setBounds(210,200,80,35);
+        btnPorNiveles = new JButton();
+        btnPorNiveles.setBounds(210, 200, 80, 35);
         btnPorNiveles.setText("Nivel Medio");
         btnPorNiveles.setBackground(new Color(248, 248, 133));
         btnPorNiveles.setFocusPainted(false);
@@ -61,8 +62,8 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
         btnPorNiveles.setHorizontalAlignment(SwingConstants.CENTER);
         //btnPorNiveles.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
-        btnMiRancking= new JButton();
-        btnMiRancking.setBounds(210,250,80,35);
+        btnMiRancking = new JButton();
+        btnMiRancking.setBounds(210, 250, 80, 35);
         btnMiRancking.setText("Nivel Dificil");
         btnMiRancking.setBackground(new Color(248, 133, 133));
         btnMiRancking.setFocusPainted(false);
@@ -71,8 +72,8 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
 
     }
 
-    public static VentanaElegirRankingsPorNivel getInstance(int codUsuario){
-        if(VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel ==null){
+    public static VentanaElegirRankingsPorNivel getInstance(int codUsuario) {
+        if (VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel == null) {
             VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel = new VentanaElegirRankingsPorNivel(codUsuario);
         }
         return VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel;

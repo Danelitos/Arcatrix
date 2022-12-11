@@ -34,34 +34,37 @@ public class Board extends JPanel implements MouseListener {
         codPartida = pCodPartida;
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
-        String colorFondo=GestorBD.getInstance().obtColorPieza("COLORFONDO",parent.codigoUsuario);
-        if(!colorFondo.equals("Classic Color")){
+        String colorFondo = GestorBD.getInstance().obtColorPieza("COLORFONDO", parent.codigoUsuario);
+        if (!colorFondo.equals("Classic Color")) {
             setBackground(obtColorFondo(colorFondo));
         }
         initBoard(parent);
         board = pParent.getCasillasOcupadas();
     }
 
-    public Tetrominoe[] getBoard(){return board;}
-    private void setTamanoYVelocidad(String nivel){
+    public Tetrominoe[] getBoard() {
+        return board;
+    }
 
-        switch (nivel.toLowerCase()){
+    private void setTamanoYVelocidad(String nivel) {
+
+        switch (nivel.toLowerCase()) {
             case "facil":
                 System.out.printf("ha entrado");
-                BOARD_WIDTH= 10;
-                BOARD_HEIGHT=22;
-                PERIOD_INTERVAL=300;
+                BOARD_WIDTH = 10;
+                BOARD_HEIGHT = 22;
+                PERIOD_INTERVAL = 300;
                 break;
             case "medio":
-                BOARD_WIDTH= 15;
-                BOARD_HEIGHT=27;
-                PERIOD_INTERVAL=200;
+                BOARD_WIDTH = 15;
+                BOARD_HEIGHT = 27;
+                PERIOD_INTERVAL = 200;
                 break;
 
             case "dificil":
-                BOARD_WIDTH= 20;
-                BOARD_HEIGHT=32;
-                PERIOD_INTERVAL=100;
+                BOARD_WIDTH = 20;
+                BOARD_HEIGHT = 32;
+                PERIOD_INTERVAL = 100;
                 break;
         }
 
@@ -95,7 +98,7 @@ public class Board extends JPanel implements MouseListener {
         board = new Tetrominoe[BOARD_WIDTH * BOARD_HEIGHT];
 
         clearBoard();
-        if(parent.getCasillasOcupadas() != null){
+        if (parent.getCasillasOcupadas() != null) {
             board = parent.getCasillasOcupadas();
         }
         newPiece();
@@ -299,13 +302,13 @@ public class Board extends JPanel implements MouseListener {
     private void drawSquare(Graphics g, int x, int y, Tetrominoe shape) throws SQLException {
 
         Color colors[] = {new Color(0, 0, 0),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORZSHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSSHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORTSHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLSHAPE",parent.codigoUsuario),shape),
-                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",parent.codigoUsuario),shape)
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORZSHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSSHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLINESHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORTSHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORLSHAPE", parent.codigoUsuario), shape),
+                obtColorPieza(GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE", parent.codigoUsuario), shape)
         };
 
         var color = colors[shape.ordinal()];
@@ -331,14 +334,13 @@ public class Board extends JPanel implements MouseListener {
 
     @Override
     public void mousePressed(MouseEvent e) {
-        if(e.getSource() instanceof JButton){
+        if (e.getSource() instanceof JButton) {
             this.timer.stop();
             System.out.println(parent.codigoUsuario);
             VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
-            Central.getInstance().guardarPartida(parent.codigoUsuario,parent);
-        }
-        else{
+            Central.getInstance().guardarPartida(parent.codigoUsuario, parent);
+        } else {
             System.exit(0);
         }
         System.out.println("Partida guardada");
@@ -418,59 +420,47 @@ public class Board extends JPanel implements MouseListener {
         }
     }
 
-    public Color obtColorPieza(String colorNombre,Tetrominoe shape){
+    public Color obtColorPieza(String colorNombre, Tetrominoe shape) {
         //TODO COLORES DE LAS PIEZAS
-        Color Black=new Color(0,0,0);
-        Color Blue=new Color(0,66,255);
-        Color Red=new Color(255,0,0);
-        Color Green=new Color(42,255,0);
-        Color Yellow=new Color(232,255,0);
-        Color Purple=new Color(220,0,255);
-        Color classicZSHAPE=new Color(204, 102, 102);
-        Color classicSSHAPE=new Color(102, 204, 102);
-        Color classicLINESHAPE=new Color(102, 102, 204);
-        Color classicTSHAPE=new Color(204, 204, 102);
-        Color classicSQUARESHAPE=new Color(204, 102, 204);
-        Color classicLSHAPE=new Color(102, 204, 204);
-        Color classicMIRROREDLSHAPE=new Color(218, 170, 0);
-        if(colorNombre.equals("Negro")){
+        Color Black = new Color(0, 0, 0);
+        Color Blue = new Color(0, 66, 255);
+        Color Red = new Color(255, 0, 0);
+        Color Green = new Color(42, 255, 0);
+        Color Yellow = new Color(232, 255, 0);
+        Color Purple = new Color(220, 0, 255);
+        Color classicZSHAPE = new Color(204, 102, 102);
+        Color classicSSHAPE = new Color(102, 204, 102);
+        Color classicLINESHAPE = new Color(102, 102, 204);
+        Color classicTSHAPE = new Color(204, 204, 102);
+        Color classicSQUARESHAPE = new Color(204, 102, 204);
+        Color classicLSHAPE = new Color(102, 204, 204);
+        Color classicMIRROREDLSHAPE = new Color(218, 170, 0);
+        if (colorNombre.equals("Negro")) {
             return Black;
-        }
-        else if(colorNombre.equals("Azul")){
+        } else if (colorNombre.equals("Azul")) {
             return Blue;
-        }
-        else if(colorNombre.equals("Rojo")){
+        } else if (colorNombre.equals("Rojo")) {
             return Red;
-        }
-        else if(colorNombre.equals("Verde")){
+        } else if (colorNombre.equals("Verde")) {
             return Green;
-        }
-        else if(colorNombre.equals("Amarillo")){
+        } else if (colorNombre.equals("Amarillo")) {
             return Yellow;
-        }
-        else if(colorNombre.equals("Morado")){
+        } else if (colorNombre.equals("Morado")) {
             return Purple;
-        }
-        else{
-            if(shape.equals(Tetrominoe.ZShape)){
+        } else {
+            if (shape.equals(Tetrominoe.ZShape)) {
                 return classicZSHAPE;
-            }
-            else if(shape.equals(Tetrominoe.SShape)){
+            } else if (shape.equals(Tetrominoe.SShape)) {
                 return classicSSHAPE;
-            }
-            else if(shape.equals(Tetrominoe.LineShape)){
+            } else if (shape.equals(Tetrominoe.LineShape)) {
                 return classicLINESHAPE;
-            }
-            else if(shape.equals(Tetrominoe.SquareShape)){
+            } else if (shape.equals(Tetrominoe.SquareShape)) {
                 return classicSQUARESHAPE;
-            }
-            else if(shape.equals(Tetrominoe.TShape)){
+            } else if (shape.equals(Tetrominoe.TShape)) {
                 return classicTSHAPE;
-            }
-            else if(shape.equals(Tetrominoe.LShape)){
+            } else if (shape.equals(Tetrominoe.LShape)) {
                 return classicLSHAPE;
-            }
-            else {
+            } else {
                 return classicMIRROREDLSHAPE;
             }
 
@@ -479,7 +469,7 @@ public class Board extends JPanel implements MouseListener {
 
     }
 
-    public Color obtColorFondo(String colorNombre){
+    public Color obtColorFondo(String colorNombre) {
         Color Black = new Color(0, 0, 0);
         Color Blue = new Color(0, 66, 255);
         Color Red = new Color(255, 0, 0);

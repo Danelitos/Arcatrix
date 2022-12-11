@@ -10,7 +10,8 @@ import java.util.Objects;
 public class JPanelImagen extends JPanel {
     private ImageIcon imagen;
     private String tipoVentana;
-    public JPanelImagen(String pTipoVentana){
+
+    public JPanelImagen(String pTipoVentana) {
         super();
         tipoVentana = pTipoVentana;
 

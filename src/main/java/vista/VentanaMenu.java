@@ -32,7 +32,7 @@ public class VentanaMenu extends JFrame {
         this.setVisible(true);
         setComponentes();
         this.pack();
-        codigoUsu=codigoUsuario;
+        codigoUsu = codigoUsuario;
     }
 
     public static VentanaMenu getInstance(int codigoUsuario) {
@@ -54,7 +54,7 @@ public class VentanaMenu extends JFrame {
         //crear panel
         panelMenu = new JPanel();
         //TODO MIRAR ESTO (DANEL)
-        fondo=new JPanelImagen("MENU");
+        fondo = new JPanelImagen("MENU");
         //this.getContentPane().add(fondo,BorderLayout.EAST);
 
         //this.getContentPane().add(panelMenu);
@@ -66,7 +66,7 @@ public class VentanaMenu extends JFrame {
         getContentPane().add(panelMenu, BorderLayout.EAST);
 
         setLocationRelativeTo(null);
-        getContentPane().add(fondo,BorderLayout.WEST);
+        getContentPane().add(fondo, BorderLayout.WEST);
 
 
         //crear BOTONES
@@ -117,40 +117,40 @@ public class VentanaMenu extends JFrame {
         cerrarSesion.addActionListener(evento -> logOut());
     }
 
-    static class ImagenFondo extends JPanel{
+    static class ImagenFondo extends JPanel {
         private Image imagen;
 
-        public void paint(Graphics g){
-            imagen=new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/java/img/tetrisFondo.png"))).getImage();
-            g.drawImage(imagen,0,0,getWidth(),getHeight(),this);
+        public void paint(Graphics g) {
+            imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/java/img/tetrisFondo.png"))).getImage();
+            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
             //setOpaque(false);
             super.paintChildren(g);
         }
     }
 
-    public void jugar(){
+    public void jugar() {
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaElegirNivel.getInstance(codigoUsu).setVisible(true);
     }
 
-    public void cargar(){
-        VentanaPartidasGuardadas.miVentana=null;
+    public void cargar() {
+        VentanaPartidasGuardadas.miVentana = null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaPartidasGuardadas.getInstance().setVisible(true);
     }
 
     public void personalizar() throws SQLException {
-        VentanaPersonalizacion.miVentanaPersonalizacion=null;
+        VentanaPersonalizacion.miVentanaPersonalizacion = null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaPersonalizacion.getInstance(codigoUsu).setVisible(true);
     }
 
-    public void verRankings(){
+    public void verRankings() {
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaElegirRanking.getInstance(codigoUsu).setVisible(true);
     }
 
-    public void logOut(){
+    public void logOut() {
         System.out.println(codigoUsu);
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaLogin.getInstance().setVisible(true);
