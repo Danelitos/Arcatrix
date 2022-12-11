@@ -96,14 +96,14 @@ public class GestorBD {
         PreparedStatement sql1= con.prepareStatement("INSERT INTO DatosPersonalizacion(CodigoPersonalizacion,ColorFondo,ColorZSHAPE,ColorSSHAPE,ColorLINESHAPE,ColorSQUARESHAPE,ColorTSHAPE,ColorLSHAPE,ColorMIRROREDLSHAPE,Sonido) VALUES(?,?,?,?,?,?,?,?,?,?)");
 
         sql1.setInt(1,codigoPersonalizacion+1);
-        sql1.setString(2,"Azul");
-        sql1.setString(3,"Azul");
-        sql1.setString(4,"Azul");
-        sql1.setString(5,"Azul");
-        sql1.setString(6,"Azul");
-        sql1.setString(7,"Azul");
-        sql1.setString(8,"Azul");
-        sql1.setString(9,"Azul");
+        sql1.setString(2,"Classic Color");
+        sql1.setString(3,"Classic Color");
+        sql1.setString(4,"Classic Color");
+        sql1.setString(5,"Classic Color");
+        sql1.setString(6,"Classic Color");
+        sql1.setString(7,"Classic Color");
+        sql1.setString(8,"Classic Color");
+        sql1.setString(9,"Classic Color");
         sql1.setString(10,"sonido");
 
         sql1.executeUpdate();

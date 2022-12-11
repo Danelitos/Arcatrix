@@ -2,6 +2,7 @@ package vista;
 
 import com.sun.jdi.Mirror;
 import com.zetcode.Board;
+import com.zetcode.Central;
 import com.zetcode.GestorBD;
 
 import javax.swing.*;
@@ -300,6 +301,7 @@ public class VentanaPersonalizacion extends JFrame{
 
     public void actualizarPersonalizacion() throws SQLException {
         boolean personActualizado;
+        String sonidoActualizado=sonido.getText();;
         if (!classicTetris.isSelected()){
             String colorFondoAtualizado= Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
 
@@ -310,15 +312,18 @@ public class VentanaPersonalizacion extends JFrame{
             String colorSQUARESHAPE= Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
             String colorLSHAPE= Objects.requireNonNull(LShape.getSelectedItem()).toString();
             String colorMIRROREDLSHAPE= Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
-            String sonidoActualizado=sonido.getText();
             personActualizado=GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado,colorZSHAPE,colorSSHAPE,colorLINESHAPE,colorTSHAPE,colorSQUARESHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonidoActualizado,codUsu);
+            Central.getInstance().actualizarDatosPersonaliza(codUsu,colorFondoAtualizado,colorZSHAPE,colorSSHAPE,colorLINESHAPE,colorTSHAPE,colorSQUARESHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonidoActualizado);
         }
         else{
             String classicColor="Classic Color";
             personActualizado=GestorBD.getInstance().actualizarPersonalizacion(classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,codUsu);
+            Central.getInstance().actualizarDatosPersonaliza(codUsu,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,classicColor,sonidoActualizado);
+            Central.getInstance().obtPersonalizacion(codUsu);
         }
         if (personActualizado){
             JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Se ha actualizado con exito","ACTUALIZACIÓN EXITOSO",JOptionPane.INFORMATION_MESSAGE);
+            Central.getInstance().obtPersonalizacion(codUsu);
         }
         else {
             JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu),"Ha habido un error al actualizar los datos","ACTUALIZACIÓN ERRONEO",JOptionPane.ERROR_MESSAGE);

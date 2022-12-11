@@ -15,9 +15,6 @@ public class Central {
         if(miCentral == null) miCentral = new Central();
         return miCentral;
     }
-    public void iniciarSesion(String nombre, String password){
-
-    }
 
     public void crearUsuario(int codUsu, String nombre, String password, String repetirPassword){
         GestorUsuarios.getInstance().crearUsuario(codUsu,nombre,password);
@@ -28,8 +25,8 @@ public class Central {
 
     }
 
-    public void actualizarDatos(){
-
+    public void actualizarDatosPersonaliza(int codUsu,String colorFondo,String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE,String sonido){
+        GestorUsuarios.getInstance().actualizarDatosPersonaliza(codUsu,colorFondo,colorZHSAPE,colorSSHAPE,colorLINESHAPE,colorSQUARESHAPE,colorTSHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonido);
     }
 
     public void guardarPartida(int codUsuario, Tetris laPartida){
@@ -58,6 +55,6 @@ public class Central {
     }
 
     public boolean obtPersonalizacion(int codUsu){
-        return false;
+        return GestorUsuarios.getInstance().obtPersonalizacion(codUsu);
     }
 }
