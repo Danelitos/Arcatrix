@@ -62,7 +62,22 @@ public class GestorUsuarios {
 
     public void crearUsuario(int codUsu, String nombre, String password){
         System.out.println(codUsu);
-        lista.add(new Usuario(codUsu,nombre,password,new DatosPersonalizacion("Azul","Azul","Sonido")));
+        lista.add(new Usuario(codUsu,nombre,password,new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido")));
 
+    }
+
+    public void actualizarDatosPersonaliza(int codUsu,String colorFondo,String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE,String sonido){
+        Usuario user=buscarUsuario(codUsu);
+        user.actualizarDatosPerosnalizacion(colorFondo,colorZHSAPE,colorSSHAPE,colorLINESHAPE,colorSQUARESHAPE,colorTSHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonido);
+
+    }
+
+    public boolean obtPersonalizacion(int codUsu){
+        Usuario user=buscarUsuario(codUsu);
+        if(!(user == null)){
+            user.obtPersonalizacion();
+            return true;
+        }
+        return false;
     }
 }

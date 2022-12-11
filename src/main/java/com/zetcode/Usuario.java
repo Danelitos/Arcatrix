@@ -36,8 +36,8 @@ public class Usuario {
         return nombre==pNombre;
     }
 
-    public void actualizarDatos(String pColorFondo,String pColorLadrillos,String pSonido){
-        personalizacion.insertatDatos(pColorFondo,pColorLadrillos,pSonido);
+    public void actualizarDatosPerosnalizacion(String colorFondo,String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE,String sonido){
+        personalizacion.insertarDatos(colorFondo,colorZHSAPE,colorSSHAPE,colorLINESHAPE,colorSQUARESHAPE,colorTSHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonido);
     }
 
     public String getNombre() {
@@ -107,5 +107,9 @@ public class Usuario {
             }
         }
         return partida;
+    }
+
+    public void obtPersonalizacion(){
+        personalizacion.obtPersonalizacion(nombre);
     }
 }
