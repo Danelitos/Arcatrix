@@ -135,7 +135,11 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
             this.setVisible(false);
 
             //INICIAR JUEGO TETRIS
-            new Tetris(codigoUsuario,codPartida,nivelElegido,null ,0);
+            try {
+                new Tetris(codigoUsuario,codPartida,nivelElegido,null ,0);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
 
         }
     }

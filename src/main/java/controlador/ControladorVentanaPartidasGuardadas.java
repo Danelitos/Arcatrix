@@ -11,6 +11,7 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -54,7 +55,11 @@ public class ControladorVentanaPartidasGuardadas implements MouseListener, ItemL
                 //hacer cuenta atras
                 VentanaNivelElegido.getInstance(codUsuarioPartida,nivel).cuentaAtras();
                 //crear interfaz del juego
-                new Tetris(codUsuarioPartida,codigoPartida++,nivel,board,puntos);
+                try {
+                    new Tetris(codUsuarioPartida,codigoPartida++,nivel,board,puntos);
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
                 VentanaNivelElegido.getInstance(codUsuarioPartida,nivel).setVisible(false);
             }
             else if(boton.getText().equals("Volver")){
