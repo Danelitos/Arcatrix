@@ -11,7 +11,7 @@ public class PartidaGuardada {
     private Tetris laPartida;
     private Date cuando;
 
-    public PartidaGuardada(Usuario pElUsuario, Tetris pLaPartida, Date pCuando){
+    public PartidaGuardada(Usuario pElUsuario, Tetris pLaPartida, Date pCuando) {
         this.elUsuario = pElUsuario;
         this.laPartida = pLaPartida;
         this.cuando = pCuando;
@@ -25,14 +25,19 @@ public class PartidaGuardada {
         this.elUsuario = elUsuario;
     }
 
-    public int obtCodUsuario(){
+    public int obtCodUsuario() {
         return this.elUsuario.getCodUsuario();
     }
 
-    public int obtCodPartida(){
+    public int obtCodPartida() {
         return this.laPartida.getCodPartida();
     }
 
-    public Date obtFechaHora(){return this.cuando;}
-    public Tetris getLaPartida(){return this.laPartida;}
+    public Date obtFechaHora() {
+        return this.cuando;
+    }
+
+    public Tetris getLaPartida() {
+        return this.laPartida;
+    }
 }

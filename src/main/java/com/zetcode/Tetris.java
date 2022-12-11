@@ -13,8 +13,8 @@ Author: Jan Bodnar
 Website: https://zetcode.com
  */
 public class Tetris extends JFrame {
-	
-	private static final Logger logger = LogManager.getLogger(Tetris.class);
+
+    private static final Logger logger = LogManager.getLogger(Tetris.class);
     public int codigoPartida;
 
     public String nivel;
@@ -24,7 +24,7 @@ public class Tetris extends JFrame {
     private Ranking rankings;
     private JLabel statusbar;
 
-    public Tetris(int codUsuario,int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) throws SQLException {
+    public Tetris(int codUsuario, int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) throws SQLException {
         codigoUsuario = codUsuario;
         codigoPartida = codPartida;
         nivel = pNivel;
@@ -35,8 +35,13 @@ public class Tetris extends JFrame {
         this.setVisible(true);
     }
 
-    public Shape.Tetrominoe[] getCasillasOcupadas(){return casillasOcupadas;}
-    public Integer getPuntos(){return puntos;}
+    public Shape.Tetrominoe[] getCasillasOcupadas() {
+        return casillasOcupadas;
+    }
+
+    public Integer getPuntos() {
+        return puntos;
+    }
 
     private Shape.Tetrominoe[] initUI(int codPartida, String nivel) throws SQLException {
 
@@ -68,5 +73,8 @@ public class Tetris extends JFrame {
 
         return statusbar;
     }
-    public int getCodPartida(){return this.codigoPartida;}
+
+    public int getCodPartida() {
+        return this.codigoPartida;
+    }
 }

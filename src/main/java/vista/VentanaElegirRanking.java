@@ -10,7 +10,7 @@ public class VentanaElegirRanking extends JFrame {
     private JPanel panel;
 
 
-    private VentanaElegirRanking(int codUsuario){
+    private VentanaElegirRanking(int codUsuario) {
 
         // crear ventana
         setTitle("Tetris");
@@ -23,7 +23,8 @@ public class VentanaElegirRanking extends JFrame {
         setComponentes();
 
     }
-    private void setComponentes(){
+
+    private void setComponentes() {
         //crear panel
         panel = new JPanel();
         panel.setBackground(Color.darkGray);
@@ -34,23 +35,23 @@ public class VentanaElegirRanking extends JFrame {
         //crear TEXTO
         JLabel texto = new JLabel();
         texto.setText("Tipo de Rancking:");
-        texto.setBounds(150,75,200,20);
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        texto.setBounds(150, 75, 200, 20);
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
 
         //crear BOTONES
-        btnGeneral= new JButton();
-        btnGeneral.setBounds(210,150,80,35);
+        btnGeneral = new JButton();
+        btnGeneral.setBounds(210, 150, 80, 35);
         btnGeneral.setText("Rancking General");
         btnGeneral.setBackground(new Color(146, 248, 133));
         btnGeneral.setFocusPainted(false);
         panel.add(btnGeneral);
         //btnGeneral.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
-        btnPorNiveles= new JButton();
-        btnPorNiveles.setBounds(210,200,80,35);
+        btnPorNiveles = new JButton();
+        btnPorNiveles.setBounds(210, 200, 80, 35);
         btnPorNiveles.setText("Ranckings por Niveles ");
         btnPorNiveles.setBackground(new Color(248, 248, 133));
         btnPorNiveles.setFocusPainted(false);
@@ -58,8 +59,8 @@ public class VentanaElegirRanking extends JFrame {
         btnPorNiveles.setHorizontalAlignment(SwingConstants.CENTER);
         //btnPorNiveles.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
-        btnMiRancking= new JButton();
-        btnMiRancking.setBounds(210,250,80,35);
+        btnMiRancking = new JButton();
+        btnMiRancking.setBounds(210, 250, 80, 35);
         btnMiRancking.setText("RanckingPersonal");
         btnMiRancking.setBackground(new Color(248, 133, 133));
         btnMiRancking.setFocusPainted(false);
@@ -68,9 +69,9 @@ public class VentanaElegirRanking extends JFrame {
 
     }
 
-    public static VentanaElegirRanking getInstance(int codUsuario){
-        if(VentanaElegirRanking.miVentanaElegirRanking ==null){
-            VentanaElegirRanking.miVentanaElegirRanking =new VentanaElegirRanking(codUsuario);
+    public static VentanaElegirRanking getInstance(int codUsuario) {
+        if (VentanaElegirRanking.miVentanaElegirRanking == null) {
+            VentanaElegirRanking.miVentanaElegirRanking = new VentanaElegirRanking(codUsuario);
         }
         return VentanaElegirRanking.miVentanaElegirRanking;
     }

@@ -11,11 +11,12 @@ public class GestorUsuarios {
     private static GestorUsuarios miGestorUsuarios;
     private ArrayList<Usuario> lista;
 
-    private GestorUsuarios(){
-        lista = new ArrayList<Usuario>();
+    private GestorUsuarios() {
+        lista = new ArrayList<>();
     }
-    public static GestorUsuarios getInstance(){
-        if(miGestorUsuarios == null) miGestorUsuarios = new GestorUsuarios();
+
+    public static GestorUsuarios getInstance() {
+        if (miGestorUsuarios == null) miGestorUsuarios = new GestorUsuarios();
         return miGestorUsuarios;
     }
 
@@ -38,43 +39,43 @@ public class GestorUsuarios {
         return (this.lista.iterator());
     }
 
-    public PartidaGuardada crearPartidaGuardada(Tetris laPartida,Usuario elUsuario){
+    public PartidaGuardada crearPartidaGuardada(Tetris laPartida, Usuario elUsuario) {
         Date fechaActual = new Date();
-        PartidaGuardada nuevaPartida = new PartidaGuardada(elUsuario,laPartida,fechaActual);
+        PartidaGuardada nuevaPartida = new PartidaGuardada(elUsuario, laPartida, fechaActual);
         return nuevaPartida;
     }
 
-    public PartidaGuardada anadirPartidaGuardada(Usuario elUsuario, PartidaGuardada laPartidaGuardada){
-        if (this.buscarUsuario(elUsuario.getCodUsuario()) != null){
+    public PartidaGuardada anadirPartidaGuardada(Usuario elUsuario, PartidaGuardada laPartidaGuardada) {
+        if (this.buscarUsuario(elUsuario.getCodUsuario()) != null) {
             elUsuario.getListaPartidasGuardadas().add(laPartidaGuardada);
 
         }
-        return  laPartidaGuardada;
+        return laPartidaGuardada;
     }
 
-    public JsonArray partidasGuardadas(Usuario elUsuario){
+    public JsonArray partidasGuardadas(Usuario elUsuario) {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-    public JsonArray buscarPartidaGuardada(Usuario elUsuario, String fechaHora){
+    public JsonArray buscarPartidaGuardada(Usuario elUsuario, String fechaHora) {
         return elUsuario.obtPartida(fechaHora);
     }
 
-    public void crearUsuario(int codUsu, String nombre, String password){
+    public void crearUsuario(int codUsu, String nombre, String password) {
         System.out.println(codUsu);
-        lista.add(new Usuario(codUsu,nombre,password,new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido")));
+        lista.add(new Usuario(codUsu, nombre, password, new DatosPersonalizacion("Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Sonido")));
 
     }
 
-    public void actualizarDatosPersonaliza(int codUsu,String colorFondo,String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE,String sonido){
-        Usuario user=buscarUsuario(codUsu);
-        user.actualizarDatosPerosnalizacion(colorFondo,colorZHSAPE,colorSSHAPE,colorLINESHAPE,colorSQUARESHAPE,colorTSHAPE,colorLSHAPE,colorMIRROREDLSHAPE,sonido);
+    public void actualizarDatosPersonaliza(int codUsu, String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
+        Usuario user = buscarUsuario(codUsu);
+        user.actualizarDatosPerosnalizacion(colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
 
     }
 
-    public boolean obtPersonalizacion(int codUsu){
-        Usuario user=buscarUsuario(codUsu);
-        if(!(user == null)){
+    public boolean obtPersonalizacion(int codUsu) {
+        Usuario user = buscarUsuario(codUsu);
+        if (!(user == null)) {
             user.obtPersonalizacion();
             return true;
         }
