@@ -4,6 +4,7 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import javax.swing.*;
+import java.sql.SQLException;
 
 /*
 Java Tetris game clone
@@ -23,7 +24,7 @@ public class Tetris extends JFrame {
     private Ranking rankings;
     private JLabel statusbar;
 
-    public Tetris(int codUsuario,int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) {
+    public Tetris(int codUsuario,int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) throws SQLException {
         codigoUsuario = codUsuario;
         codigoPartida = codPartida;
         nivel = pNivel;
@@ -37,7 +38,7 @@ public class Tetris extends JFrame {
     public Shape.Tetrominoe[] getCasillasOcupadas(){return casillasOcupadas;}
     public Integer getPuntos(){return puntos;}
 
-    private Shape.Tetrominoe[] initUI(int codPartida, String nivel) {
+    private Shape.Tetrominoe[] initUI(int codPartida, String nivel) throws SQLException {
 
         getContentPane().setLayout(null);
 

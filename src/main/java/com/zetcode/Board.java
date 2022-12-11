@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 public class Board extends JPanel implements MouseListener {
 
@@ -28,13 +29,13 @@ public class Board extends JPanel implements MouseListener {
     private int codPartida;
     private String nivel;
 
-    public Board(Tetris pParent, int pCodPartida, String pNivel) {
+    public Board(Tetris pParent, int pCodPartida, String pNivel) throws SQLException {
         parent = pParent;
         codPartida = pCodPartida;
         nivel = pNivel;
         setTamanoYVelocidad(nivel);
-        //TODO FONDO COLOR
-        //setBackground(Color.BLACK);
+        String colorFondo=GestorBD.getInstance().obtColorPieza("COLORFONDO",parent.codigoUsuario);
+        setBackground(obtColor(colorFondo));
         initBoard(parent);
         board = pParent.getCasillasOcupadas();
     }
@@ -120,10 +121,14 @@ public class Board extends JPanel implements MouseListener {
     public void paintComponent(Graphics g) {
 
         super.paintComponent(g);
-        doDrawing(g);
+        try {
+            doDrawing(g);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
     }
 
-    private void doDrawing(Graphics g) {
+    private void doDrawing(Graphics g) throws SQLException {
 
         var size = getSize();
         int boardTop = (int) size.getHeight() - BOARD_HEIGHT * squareHeight();
@@ -289,12 +294,16 @@ public class Board extends JPanel implements MouseListener {
         }
     }
 
-    private void drawSquare(Graphics g, int x, int y, Tetrominoe shape) {
+    private void drawSquare(Graphics g, int x, int y, Tetrominoe shape) throws SQLException {
 
-        Color colors[] = {new Color(0, 0, 0), new Color(204, 102, 102),
-                new Color(102, 204, 102), new Color(102, 102, 204),
-                new Color(204, 204, 102), new Color(204, 102, 204),
-                new Color(102, 204, 204), new Color(218, 170, 0)
+        Color colors[] = {new Color(0, 0, 0),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORZSHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORSSHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORLINESHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORTSHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORSQUARESHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORLSHAPE",parent.codigoUsuario)),
+                obtColor(GestorBD.getInstance().obtColorPieza("COLORMIRROREDLSHAPE",parent.codigoUsuario))
         };
 
         var color = colors[shape.ordinal()];
@@ -405,6 +414,24 @@ public class Board extends JPanel implements MouseListener {
                 case KeyEvent.VK_D -> oneLineDown();
             }
         }
+    }
+
+    public Color obtColor(String colorNombre){
+        //TODO COLORES DE LAS PIEZAS
+        Color Black=new Color(0,0,0);
+        Color Blue=new Color(0,66,255);
+        Color Red=new Color(255,0,0);
+        Color Green=new Color(42,255,0);
+        Color Yellow=new Color(232,255,0);
+        Color Purple=new Color(220,0,255);
+        return switch (colorNombre) {
+            case "Negro" -> Black;
+            case "Azul" -> Blue;
+            case "Rojo" -> Red;
+            case "Morado" -> Purple;
+            case "Amarillo" -> Yellow;
+            default -> Green;
+        };
     }
 
 }

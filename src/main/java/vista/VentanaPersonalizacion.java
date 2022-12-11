@@ -35,14 +35,6 @@ public class VentanaPersonalizacion extends JFrame{
     private JComboBox<String> MirroredLShape;
     private JTextField sonido;
 
-    //TODO COLORES DE LAS PIEZAS
-    private Color Black=new Color(0,0,0);
-    private Color Blue=new Color(0,66,255);
-    private Color Red=new Color(255,0,0);
-    private Color Green=new Color(42,255,0);
-    private Color Yellow=new Color(232,255,0);
-    private Color Purple=new Color(220,0,255);
-
 
     private JButton guardarPersonalizacion;
     private JButton volver;
