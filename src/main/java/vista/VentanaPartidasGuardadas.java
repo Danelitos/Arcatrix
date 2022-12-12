@@ -23,7 +23,8 @@ public class VentanaPartidasGuardadas extends JFrame {
 
     private VentanaPartidasGuardadas() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setBounds(100, 100, 674, 398);
+        setSize(500,500);
+        setLocationRelativeTo(null);
         contentPane = new JPanel();
         contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
         contentPane.setLayout(new BorderLayout(0, 0));
@@ -34,13 +35,13 @@ public class VentanaPartidasGuardadas extends JFrame {
         panel.setLayout(null);
 
         JButton cargarPartida = new JButton("Cargar Partida");
-        cargarPartida.setBounds(438, 256, 120, 38);
+        cargarPartida.setBounds(350, 256, 120, 38);
         panel.add(cargarPartida);
         cargarPartida.addActionListener(evento -> cargarPartida());
         this.getPartidasGuardadas();
 
         JButton volver = new JButton("Volver");
-        volver.setBounds(438, 300, 120, 38);
+        volver.setBounds(350, 300, 120, 38);
         panel.add(volver);
         volver.addActionListener(evento -> volverMenu());
     }
@@ -99,12 +100,10 @@ public class VentanaPartidasGuardadas extends JFrame {
         for (int i = 0; i < array.length; i++) {
             board[i] = Shape.Tetrominoe.valueOf(array[i]);
         }
-        System.out.println("partida instancia: " + codigoPartida++);
-        //hacer cuenta atras
-        VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).cuentaAtras();
+        int newCodPartida= codigoPartida + 1;
         //crear interfaz del juego
         try {
-            new Tetris(codUsuarioPartida, codigoPartida++, nivel, board, puntos);
+            new Tetris(codUsuarioPartida, newCodPartida, nivel, board, puntos);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

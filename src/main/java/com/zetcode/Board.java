@@ -9,6 +9,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.event.*;
 import java.sql.SQLException;
+import java.util.Date;
 
 public class Board extends JPanel implements MouseListener {
 
@@ -74,6 +75,7 @@ public class Board extends JPanel implements MouseListener {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
+        numLinesRemoved=parent.getPuntos();
         addKeyListener(new TAdapter());
     }
 
@@ -88,7 +90,6 @@ public class Board extends JPanel implements MouseListener {
     }
 
     private Tetrominoe shapeAt(int x, int y) {
-
         return board[(y * BOARD_WIDTH) + x];
     }
 
@@ -339,7 +340,20 @@ public class Board extends JPanel implements MouseListener {
             System.out.println(parent.codigoUsuario);
             VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
-            Central.getInstance().guardarPartida(parent.codigoUsuario, parent);
+            Date fechaActual = new Date();
+            //actualizar puntos
+            parent.puntos=numLinesRemoved;
+            //AÑADIR A BD LA PARTIDA Y COGER SU CODIGO PARTIDA
+            try {
+                codPartida=GestorBD.getInstance().insertPartida(parent.codigoUsuario,parent.nivel,parent.getPuntos(),fechaActual.toString());
+            } catch (SQLException ex) {
+                throw new RuntimeException(ex);
+            }
+            //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
+            parent.codigoPartida=codPartida;
+
+
+            Central.getInstance().guardarPartida(parent.codigoUsuario, parent,fechaActual);
         } else {
             System.exit(0);
         }
