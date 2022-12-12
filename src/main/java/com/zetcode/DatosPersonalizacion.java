@@ -38,4 +38,41 @@ public class DatosPersonalizacion {
     public void obtPersonalizacion(String nombre) {
         System.out.println(nombre + " tiene la siguiente personalicación: Color del fondo " + colorFondo + " ,ZSHAPE " + colorZSHAPE + " ,SSHAPE " + colorSSHAPE + " ,LINESHAPESHAPE " + colorZSHAPE + " ,SQUARESHAPE " + colorSQUARESHAPE + " ,TSHAPE " + colorTSHAPE + " LSHAPE " + colorLSHAPE + " ,MIRROREDLSHAPE " + colorMIRROREDLSHAPE + " y el sonido: " + sonido);
     }
+
+    public String getColorFondo() {
+        return colorFondo;
+    }
+
+    public String getColorLINESHAPE() {
+        return colorLINESHAPE;
+    }
+
+    public String getColorMIRROREDLSHAPE() {
+        return colorMIRROREDLSHAPE;
+    }
+
+    public String getColorLSHAPE() {
+        return colorLSHAPE;
+    }
+
+    public String getColorSQUARESHAPE() {
+        return colorSQUARESHAPE;
+    }
+
+    public String getColorSSHAPE() {
+        return colorSSHAPE;
+    }
+
+    public String getColorTSHAPE() {
+        return colorTSHAPE;
+    }
+
+    public String getColorZSHAPE() {
+        return colorZSHAPE;
+    }
+
+    public String getSonido() {
+        return sonido;
+    }
+
 }

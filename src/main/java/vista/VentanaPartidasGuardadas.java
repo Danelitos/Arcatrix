@@ -2,15 +2,15 @@ package vista;
 
 
 import com.google.gson.JsonArray;
-import com.zetcode.Central;
+import com.zetcode.*;
 import com.zetcode.Shape;
-import com.zetcode.Tetris;
 
 import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -103,6 +103,9 @@ public class VentanaPartidasGuardadas extends JFrame {
         int newCodPartida= codigoPartida + 1;
         //crear interfaz del juego
         try {
+            String sonidoElegido= GestorBD.getInstance().obtColorPieza("SONIDO",VentanaMenu.getInstance(0).codigoUsu);
+            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav","Clip Cancion");
+            Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
             new Tetris(codUsuarioPartida, newCodPartida, nivel, board, puntos);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

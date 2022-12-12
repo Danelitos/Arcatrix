@@ -17,7 +17,7 @@ public class Central {
         return miCentral;
     }
 
-    public void crearUsuario(int codUsu, String nombre, String password, String repetirPassword) {
+    public void crearUsuario(int codUsu, String nombre, String password) {
         GestorUsuarios.getInstance().crearUsuario(codUsu, nombre, password);
 
     }
@@ -78,7 +78,7 @@ public class Central {
         return array;
     }
 
-    public boolean obtPersonalizacion(int codUsu) {
+    public DatosPersonalizacion obtPersonalizacion(int codUsu) {
         return GestorUsuarios.getInstance().obtPersonalizacion(codUsu);
     }
 }

@@ -35,6 +35,7 @@ CREATE TABLE IF NOT EXISTS `Partida` (
   `nivel` varchar(10) NOT NULL,
   `puntos` int NOT NULL,
   `listaLadrillos` varchar(30) NOT NULL,
+  `fechaHora` varchar(50) NOT NULL,
 PRIMARY KEY(codPartida)
 );
 

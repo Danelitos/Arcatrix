@@ -99,7 +99,7 @@ public class VentanaLogin extends JFrame {
             VentanaMenu.getInstance(loginCorrecto).setVisible(true);
             VentanaMenu.setCodigoUsu(loginCorrecto);
             int codUsu = GestorBD.getInstance().buscarUsuario(usuarioVerificar, passwordVerificar);
-            GestorUsuarios.getInstance().crearUsuario(codUsu, usuarioVerificar, passwordVerificar);
+            Central.getInstance().crearUsuario(codUsu, usuarioVerificar, passwordVerificar);
         } else {
             JOptionPane.showMessageDialog(VentanaLogin.getInstance(), "Ha habido un error al logearse", "LOGIN ERRONEO", JOptionPane.ERROR_MESSAGE);
         }
