@@ -51,4 +51,19 @@ CREATE TABLE IF NOT EXISTS `Usuario` (
   `Contraseña` varchar(50) NOT NULL,
   `CodigoPersonalizacion` int NOT NULL,
 PRIMARY KEY(Id)
-)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `Usuario`
+--
+
+CREATE TABLE IF NOT EXISTS `Ranking` (
+  `Puntuacion` int NOT NULL,
+  PRIMARY KEY(Puntuacion),
+  CONSTRAINT fk_Usr
+  FOREIGN KEY (Id, Nombre)  REFERENCES Usuario(Id, Nombre)
+
+);
+

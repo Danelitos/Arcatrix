@@ -9,7 +9,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
 
 
     public static VentanaElegirRankingsPorNivel miVentanaElegirRankingsPorNivel;
-    private JButton btnRFacil, btnRMedio, btnRDificil;
+    private JButton btnRFAcil, btnRMedio, btnRDificil;
     private JPanel panel;
 
     public  int codUsuario;
@@ -47,7 +47,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
         panel.add(texto);
 
         //crear BOTONES
-        JButton btnRFAcil = new JButton();
+        btnRFAcil = new JButton();
         btnRFAcil.setBounds(150,150,200,35);
         btnRFAcil.setText("Nivel Facil");
         btnRFAcil.setBackground(new Color(146, 248, 133));
@@ -56,7 +56,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
         btnRFAcil.addActionListener(this);
 
 
-        JButton btnRMedio= new JButton();
+        btnRMedio= new JButton();
         btnRMedio.setBounds(150,200,200,35);
         btnRMedio.setText("Nivel Medio");
         btnRMedio.setBackground(new Color(248, 248, 133));
@@ -64,7 +64,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
         panel.add(btnRMedio);
         btnRMedio.addActionListener(this);
 
-        JButton btnRDificil= new JButton();
+        btnRDificil= new JButton();
         btnRDificil.setBounds(150,250,200,35);
         btnRDificil.setText("Nivel Dificil");
         btnRDificil.setBackground(new Color(248, 133, 133));
@@ -85,7 +85,8 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
     public void actionPerformed(ActionEvent e){
 
         Object source = e.getSource();
-        if (btnRFacil.equals(source)) {
+
+        if (btnRFAcil.equals(source)) {
             this.setVisible(false);
             VentanaRankings.miVentanaRankings=null;
             VentanaRankings.getInstance("Facil",codUsuario);

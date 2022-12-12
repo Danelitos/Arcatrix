@@ -77,9 +77,17 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
     }
 
+    public static VentanaElegirRanking getInstance(int codUsuario){
+        if(VentanaElegirRanking.miVentanaElegirRanking ==null){
+            VentanaElegirRanking.miVentanaElegirRanking =new VentanaElegirRanking(codUsuario);
+        }
+        return VentanaElegirRanking.miVentanaElegirRanking;
+    }
+
+
     @Override
     public void actionPerformed(ActionEvent e){
-        tRanking="nada";
+
         Object source = e.getSource();
         if (btnGeneral.equals(source)) {
             this.setVisible(false);
