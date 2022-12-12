@@ -2,19 +2,22 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class VentanaElegirRankingsPorNivel extends JFrame {
+public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListener {
 
 
-    private static VentanaElegirRankingsPorNivel miVentanaElegirRankingsPorNivel;
-    private JButton btnGeneral, btnPorNiveles, btnMiRancking;
+    public static VentanaElegirRankingsPorNivel miVentanaElegirRankingsPorNivel;
+    private JButton btnRFacil, btnRMedio, btnRDificil;
     private JPanel panel;
 
-    public static int codUsuario;
+    public  int codUsuario;
 
 
-    private VentanaElegirRankingsPorNivel(int codUsuario) {
+    private VentanaElegirRankingsPorNivel(int pCodUsu){
 
+        this.codUsuario =  pCodUsu;
         // crear ventana
         setTitle("Tetris");
         setSize(500, 500);
@@ -26,8 +29,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
         setComponentes();
 
     }
-
-    private void setComponentes() {
+    private void setComponentes(){
         //crear panel
         panel = new JPanel();
         panel.setBackground(Color.darkGray);
@@ -38,46 +40,67 @@ public class VentanaElegirRankingsPorNivel extends JFrame {
         //crear TEXTO
         JLabel texto = new JLabel();
         texto.setText("Tipo de Rancking:");
-        texto.setBounds(150, 75, 200, 20);
-        texto.setFont(new Font(null, Font.PLAIN, 20));
+        texto.setBounds(150,75,200,20);
+        texto.setFont(new Font(null,Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
 
         //crear BOTONES
-        btnGeneral = new JButton();
-        btnGeneral.setBounds(210, 150, 80, 35);
-        btnGeneral.setText("Nivel Facil");
-        btnGeneral.setBackground(new Color(146, 248, 133));
-        btnGeneral.setFocusPainted(false);
-        panel.add(btnGeneral);
-        //btnGeneral.addMouseListener(ControladorVentanaElegirNivel.getInstance());
+        JButton btnRFAcil = new JButton();
+        btnRFAcil.setBounds(150,150,200,35);
+        btnRFAcil.setText("Nivel Facil");
+        btnRFAcil.setBackground(new Color(146, 248, 133));
+        btnRFAcil.setFocusPainted(false);
+        panel.add(btnRFAcil);
+        btnRFAcil.addActionListener(this);
 
-        btnPorNiveles = new JButton();
-        btnPorNiveles.setBounds(210, 200, 80, 35);
-        btnPorNiveles.setText("Nivel Medio");
-        btnPorNiveles.setBackground(new Color(248, 248, 133));
-        btnPorNiveles.setFocusPainted(false);
-        panel.add(btnPorNiveles);
-        btnPorNiveles.setHorizontalAlignment(SwingConstants.CENTER);
-        //btnPorNiveles.addMouseListener(ControladorVentanaElegirNivel.getInstance());
 
-        btnMiRancking = new JButton();
-        btnMiRancking.setBounds(210, 250, 80, 35);
-        btnMiRancking.setText("Nivel Dificil");
-        btnMiRancking.setBackground(new Color(248, 133, 133));
-        btnMiRancking.setFocusPainted(false);
-        panel.add(btnMiRancking);
-        //btnMiRancking.addMouseListener(ControladorVentanaElegirNivel.getInstance());
+        JButton btnRMedio= new JButton();
+        btnRMedio.setBounds(150,200,200,35);
+        btnRMedio.setText("Nivel Medio");
+        btnRMedio.setBackground(new Color(248, 248, 133));
+        btnRMedio.setFocusPainted(false);
+        panel.add(btnRMedio);
+        btnRMedio.addActionListener(this);
+
+        JButton btnRDificil= new JButton();
+        btnRDificil.setBounds(150,250,200,35);
+        btnRDificil.setText("Nivel Dificil");
+        btnRDificil.setBackground(new Color(248, 133, 133));
+        btnRDificil.setFocusPainted(false);
+        panel.add(btnRDificil);
+        btnRDificil.addActionListener(this);
 
     }
 
-    public static VentanaElegirRankingsPorNivel getInstance(int codUsuario) {
-        if (VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel == null) {
+    public static VentanaElegirRankingsPorNivel getInstance(int codUsuario){
+        if(VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel ==null){
             VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel = new VentanaElegirRankingsPorNivel(codUsuario);
         }
         return VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel;
     }
-}
 
+    @Override
+    public void actionPerformed(ActionEvent e){
+
+        Object source = e.getSource();
+        if (btnRFacil.equals(source)) {
+            this.setVisible(false);
+            VentanaRankings.miVentanaRankings=null;
+            VentanaRankings.getInstance("Facil",codUsuario);
+
+        } else if (btnRMedio.equals(source)) {
+            this.setVisible(false);
+            VentanaRankings.miVentanaRankings=null;
+            VentanaRankings.getInstance("Medio",codUsuario);
+
+        } else if (btnRDificil.equals(source)) {
+            this.setVisible(false);
+            VentanaRankings.miVentanaRankings=null;
+            VentanaRankings.getInstance("Dificil",codUsuario);
+        }
+
+    }
+}
 
