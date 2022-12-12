@@ -2,13 +2,14 @@ package vista;
 
 import com.zetcode.*;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
-public class VentanaNivelElegido extends JFrame implements ActionListener {
+public class VentanaNivelElegido extends JFrame {
     public static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
     public int codigoUsuario;
@@ -76,9 +77,8 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
         btnEmpPartida.setBackground(new Color(245, 52, 52));
         btnEmpPartida.setFocusPainted(false);
         panel.add(btnEmpPartida);
-        //btnEmpPartida.addMouseListener(ControladorVentanaNivelElegido.getInstance());
-        btnEmpPartida.addActionListener(this);
-        //boton atras
+        btnEmpPartida.addActionListener(evento -> start());
+
 
     }
 
@@ -121,10 +121,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
         catch (InterruptedException e) {}
     }
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==btnEmpPartida){
-
+    public void start() {
             int codPartida=0;
             //hacer cuenta atras
             VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
@@ -137,12 +134,19 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
 
             //INICIAR JUEGO TETRIS
             try {
+                String sonidoElegido=GestorBD.getInstance().obtColorPieza("SONIDO",codigoUsuario);
+                Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav","Clip Cancion");
+                Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+            try {
                 new Tetris(codigoUsuario,codPartida,nivelElegido,null ,0);
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
 
-        }
+
     }
 
 }

@@ -36,7 +36,7 @@ public class Usuario {
         return nombre == pNombre;
     }
 
-    public void actualizarDatosPerosnalizacion(String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
+    public void actualizarDatosPersonalizacion(String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
         personalizacion.insertarDatos(colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
     }
 
@@ -113,7 +113,8 @@ public class Usuario {
         return partida;
     }
 
-    public void obtPersonalizacion() {
+    public DatosPersonalizacion obtPersonalizacion() {
         personalizacion.obtPersonalizacion(nombre);
+        return personalizacion;
     }
 }

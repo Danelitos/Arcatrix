@@ -4,6 +4,7 @@ import com.zetcode.Shape.Tetrominoe;
 import vista.VentanaElegirNivel;
 import vista.VentanaMenu;
 
+import javax.sound.sampled.Clip;
 import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
@@ -29,6 +30,7 @@ public class Board extends JPanel implements MouseListener {
     private Tetris parent;
     private int codPartida;
     private String nivel;
+    private boolean gameOver;
 
     public Board(Tetris pParent, int pCodPartida, String pNivel) throws SQLException {
         parent = pParent;
@@ -75,7 +77,7 @@ public class Board extends JPanel implements MouseListener {
 
         setFocusable(true);
         statusbar = parent.getStatusBar();
-        numLinesRemoved=parent.getPuntos();
+        numLinesRemoved = parent.getPuntos();
         addKeyListener(new TAdapter());
     }
 
@@ -113,10 +115,12 @@ public class Board extends JPanel implements MouseListener {
         isPaused = !isPaused;
 
         if (isPaused) {
-
+            Sonido.getInstance().stop("Clip Cancion");
             statusbar.setText("paused");
         } else {
-
+            Clip clip=Sonido.getInstance().getClip("Clip Cancion");
+            clip.start();
+            clip.loop(Clip.LOOP_CONTINUOUSLY);
             statusbar.setText(String.valueOf(numLinesRemoved));
         }
 
@@ -218,16 +222,17 @@ public class Board extends JPanel implements MouseListener {
     }
 
     private void newPiece() {
-
+        Sonido.getInstance().reproducirSonido("src/main/resources/audio/Beep.wav", "Clip Beep");
         curPiece.setRandomShape();
         curX = BOARD_WIDTH / 2 + 1;
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
         if (!tryMove(curPiece, curX, curY)) {
-
+            Sonido.getInstance().stop("Clip Cancion");
+            Sonido.getInstance().reproducirSonido("src/main/resources/audio/GameOver.wav", "Clip Cancion");
             curPiece.setShape(Tetrominoe.NoShape);
             timer.stop();
-
+            gameOver = true;
             var msg = String.format("Game over. Score: %d", numLinesRemoved);
             statusbar.setText(msg);
         }
@@ -336,29 +341,44 @@ public class Board extends JPanel implements MouseListener {
     @Override
     public void mousePressed(MouseEvent e) {
         if (e.getSource() instanceof JButton) {
-            this.timer.stop();
-            System.out.println(parent.codigoUsuario);
-            VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
-            parent.setVisible(false);
-            Date fechaActual = new Date();
-            //actualizar puntos
-            parent.puntos=numLinesRemoved;
-            //AÑADIR A BD LA PARTIDA Y COGER SU CODIGO PARTIDA
-            try {
-                codPartida=GestorBD.getInstance().insertPartida(parent.codigoUsuario,parent.nivel,parent.getPuntos(),fechaActual.toString());
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
+            if (!gameOver) {
+                this.timer.stop();
+                Sonido.getInstance().stop("Clip Cancion");
+                //TODO REVISAR SI HAY TIEMPO
+                //int result = JOptionPane.showConfirmDialog(parent, "Quieres guardar la partida?", "GUARDAR PARTIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                //if (result == JOptionPane.YES_OPTION) {
+                    System.out.println(parent.codigoUsuario);
+                    VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
+                    parent.setVisible(false);
+                    Date fechaActual = new Date();
+                    //actualizar puntos
+                    parent.puntos = numLinesRemoved;
+                    //AÑADIR A BD LA PARTIDA Y COGER SU CODIGO PARTIDA
+                    try {
+                        codPartida = GestorBD.getInstance().insertPartida(parent.codigoUsuario, parent.nivel, parent.getPuntos(), fechaActual.toString());
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
+                    //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
+                    parent.codigoPartida = codPartida;
+
+
+                    Central.getInstance().guardarPartida(parent.codigoUsuario, parent, fechaActual);
+                    System.out.println("Partida guardada");
+                /*} else {
+                    String sonidoElegido = null;
+                    try {
+                        sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", parent.codigoUsuario);
+                    } catch (SQLException throwables) {
+                        throwables.printStackTrace();
+                    }
+                    Clip clip=Sonido.getInstance().getClip("Clip Cancion");
+                    clip.start();
+                    clip.loop(Clip.LOOP_CONTINUOUSLY);
+                    this.timer.start();
+                }*/
             }
-            //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
-            parent.codigoPartida=codPartida;
-
-
-            Central.getInstance().guardarPartida(parent.codigoUsuario, parent,fechaActual);
-        } else {
-            System.exit(0);
         }
-        System.out.println("Partida guardada");
-
     }
 
     @Override

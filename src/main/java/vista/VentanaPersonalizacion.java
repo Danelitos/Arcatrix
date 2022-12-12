@@ -35,7 +35,7 @@ public class VentanaPersonalizacion extends JFrame {
     private JComboBox<String> SquareShape;
     private JComboBox<String> LShape;
     private JComboBox<String> MirroredLShape;
-    private JTextField sonido;
+    private JComboBox<String> sonido;
 
 
     private JButton guardarPersonalizacion;
@@ -253,7 +253,13 @@ public class VentanaPersonalizacion extends JFrame {
         sonidoText.setHorizontalAlignment(SwingConstants.CENTER);
         panelPersonalizacion.add(sonidoText);
 
-        sonido = new JTextField();
+        String sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", codUsu);
+        sonido = new JComboBox<>();
+        sonido.addItem(sonidoElegido);
+        sonido.addItem("Tetris Original");
+        sonido.addItem("Tetris Piano");
+        sonido.addItem("Tetris Trap");
+        sonido.addItem("Tetris Dubstep");
         sonido.setBounds(10, 320, 150, 20);
         panelPersonalizacion.add(sonido);
 
@@ -300,7 +306,6 @@ public class VentanaPersonalizacion extends JFrame {
 
     public void actualizarPersonalizacion() throws SQLException {
         boolean personActualizado;
-        String sonidoActualizado = sonido.getText();
         ;
         if (!classicTetris.isSelected()) {
             String colorFondoAtualizado = Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
@@ -312,12 +317,13 @@ public class VentanaPersonalizacion extends JFrame {
             String colorSQUARESHAPE = Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
             String colorLSHAPE = Objects.requireNonNull(LShape.getSelectedItem()).toString();
             String colorMIRROREDLSHAPE = Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
+            String sonidoActualizado = Objects.requireNonNull(sonido.getSelectedItem()).toString();
             personActualizado = GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
             Central.getInstance().actualizarDatosPersonaliza(codUsu, colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado);
         } else {
             String classicColor = "Classic Color";
-            personActualizado = GestorBD.getInstance().actualizarPersonalizacion(classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, codUsu);
-            Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, sonidoActualizado);
+            personActualizado = GestorBD.getInstance().actualizarPersonalizacion(classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original", codUsu);
+            Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original");
             Central.getInstance().obtPersonalizacion(codUsu);
         }
         if (personActualizado) {

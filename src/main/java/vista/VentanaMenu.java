@@ -1,5 +1,6 @@
 package vista;
 
+import com.zetcode.Sonido;
 import com.zetcode.Tetris;
 
 import javax.swing.*;

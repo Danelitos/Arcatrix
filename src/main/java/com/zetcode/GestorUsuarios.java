@@ -68,16 +68,17 @@ public class GestorUsuarios {
 
     public void actualizarDatosPersonaliza(int codUsu, String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
         Usuario user = buscarUsuario(codUsu);
-        user.actualizarDatosPerosnalizacion(colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
+        user.actualizarDatosPersonalizacion(colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
 
     }
 
-    public boolean obtPersonalizacion(int codUsu) {
+    public DatosPersonalizacion obtPersonalizacion(int codUsu) {
+        DatosPersonalizacion personalizacion=null;
         Usuario user = buscarUsuario(codUsu);
         if (!(user == null)) {
-            user.obtPersonalizacion();
-            return true;
+            personalizacion=user.obtPersonalizacion();
+
         }
-        return false;
+        return personalizacion;
     }
 }

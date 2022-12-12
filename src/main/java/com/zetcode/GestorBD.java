@@ -106,7 +106,7 @@ public class GestorBD {
         sql1.setString(7, "Classic Color");
         sql1.setString(8, "Classic Color");
         sql1.setString(9, "Classic Color");
-        sql1.setString(10, "sonido");
+        sql1.setString(10, "Tetris Original");
 
         sql1.executeUpdate();
 
