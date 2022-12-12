@@ -20,7 +20,7 @@ public class Tetris extends JFrame {
     public String nivel;
     public int codigoUsuario;
     private Shape.Tetrominoe[] casillasOcupadas;
-    private int puntos;
+    public int puntos;
     private Ranking rankings;
     private JLabel statusbar;
 
@@ -47,7 +47,7 @@ public class Tetris extends JFrame {
 
         getContentPane().setLayout(null);
 
-        statusbar = new JLabel(" 0");
+        statusbar = new JLabel(puntos+"");
         statusbar.setBounds(0, 344, 264, 28);
         getContentPane().add(statusbar);
 

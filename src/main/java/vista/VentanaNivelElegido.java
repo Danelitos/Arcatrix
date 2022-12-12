@@ -12,7 +12,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
     public static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
     public int codigoUsuario;
-    JLabel texto,numero;
+    JLabel texto,numero,nombre;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
@@ -36,6 +36,16 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
         this.getContentPane().add(panel);
         panel.setLayout(null);
         panel.setVisible(true);
+
+        //texto del nivel elegido
+        nombre = new JLabel();
+        nombre.setText("ARCATRIX");
+        nombre.setForeground(Color.white);
+        nombre.setBounds(50,10,400,100);
+        nombre.setHorizontalAlignment(SwingConstants.CENTER);
+        nombre.setFont(new Font("arial", Font.BOLD, 70));
+        panel.add(nombre);
+
 
         //texto del nivel elegido
         texto = new JLabel();
@@ -115,16 +125,7 @@ public class VentanaNivelElegido extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==btnEmpPartida){
 
-            int codPartida;
-            //INSERTAR PARTIDA EN BASE DATOS
-            try {
-                codPartida=GestorBD.getInstance().insertPartida(codigoUsuario,nivelElegido,0);
-            } catch (SQLException ex) {
-                throw new RuntimeException(ex);
-            }
-            //crear objeto partida
-            //Tetris partida= new Tetris(codigoUsuario,codPartida,nivelElegido, null,0);
-            //System.out.println("partida instancia: " + partida.getCodPartida());
+            int codPartida=0;
             //hacer cuenta atras
             VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
 
