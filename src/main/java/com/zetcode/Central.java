@@ -34,13 +34,8 @@ public class Central {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user,fechaActual);
         GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
-        //FALTA LO DEL SGBD
         user.partidasGuardadasUsuario();
         Shape.Tetrominoe[] tablero= laPartida.getCasillasOcupadas();
-        //System.out.println("tamaño tablero guardado: " + tablero.length);
-
-        //pasar del tablero al string
-        //System.out.println("pos 0 del tablero: " + tablero[0]);
         String tableroTexto= "";
         for (int i=0; i<tablero.length; i++){
             if (i==tablero.length -1) {
@@ -61,8 +56,11 @@ public class Central {
     }
 
     public JsonArray obtPartidasGuardadas(int codUsuario) {
+        JsonArray arrayJson = null;
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        JsonArray arrayJson = GestorUsuarios.getInstance().partidasGuardadas(user);
+        if(user != null) {
+            arrayJson = GestorUsuarios.getInstance().partidasGuardadas(user);
+        }
         return arrayJson;
     }
 
@@ -74,7 +72,8 @@ public class Central {
 
     public String[] obtLadrillos(int codUsuario, int codPartida) {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        String[] array = user.getBoard(codPartida);
+        String[] array = null;
+        array = user.getBoard(codPartida);
         return array;
     }
 

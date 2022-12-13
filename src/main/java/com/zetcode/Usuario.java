@@ -5,6 +5,7 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 
+import java.io.PrintStream;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -91,7 +92,8 @@ public class Usuario {
 
     public String[] getBoard(int codPartida) {
         Tetris partida = obtTetris(codPartida);
-        String[] pieza = new String[partida.getCasillasOcupadas().length];
+        String[] pieza = null;
+        pieza = new String[partida.getCasillasOcupadas().length];
         for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
             pieza[i] = partida.getCasillasOcupadas()[i].toString();
         }
@@ -108,6 +110,9 @@ public class Usuario {
             if (partidaGuardada.obtCodPartida() == codPartida) {
                 enc = true;
                 partida = partidaGuardada.getLaPartida();
+                System.out.println(partida.getCasillasOcupadas().length);
+                System.out.println(partida.nivel);
+                System.out.println(partida.codigoPartida);
             }
         }
         return partida;

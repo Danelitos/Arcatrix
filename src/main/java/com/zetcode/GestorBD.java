@@ -61,15 +61,14 @@ public class GestorBD {
         return miBaseDeDatos;
     }
 
-    public int insertPartida(int codUsuario, String nivel, int puntos,String fechaActual) throws SQLException {
+    public int insertPartida(int codUsuario, String nivel, int puntos) throws SQLException {
 
-        PreparedStatement sql = con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos,fechaHora) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement sql = con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
         sql.setInt(1, codUsuario);
         sql.setString(2, nivel);
-        sql.setInt(3, puntos);
+        sql.setInt(3, 0);
         sql.setString(4, "ladrillos");
-        sql.setString(5,fechaActual);
 
         sql.executeUpdate();
 
@@ -181,7 +180,7 @@ public class GestorBD {
         ResultSet rs1 = sql1.executeQuery();
         if (rs1.next()) {
             codigoPersonalizacion = rs1.getInt("CodigoPersonalizacion");
-            //System.out.println(codigoPersonalizacion);
+            System.out.println(codigoPersonalizacion);
         }
 
         String colorFondo = null;
@@ -207,7 +206,7 @@ public class GestorBD {
             colorLSHAPE = rs2.getString("COLORLSHAPE");
             colorMIRRROREDLSHAPE = rs2.getString("COLORMIRROREDLSHAPE");
             sonido = rs2.getString("SONIDO");
-            //System.out.println(codigoPersonalizacion);
+            System.out.println(codigoPersonalizacion);
         }
         if (columna.equals("COLORFONDO")) {
             return colorFondo;
