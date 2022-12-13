@@ -19,7 +19,7 @@ public class UsuarioTest {
     private Date fecha= Date.from(Instant.now());
     private Usuario usu1= new Usuario(1,"Danel","123",personalizacion1);
     private Tetris tetris=new Tetris(1,1,"Facil",casillasOcupadas,12);
-    private PartidaGuardada partidaGuardada=new PartidaGuardada(usu1,tetris,fecha);
+    //private PartidaGuardada partidaGuardada=new PartidaGuardada(usu1,tetris,fecha);
 
     public UsuarioTest() throws SQLException {
 

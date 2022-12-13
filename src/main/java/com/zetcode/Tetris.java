@@ -57,10 +57,17 @@ public class Tetris extends JFrame {
         getContentPane().add(board);
 
         JButton btnNewButton = new JButton("Guardar");
-        btnNewButton.setBounds(159, 344, 105, 28);
+        btnNewButton.setBounds(122, 344, 80, 28);
         getContentPane().add(btnNewButton);
         btnNewButton.addActionListener(evento -> board.guardarPartida());
+
+        JButton botonFinalizar = new JButton("Fin");
+        botonFinalizar.setBounds(205, 344, 55, 28);
+        getContentPane().add(botonFinalizar);
+        botonFinalizar.addActionListener(evento -> board.finalizar());
         board.start();
+
+
 
         setTitle("Tetris");
         setSize(278, 412);
