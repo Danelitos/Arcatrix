@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -30,7 +31,7 @@ public class Central {
         GestorUsuarios.getInstance().actualizarDatosPersonaliza(codUsu, colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
     }
 
-    public void guardarPartida(int codUsuario, Tetris laPartida, Date fechaActual) {
+    public void guardarPartida(int codUsuario, Partida laPartida, String fechaActual) {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user,fechaActual);
         GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
@@ -79,5 +80,23 @@ public class Central {
 
     public DatosPersonalizacion obtPersonalizacion(int codUsu) {
         return GestorUsuarios.getInstance().obtPersonalizacion(codUsu);
+    }
+
+    public String pasarLadrillosTexto(Shape.Tetrominoe[] tablero){
+        String tableroTexto= "";
+        for (int i=0; i<tablero.length; i++){
+            if (i==tablero.length -1) {
+                tableroTexto = tableroTexto + tablero[i];
+            }
+            else{
+                tableroTexto = tableroTexto + tablero[i] + " ";
+            }
+
+        }
+        return tableroTexto;
+    }
+
+    public void cargarPartidasGuardadas(int codUsu) throws SQLException {
+        GestorBD.getInstance().cargarPartidasUsuario(codUsu);
     }
 }

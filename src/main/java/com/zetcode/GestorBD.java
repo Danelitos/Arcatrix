@@ -19,38 +19,6 @@ public class GestorBD {
         PreparedStatement sql = con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
         sql.execute();
 
-        //pruebah2();
-    }
-
-    private void pruebah2() throws SQLException {
-        PreparedStatement sql = con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
-        sql.execute();
-
-        sql = con.prepareStatement("INSERT INTO Usuario(Nombre,Email,Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
-
-        sql.setString(1, "hola");
-        sql.setString(2, "jeje");
-        sql.setString(3, "123");
-        sql.setInt(4, 4);
-
-
-        sql.executeUpdate();
-        ResultSet generatedKeys = sql.getGeneratedKeys();
-        generatedKeys.next();
-        int codUsuario = generatedKeys.getInt(1);
-        System.out.println(codUsuario);
-        Statement s = con.createStatement();
-        ResultSet rs = s.executeQuery("select nombre from Usuario where id=1");
-
-        rs.next();
-        String nombre = rs.getString(1);
-
-        System.out.println("nombre: " + nombre);
-
-        //exportar la bd para PROBAR
-        //sql= con.prepareStatement("SCRIPT TO 'bd2.sql'");
-        //sql.execute();
-
     }
 
 
@@ -61,14 +29,15 @@ public class GestorBD {
         return miBaseDeDatos;
     }
 
-    public int insertPartida(int codUsuario, String nivel, int puntos) throws SQLException {
+    public int insertPartida(int codUsuario, String nivel, int puntos,String fechaActual, String ladrillos) throws SQLException {
 
-        PreparedStatement sql = con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos) VALUES(?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
+        PreparedStatement sql = con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos,fechaHora) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
         sql.setInt(1, codUsuario);
         sql.setString(2, nivel);
-        sql.setInt(3, 0);
-        sql.setString(4, "ladrillos");
+        sql.setInt(3, puntos);
+        sql.setString(4, ladrillos);
+        sql.setString(5,fechaActual);
 
         sql.executeUpdate();
 
@@ -228,6 +197,45 @@ public class GestorBD {
             return sonido;
         }
 
+    }
+
+    public void cargarPartidasUsuario(int codUsu) throws SQLException {
+
+        Usuario usuario= GestorUsuarios.getInstance().buscarUsuario(codUsu);
+
+        //COGER LAS PARTIDAS DEL USUARIO
+        PreparedStatement sql1 = con.prepareStatement("select * from Partida where codUsuario=?");
+        sql1.setInt(1, codUsu);
+        ResultSet rs1 = sql1.executeQuery();
+        Partida partida=null;
+        while (rs1.next()){
+            int codPartida= rs1.getInt("codPartida");
+            int codUsuario= rs1.getInt("codUsuario");
+            String nivel = rs1.getString("nivel");
+            int puntos = rs1.getInt("puntos");
+            String ladrillos= rs1.getString("listaLadrillos");
+            String fecha= rs1.getString("fechaHora");
+
+            //tenemos los datos
+
+            //pasar de String a Tetrominoe[]
+            Shape.Tetrominoe[] casillasOcupadas;
+            String[] casillas = ladrillos.split(" ");
+
+            casillasOcupadas = new com.zetcode.Shape.Tetrominoe[casillas.length];
+            for (int i = 0; i < casillas.length; i++) {
+                casillasOcupadas[i] = Shape.Tetrominoe.valueOf(casillas[i]);
+            }
+
+            //creamos la partida
+            partida=new Partida(codPartida,nivel,codUsuario,casillasOcupadas,puntos);
+
+            //creamos la partida guardada
+            PartidaGuardada partGuardada= new PartidaGuardada(usuario,partida,fecha);
+
+            usuario.getListaPartidasGuardadas().add(partGuardada);
+
+        }
     }
 
 

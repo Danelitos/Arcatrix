@@ -59,7 +59,7 @@ public class Usuario {
         JsonArray array = new JsonArray();
         while (itr.hasNext()) {
             partida = itr.next();
-            Date fechaHora = partida.obtFechaHora();
+            String fechaHora = partida.obtFechaHora();
             String s = fechaHora.toString();
             array.add(s);
         }
@@ -73,7 +73,7 @@ public class Usuario {
     public JsonArray obtPartida(String fechaHora) {
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partidaGuardada = null;
-        Tetris partida = null;
+        Partida partida = null;
         JsonArray array = new JsonArray();
         boolean enc = false;
         while (itr.hasNext() && !enc) {
@@ -91,7 +91,7 @@ public class Usuario {
     }
 
     public String[] getBoard(int codPartida) {
-        Tetris partida = obtTetris(codPartida);
+        Partida partida = obtTetris(codPartida);
         String[] pieza = null;
         pieza = new String[partida.getCasillasOcupadas().length];
         for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
@@ -100,8 +100,8 @@ public class Usuario {
         return pieza;
     }
 
-    public Tetris obtTetris(int codPartida) {
-        Tetris partida = null;
+    public Partida obtTetris(int codPartida) {
+        Partida partida = null;
         Iterator<PartidaGuardada> itr = this.getIterador();
         PartidaGuardada partidaGuardada = null;
         boolean enc = false;

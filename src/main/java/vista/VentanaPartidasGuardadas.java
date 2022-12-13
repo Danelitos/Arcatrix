@@ -101,16 +101,16 @@ public class VentanaPartidasGuardadas extends JFrame {
         }
         System.out.println("partida instancia: " + codigoPartida++);
         //hacer cuenta atras
-        VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).cuentaAtras();
+        //VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).cuentaAtras();
         //crear interfaz del juego
         try {
             String sonidoElegido= GestorBD.getInstance().obtColorPieza("SONIDO",VentanaMenu.getInstance(0).codigoUsu);
             Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav","Clip Cancion");
-            Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
+            //Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
             new Tetris(codUsuarioPartida, codigoPartida++, nivel, board, puntos);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).setVisible(false);
+        //VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).setVisible(false);
     }
 }

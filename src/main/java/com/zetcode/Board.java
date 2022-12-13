@@ -347,16 +347,19 @@ public class Board extends JPanel {
                 //actualizar puntos
                 parent.puntos = numLinesRemoved;
                 //AÑADIR A BD LA PARTIDA Y COGER SU CODIGO PARTIDA
+                String ladrillosTexto = Central.getInstance().pasarLadrillosTexto(parent.getCasillasOcupadas());
                 try {
-                    codPartida = GestorBD.getInstance().insertPartida(parent.codigoUsuario, parent.nivel, parent.getPuntos(), fechaActual.toString());
+                    codPartida = GestorBD.getInstance().insertPartida(parent.codigoUsuario, parent.nivel, parent.getPuntos(), fechaActual.toString(),ladrillosTexto);
                 } catch (SQLException ex) {
                     throw new RuntimeException(ex);
                 }
                 //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
                 parent.codigoPartida = codPartida;
 
+                Partida partida= new Partida(parent.codigoPartida,parent.nivel,parent.codigoUsuario,parent.getCasillasOcupadas(),parent.puntos);
 
-                Central.getInstance().guardarPartida(parent.codigoUsuario, parent, fechaActual);
+                Central.getInstance().guardarPartida(parent.codigoUsuario, partida,fechaActual.toString());
+                //Central.getInstance().guardarPartida(parent.codigoUsuario, parent, fechaActual);
                 System.out.println("Partida guardada");
             /*} else {
                 String sonidoElegido = null;
