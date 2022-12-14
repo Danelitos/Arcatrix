@@ -7,11 +7,12 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.nio.file.FileSystemNotFoundException;
+import java.sql.SQLException;
 
 public class VentanaElegirRanking extends JFrame implements ActionListener{
 
-    private static VentanaElegirRanking miVentanaElegirRanking;
-    private JButton btnGeneral, btnPorNiveles, btnMiRancking;
+    public static VentanaElegirRanking miVentanaElegirRanking;
+    private JButton btnGeneral, btnPorNiveles, btnMiRancking, btnAtras;
     private JPanel panel;
 
     public String tRanking = "PorNiveles";
@@ -48,6 +49,15 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
+
+        //crear boton atras
+        btnAtras = new JButton();
+        btnAtras.setBounds(0,0,75,50);
+        btnAtras.setText("Atras");
+        btnAtras.setBackground(new Color(0,255,255));
+        texto.setFont(new Font(null,Font.PLAIN, 20));
+        panel.add(btnAtras);
+        btnAtras.addActionListener(this);
 
         //crear BOTONES
         btnGeneral= new JButton();
@@ -86,7 +96,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
 
         Object source = e.getSource();
         if (btnGeneral.equals(source)) {
@@ -103,6 +113,10 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
             this.setVisible(false);
             VentanaRankings.miVentanaRankings=null;
             VentanaRankings.getInstance("Personal",codUsuario);
+        } else if (btnAtras.equals(source)) {
+            this.setVisible(false);
+
+
         }
 
     }

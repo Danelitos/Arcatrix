@@ -2,7 +2,6 @@ package vista;
 
 import com.zetcode.Central;
 import com.zetcode.GestorBD;
-import com.zetcode.GestorUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
