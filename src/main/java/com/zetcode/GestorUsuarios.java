@@ -31,7 +31,7 @@ public class GestorUsuarios {
                 enc = true;
             }
         }
-        if (!enc) user = null;
+        if (!enc) {user = null;};
         return (user);
     }
 

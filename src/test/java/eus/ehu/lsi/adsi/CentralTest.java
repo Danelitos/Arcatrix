@@ -195,25 +195,23 @@ public class CentralTest {
 
 
         //PRUEBAS DE CAJA BLANCA
-        //Creas nueva partida
 
-        //Central.getInstance().guardarPartida(-1,tetris,Date.from(Instant.now()));
+        //No existe el usuario
+        Partida p11 = new Partida(11,"Facil",-1,new Shape.Tetrominoe[240],0);
+        Central.getInstance().guardarPartida(-1,p11,Date.from(Instant.now()).toString());
         //Printea un error porque no existe el usuario
 
         //La partida es null
-        //Central.getInstance().guardarPartida(1,null,Date.from(Instant.now()));
+        Central.getInstance().guardarPartida(1,null,Date.from(Instant.now()).toString());
         //Printea un error porque la partida es null
 
         //La fecha es null
-        //Creas nueva partida
-
-        //Central.getInstance().guardarPartida(1,tetris,null);
+        Partida p12 = new Partida(12,"Facil",1,new Shape.Tetrominoe[240],0);
+        Central.getInstance().guardarPartida(1,p11,null);
         //Printea un error porque la fecha es null
 
         //La partida y la fecha son null
-        //Creas nueva partida
-
-        //Central.getInstance().guardarPartida(1,null,null);
+        Central.getInstance().guardarPartida(1,null,null);
         //Printea un error porque la partida y la fecha son null
 
     }

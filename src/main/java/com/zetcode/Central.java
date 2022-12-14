@@ -32,20 +32,25 @@ public class Central {
 
     public void guardarPartida(int codUsuario, Partida laPartida, String fechaActual) {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user,fechaActual);
-        GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
-        user.partidasGuardadasUsuario();
-        Shape.Tetrominoe[] tablero= laPartida.getCasillasOcupadas();
-        String tableroTexto= "";
-        for (int i=0; i<tablero.length; i++){
-            if (i==tablero.length -1) {
-                tableroTexto = tableroTexto + tablero[i];
-            }
-            else{
-                tableroTexto = tableroTexto + tablero[i] + " ";
-            }
+        if (user != null) {
+            if (laPartida != null && fechaActual != null) {
+                PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user, fechaActual);
+                GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
+                user.partidasGuardadasUsuario();
+                Shape.Tetrominoe[] tablero = laPartida.getCasillasOcupadas();
+                String tableroTexto = "";
+                for (int i = 0; i < tablero.length; i++) {
+                    if (i == tablero.length - 1) {
+                        tableroTexto = tableroTexto + tablero[i];
+                    } else {
+                        tableroTexto = tableroTexto + tablero[i] + " ";
+                    }
 
+                }
+            }
+            else {System.out.println("ERROR, la partida y/o la fecha es null");}
         }
+        else {System.out.println("ERROR, no existe el usuario");}
         //System.out.println(tableroTexto);
         //String[] casillas = tableroTexto.split(" ");
         //System.out.println(Arrays.toString(casillas));
