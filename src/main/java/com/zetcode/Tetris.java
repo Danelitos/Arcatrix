@@ -52,7 +52,7 @@ public class Tetris extends JFrame {
         getContentPane().add(statusbar);
 
         //Habrá que añadir los métodos para completar el tablero con las piezas en el caso de cargarPartida
-        var board = new Board(this, codPartida, nivel);
+        var board = new Board(this, codPartida, nivel,codigoUsuario);
         board.setBounds(0, 0, 264, 344);
         getContentPane().add(board);
 

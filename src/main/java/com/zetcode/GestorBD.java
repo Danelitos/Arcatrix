@@ -2,6 +2,7 @@ package com.zetcode;
 
 import java.security.GeneralSecurityException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class GestorBD {
     private static GestorBD miBaseDeDatos;
@@ -89,6 +90,7 @@ public class GestorBD {
 
     }
 
+
     public int verificarLogin(String usuarioLogin, String password) throws SQLException {
         int codigoUsu = 0;
         PreparedStatement sql = con.prepareStatement("select Id, Nombre, Contraseña from Usuario where Nombre=? and Contraseña=?");
@@ -99,7 +101,11 @@ public class GestorBD {
             String nombre = rs.getString("Nombre");
             String contraseña = rs.getString("Contraseña");
             codigoUsu = rs.getInt("Id");
+
+            //Dejar registrado quien esta en el tablero
+
         }
+
         return codigoUsu;
     }
 
@@ -236,6 +242,63 @@ public class GestorBD {
             usuario.getListaPartidasGuardadas().add(partGuardada);
 
         }
+    }
+
+    public ArrayList<Ranking> cargarRankings() throws SQLException{
+
+        ArrayList<Ranking> result = new ArrayList<Ranking>();
+
+        PreparedStatement sql = con.prepareStatement("Select IdUsr,NombreUsr,Nivel,Puntuacion from Ranking");
+        ResultSet rs1 = sql.executeQuery();
+        while (rs1.next()){
+            int UdSur = rs1.getInt("IdUsr");
+            String Nombre = rs1.getString("NombreUsr");
+            String Nivel = rs1.getString("Nivel");
+            int Puntuacion = rs1.getInt("Puntuacion");
+            Ranking r = new Ranking(UdSur,Nombre,Puntuacion,Nivel);
+            result.add(r);
+        }
+
+        return result;
+    }
+
+    public boolean anadirRanking(Ranking r) throws SQLException{
+
+        int CodRanking=0;
+        PreparedStatement sql1 = con.prepareStatement("select CodRanking from Ranking order by CodRanking desc limit 1");
+        ResultSet rs1 = sql1.executeQuery();
+
+        if (rs1.next()) {
+            CodRanking = rs1.getInt("CodRanking") + 1;
+        } else {
+            CodRanking = 0;
+        }
+
+
+        PreparedStatement sql2 = con.prepareStatement("Insert into Ranking(CodRanking,IdUsr,NombreUsr,Nivel,Puntuacion) values(?,?,?,?,?)" );
+        sql2.setInt(1,CodRanking);
+        sql2.setInt(2, r.getIdUsr());
+        sql2.setString(3, r.getNombreUsr());
+        sql2.setString(4, r.getNivel());
+        sql2.setInt(5, r.getPuntuacion());
+
+        System.out.println("Ranking Guardado");
+        return sql2.executeUpdate() > 0 ? true : false;
+    }
+
+    public String conseguirNombreUsr(int codUsr) throws SQLException{
+        String nombre ="";
+
+        PreparedStatement sql = con.prepareStatement("Select Nombre from Usuario where Id=?");
+        sql.setInt(1,codUsr);
+        ResultSet rs1 = sql.executeQuery();
+
+        if (rs1.next()) {
+            nombre= rs1.getString("Nombre");
+        }
+
+
+        return nombre;
     }
 
 

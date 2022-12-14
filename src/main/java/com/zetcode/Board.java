@@ -29,13 +29,19 @@ public class Board extends JPanel {
     private Tetrominoe[] board;
     private Tetris parent;
     private int codPartida;
+
+    private int codUsr;
+
     private String nivel;
     private boolean gameOver;
 
-    public Board(Tetris pParent, int pCodPartida, String pNivel) throws SQLException {
+
+
+    public Board(Tetris pParent, int pCodPartida, String pNivel,int codUsr) throws SQLException {
         parent = pParent;
         codPartida = pCodPartida;
         nivel = pNivel;
+        this.codUsr=codUsr;
         setTamanoYVelocidad(nivel);
         String colorFondo = GestorBD.getInstance().obtColorPieza("COLORFONDO", parent.codigoUsuario);
         if (!colorFondo.equals("Classic Color")) {
@@ -45,9 +51,11 @@ public class Board extends JPanel {
         board = pParent.getCasillasOcupadas();
     }
 
+
     public Tetrominoe[] getBoard() {
         return board;
     }
+
 
     private void setTamanoYVelocidad(String nivel) {
 
@@ -235,8 +243,19 @@ public class Board extends JPanel {
             gameOver = true;
             var msg = String.format("Game over. Score: %d", numLinesRemoved);
             statusbar.setText(msg);
-        }
         //ACTUALIZAR RANKINGS
+
+            String nombre ="";
+            try {
+                nombre = GestorBD.getInstance().conseguirNombreUsr(codUsr);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+            try {
+            ListaRankings.getInstance().anadirRanking(codUsr,nombre,numLinesRemoved,nivel);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }}
     }
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
@@ -501,4 +520,6 @@ public class Board extends JPanel {
         };
 
     }
+
+
 }

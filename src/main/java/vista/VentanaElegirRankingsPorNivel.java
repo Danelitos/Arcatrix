@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
+import java.security.GeneralSecurityException;
 
 public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListener {
 
@@ -82,24 +84,24 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
     }
 
     @Override
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e) {
 
         Object source = e.getSource();
 
         if (btnRFAcil.equals(source)) {
             this.setVisible(false);
             VentanaRankings.miVentanaRankings=null;
-            VentanaRankings.getInstance("Facil",codUsuario);
+            VentanaRankings.getInstance("facil",codUsuario);
 
         } else if (btnRMedio.equals(source)) {
             this.setVisible(false);
             VentanaRankings.miVentanaRankings=null;
-            VentanaRankings.getInstance("Medio",codUsuario);
+            VentanaRankings.getInstance("medio",codUsuario);
 
         } else if (btnRDificil.equals(source)) {
             this.setVisible(false);
             VentanaRankings.miVentanaRankings=null;
-            VentanaRankings.getInstance("Dificil",codUsuario);
+            VentanaRankings.getInstance("dificil",codUsuario);
         }
 
     }
