@@ -60,8 +60,7 @@ public class Usuario {
         while (itr.hasNext()) {
             partida = itr.next();
             String fechaHora = partida.obtFechaHora();
-            String s = fechaHora.toString();
-            array.add(s);
+            array.add(fechaHora);
         }
         return array;
     }
@@ -110,9 +109,6 @@ public class Usuario {
             if (partidaGuardada.obtCodPartida() == codPartida) {
                 enc = true;
                 partida = partidaGuardada.getLaPartida();
-                System.out.println(partida.getCasillasOcupadas().length);
-                System.out.println(partida.nivel);
-                System.out.println(partida.codigoPartida);
             }
         }
         return partida;

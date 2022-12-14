@@ -20,7 +20,6 @@ public class Central {
 
     public void crearUsuario(int codUsu, String nombre, String password) {
         GestorUsuarios.getInstance().crearUsuario(codUsu, nombre, password);
-
     }
 
     public void recuperarContrasena(String correo) {

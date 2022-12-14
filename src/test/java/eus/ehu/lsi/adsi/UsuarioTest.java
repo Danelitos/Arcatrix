@@ -15,7 +15,7 @@ import static org.junit.Assert.*;
 public class UsuarioTest {
     private DatosPersonalizacion personalizacion1=new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido");
     private DatosPersonalizacion personalizacion2=new DatosPersonalizacion("Rojo","Rojo","Rojo","Rojo","Rojo","Rojo","Rojo","Rojo","Hola");
-    private Shape.Tetrominoe[] casillasOcupadas=new Shape.Tetrominoe[5];
+    private Shape.Tetrominoe[] casillasOcupadas=new Shape.Tetrominoe[220];
     private Date fecha= Date.from(Instant.now());
     private Usuario usu1= new Usuario(1,"Danel","123",personalizacion1);
     private Tetris tetris=new Tetris(1,1,"Facil",casillasOcupadas,12);

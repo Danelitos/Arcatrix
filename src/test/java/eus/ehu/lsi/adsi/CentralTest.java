@@ -14,16 +14,13 @@ import java.util.Date;
 public class CentralTest {
     private DatosPersonalizacion personalizacion1;
     private Usuario usu1;
-    private Tetris tetris;
-    private PartidaGuardada partidaGuardada;
 
     @Before
     public void setUp() throws SQLException {
         GestorBD.getInstance().addUsuario("Danel","Danel","1");
         DatosPersonalizacion personalizacion1=new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido");
         Usuario usu1=new Usuario(1,"Danel","1",personalizacion1);
-        Tetris tetris=new Tetris(1,1,"Facil",new Shape.Tetrominoe[220],0);
-        //PartidaGuardada partidaGuardada=new PartidaGuardada(usu1,tetris, Date.from(Instant.now()));
+        Central.getInstance().crearUsuario(1,"Danel","1");
     }
 
 
@@ -69,104 +66,157 @@ public class CentralTest {
     }
 
     @Test
-    /*public void guardarPartida() {
-        //Por cada prueba, vemos si en la partida se guarda tanto en el registro de partidas guardadas
-        //como en la lista de partidas guardadas del usuario (BASE DE DATOS????)
-        Central.getInstance().crearUsuario(1,"Danel","1");
+    public void guardarPartida() {
+        //Por cada prueba, vemos si la partida se guarda tanto en el registro de partidas guardadas
+        //como en la lista de partidas guardadas del usuario
+        Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
+        Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
+
         //Guardar partida por primera vez en modo fácil
         Date fecha1 = new Date();
         //CREAR NUEVA PARTIDA
-        Central.getInstance().guardarPartida(1,tetris,fecha1);
-        assertTrue(usu1.getListaPartidasGuardadas().contains(tetris));
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(1).toString(), fecha1.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Shape.Tetrominoe[] boardFacil = new Shape.Tetrominoe[220];
+        for (int i=0;i<boardFacil.length;i++){
+            boardFacil[i] = Shape.Tetrominoe.NoShape;
+        }
+        Partida partidaFacil1 = new Partida(1,"Facil", usu1.getCodUsuario(),boardFacil ,0);
+        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil1,fecha1.toString());
+        String s1 = Central.getInstance().obtPartidasGuardadas(1).get(0).toString();
+        s1 = s1.replaceAll("\"", "");
+        assertEquals(s1, fecha1.toString());
+
         //Guardar partida por primera vez en modo intermedio
         Date fecha2 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha2);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(2).toString(), fecha2.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Shape.Tetrominoe[] boardMedio = new Shape.Tetrominoe[405];
+        for (int i=0;i<boardMedio.length;i++){
+            boardMedio[i] = Shape.Tetrominoe.NoShape;
+        }
+        Partida partidaMedio1 = new Partida(2,"Medio", usu1.getCodUsuario(), boardMedio,0);
+        Central.getInstance().guardarPartida(1,partidaMedio1,fecha2.toString());
+        String s2 = Central.getInstance().obtPartidasGuardadas(1).get(1).toString();
+        s2 = s2.replaceAll("\"", "");
+        assertEquals(s2, fecha2.toString());
+
         //Guardar partida por primera vez en modo difícil
         Date fecha3 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha3);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(3).toString(), fecha3.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Shape.Tetrominoe[] boardDificil = new Shape.Tetrominoe[640];
+        for (int i=0;i<boardDificil.length;i++){
+            boardDificil[i] = Shape.Tetrominoe.NoShape;
+        }
+        Partida partidaDificil1 = new Partida(3,"Dificil", usu1.getCodUsuario(), boardDificil,0);
+        Central.getInstance().guardarPartida(1,partidaDificil1,fecha3.toString());
+        String s3 = Central.getInstance().obtPartidasGuardadas(1).get(2).toString();
+        s3 = s3.replaceAll("\"", "");
+        assertEquals(s3, fecha3.toString());
+
         //Guardar partida por segunda vez en modo fácil
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha1.toString());
+        JsonArray jsonArray1 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha1.toString());
+        String[] ladrillos1 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board1 = new com.zetcode.Shape.Tetrominoe[ladrillos1.length];
+        for (int i = 0; i < ladrillos1.length; i++) {
+            board1[i] = Shape.Tetrominoe.valueOf(ladrillos1[i]);
+        }
         Date fecha4 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha4);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(4).toString(), fecha4.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Partida partidaFacil2 = new Partida(4,jsonArray1.get(2).toString(), jsonArray1.get(0).getAsInt(), board1,jsonArray1.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaFacil2,fecha4.toString());
+        String s4 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s4 = s4.replaceAll("\"", "");
+        assertEquals(s4, fecha4.toString());
+
         //Guardar partida por segunda vez en modo intermedio
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha2.toString());
+        JsonArray jsonArray2 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha2.toString());
+        String[] ladrillos2 = Central.getInstance().obtLadrillos(jsonArray2.get(0).getAsInt(),jsonArray2.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board2 = new com.zetcode.Shape.Tetrominoe[ladrillos2.length];
+        for (int i = 0; i < ladrillos2.length; i++) {
+            board2[i] = Shape.Tetrominoe.valueOf(ladrillos2[i]);
+        }
         Date fecha5 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha5);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(5).toString(), fecha5.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Partida partidaMedio2 = new Partida(5,jsonArray2.get(2).toString(), jsonArray2.get(0).getAsInt(), board2,jsonArray2.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaMedio2,fecha5.toString());
+        String s5 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s5 = s5.replaceAll("\"", "");
+        assertEquals(s5, fecha5.toString());
+
         //Guardar partida por segunda vez en modo difícil
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha3.toString());
+        JsonArray jsonArray3 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha3.toString());
+        String[] ladrillos3 = Central.getInstance().obtLadrillos(jsonArray3.get(0).getAsInt(),jsonArray3.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board3 = new com.zetcode.Shape.Tetrominoe[ladrillos3.length];
+        for (int i = 0; i < ladrillos3.length; i++) {
+            board3[i] = Shape.Tetrominoe.valueOf(ladrillos3[i]);
+        }
         Date fecha6 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha6);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(6).toString(), fecha6.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
-        //Guardar partida n veces en modo fácil
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha4.toString());
+        Partida partidaDificil2 = new Partida(6,jsonArray3.get(2).toString(), jsonArray3.get(0).getAsInt(), board3,jsonArray3.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaDificil2,fecha6.toString());
+        String s6 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s6 = s6.replaceAll("\"", "");
+        assertEquals(s6, fecha6.toString());
+
+        //Guardar partida n veces (3) en modo fácil
+        JsonArray jsonArray4 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha4.toString());
+        String[] ladrillos4 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board4 = new com.zetcode.Shape.Tetrominoe[ladrillos4.length];
+        for (int i = 0; i < ladrillos4.length; i++) {
+            board4[i] = Shape.Tetrominoe.valueOf(ladrillos4[i]);
+        }
         Date fecha7 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha7);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha7.toString());
+        Partida partidaFacil3 = new Partida(7,jsonArray1.get(2).toString(), jsonArray1.get(0).getAsInt(), board4,jsonArray1.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaFacil3,fecha7.toString());
+        String s7 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s7 = s7.replaceAll("\"", "");
+        assertEquals(s7, fecha7.toString());
+
+        //Guardar partida n veces (3) en modo intermedio
+        JsonArray jsonArray5 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha5.toString());
+        String[] ladrillos5 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board5 = new com.zetcode.Shape.Tetrominoe[ladrillos5.length];
+        for (int i = 0; i < ladrillos5.length; i++) {
+            board5[i] = Shape.Tetrominoe.valueOf(ladrillos5[i]);
+        }
         Date fecha8 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha8);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha8.toString());
+        Partida partidaMedio3 = new Partida(8,jsonArray1.get(2).toString(), jsonArray1.get(0).getAsInt(), board5,jsonArray1.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaMedio3,fecha8.toString());
+        String s8 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s8 = s8.replaceAll("\"", "");
+        assertEquals(s8, fecha8.toString());
+
+        //Guardar partida n veces (3) en modo difícil
+        JsonArray jsonArray6 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha6.toString());
+        String[] ladrillos6 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board6 = new com.zetcode.Shape.Tetrominoe[ladrillos6.length];
+        for (int i = 0; i < ladrillos6.length; i++) {
+            board6[i] = Shape.Tetrominoe.valueOf(ladrillos6[i]);
+        }
         Date fecha9 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha9);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(9).toString(), fecha9.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
-        //Guardar partida n veces en modo medio
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha5.toString());
-        Date fecha10 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha10);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha10.toString());
-        Date fecha11 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha11);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha11.toString());
-        Date fecha12 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha12);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(12).toString(), fecha12.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
-        //Guardar partida n veces en modo difícil
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha6.toString());
-        Date fecha13 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha13);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha13.toString());
-        Date fecha14 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha14);
-        Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha14.toString());
-        Date fecha15 = new Date();
-        Central.getInstance().guardarPartida(1,tetris,fecha15);
-        assertEquals(Central.getInstance().obtPartidasGuardadas(1).get(15).toString(), fecha15.toString());
-        System.out.println(Central.getInstance().obtPartidasGuardadas(1));
+        Partida partidaDificil3 = new Partida(9,jsonArray1.get(2).toString(), jsonArray1.get(0).getAsInt(), board6,jsonArray1.get(3).getAsInt());
+        Central.getInstance().guardarPartida(1,partidaDificil3,fecha9.toString());
+        String s9 = Central.getInstance().obtPartidasGuardadas(1).get(3).toString();
+        s9 = s9.replaceAll("\"", "");
+        assertEquals(s9, fecha9.toString());
+
 
         //PRUEBAS DE CAJA BLANCA
         //Creas nueva partida
 
-        Central.getInstance().guardarPartida(-1,tetris,Date.from(Instant.now()));
+        //Central.getInstance().guardarPartida(-1,tetris,Date.from(Instant.now()));
         //Printea un error porque no existe el usuario
 
         //La partida es null
-        Central.getInstance().guardarPartida(1,null,Date.from(Instant.now()));
+        //Central.getInstance().guardarPartida(1,null,Date.from(Instant.now()));
         //Printea un error porque la partida es null
 
         //La fecha es null
         //Creas nueva partida
 
-        Central.getInstance().guardarPartida(1,tetris,null);
+        //Central.getInstance().guardarPartida(1,tetris,null);
         //Printea un error porque la fecha es null
 
         //La partida y la fecha son null
         //Creas nueva partida
 
-        Central.getInstance().guardarPartida(1,null,null);
+        //Central.getInstance().guardarPartida(1,null,null);
         //Printea un error porque la partida y la fecha son null
-    }*/
+
+    }
 
     //@Test
     public void obtPartidasGuardadas() {

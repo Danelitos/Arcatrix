@@ -60,9 +60,8 @@ public class GestorUsuarios {
     }
 
     public void crearUsuario(int codUsu, String nombre, String password) {
-        System.out.println(codUsu);
         lista.add(new Usuario(codUsu, nombre, password, new DatosPersonalizacion("Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Classic Color", "Sonido")));
-
+        System.out.println(lista.size());
     }
 
     public void actualizarDatosPersonaliza(int codUsu, String colorFondo, String colorZHSAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonido) {
@@ -80,4 +79,6 @@ public class GestorUsuarios {
         }
         return personalizacion;
     }
+
+    public ArrayList<Usuario> getLista(){return lista;}
 }
