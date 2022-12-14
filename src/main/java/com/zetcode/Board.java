@@ -377,6 +377,7 @@ public class Board extends JPanel {
     }
 
     public void finalizar() {
+        this.timer.stop();
         Sonido.getInstance().stop("Clip Cancion");
         VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
         parent.setVisible(false);
