@@ -59,5 +59,12 @@ PRIMARY KEY(Id)
 --
 -- Estructura de tabla para la tabla `Usuario`
 --
-
+CREATE TABLE IF NOT EXISTS `Ranking` (
+  `CodRanking` int NOT NULL AUTO_INCREMENT,
+  `IdUsr` int NOT NULL ,
+  `NombreUsr` varchar(30) NOT NULL,
+  `Nivel` varchar(40) NOT NULL,
+  `Puntuacion` int NOT NULL,
+PRIMARY KEY(CodRanking)
+);
 

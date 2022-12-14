@@ -1,7 +1,5 @@
 package vista;
 
-import com.sun.jdi.Mirror;
-import com.zetcode.Board;
 import com.zetcode.Central;
 import com.zetcode.GestorBD;
 
