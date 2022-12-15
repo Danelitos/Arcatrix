@@ -1,5 +1,6 @@
 package eus.ehu.lsi.adsi;
 
+import static java.lang.Thread.*;
 import static org.junit.Assert.*;
 import com.google.gson.JsonArray;
 import com.zetcode.*;
@@ -67,8 +68,7 @@ public class CentralTest {
 
     @Test
     public void guardarPartida() {
-        //Por cada prueba, vemos si la partida se guarda tanto en el registro de partidas guardadas
-        //como en la lista de partidas guardadas del usuario
+        //Por cada prueba, vemos si la partida se guarda en la lista de partidas guardadas del usuario
         Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
         Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
 
@@ -216,20 +216,78 @@ public class CentralTest {
 
     }
 
-    //@Test
+    @Test
     public void obtPartidasGuardadas() {
+
+        //Obtiene correctamente las partidas guardadas del usuario
+        //He llamado a este método en las pruebas de guardarPartida, pero aquí pruebo con tres partidas nuevas
+        Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
+        Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
+
+        //Guardar tres partidas
+        Date fecha10 = new Date();
+        Partida partidaFacil10 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
+        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil10,fecha10.toString());
+        Date fecha11 = new Date();
+        Partida partidaFacil11 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
+        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil11,fecha11.toString());
+        Date fecha12 = new Date();
+        Partida partidaFacil12 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
+        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil12,fecha12.toString());
+        String s10 = Central.getInstance().obtPartidasGuardadas(usu1.getCodUsuario()).get(0).toString();
+        s10 = s10.replaceAll("\"", "");
+        assertEquals(s10, fecha10.toString());
+        String s11 = Central.getInstance().obtPartidasGuardadas(usu1.getCodUsuario()).get(1).toString();
+        s11 = s11.replaceAll("\"", "");
+        assertEquals(s11, fecha11.toString());
+        String s12 = Central.getInstance().obtPartidasGuardadas(usu1.getCodUsuario()).get(2).toString();
+        s12 = s12.replaceAll("\"", "");
+        assertEquals(s12, fecha12.toString());
+        System.out.println(Central.getInstance().obtPartidasGuardadas(usu1.getCodUsuario()).toString());
+
+        //CAJA BLANCA
+
         //No existe el usuario
         Central.getInstance().obtPartidasGuardadas(-1);
         //Printea un error porque no existe el usuario
+
     }
 
     @Test
     public void cargarPartida() {
+        Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
+        Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
 
+        //Este método también lo he utilizado al guardarPartida, ya que para guardar más de una vez
+        //una misma partida tengo que cargarla previamente
+        Date fecha = new Date();
+        //CREAR NUEVA PARTIDA FÁCIL
+        Shape.Tetrominoe[] boardFacil = new Shape.Tetrominoe[220];
+        for (int i=0;i<boardFacil.length;i++){
+            boardFacil[i] = Shape.Tetrominoe.NoShape;
+        }
+        Partida partidaFacil1 = new Partida(1,"Facil", usu1.getCodUsuario(),boardFacil ,0);
+        //Guardas la partida
+        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil1,fecha.toString());
+        //Cargas la partida
+        JsonArray jsonArray1 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha.toString());
+        String[] ladrillos1 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
+        com.zetcode.Shape.Tetrominoe[] board1 = new com.zetcode.Shape.Tetrominoe[ladrillos1.length];
+        for (int i = 0; i < ladrillos1.length; i++) {
+            board1[i] = Shape.Tetrominoe.valueOf(ladrillos1[i]);
+        }
+        //Compruebas que los valores:codUsuario,nivel,puntos y su tablero son iguales
+        assertEquals(partidaFacil1.codigoUsuario,jsonArray1.get(0).getAsInt());
+        String s = jsonArray1.get(2).toString();
+        s = s.replaceAll("\"", "");
+        assertEquals(partidaFacil1.nivel,s);
+        assertEquals(partidaFacil1.puntos,jsonArray1.get(3).getAsInt());
+        assertEquals(boardFacil,board1);
     }
 
     @Test
     public void obtLadrillos() {
+        //Funciona ya que se usa en guardarPartida y cargarPartida
         Central.getInstance().crearUsuario(1,"Danel","1");
         Central.getInstance().obtLadrillos(1,1);
     }

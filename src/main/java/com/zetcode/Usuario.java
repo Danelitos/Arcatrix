@@ -92,10 +92,13 @@ public class Usuario {
     public String[] getBoard(int codPartida) {
         Partida partida = obtTetris(codPartida);
         String[] pieza = null;
-        pieza = new String[partida.getCasillasOcupadas().length];
-        for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
-            pieza[i] = partida.getCasillasOcupadas()[i].toString();
+        if (partida != null) {
+            pieza = new String[partida.getCasillasOcupadas().length];
+            for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
+                pieza[i] = partida.getCasillasOcupadas()[i].toString();
+            }
         }
+        else {System.out.println("Error, no existe la partida");}
         return pieza;
     }
 
