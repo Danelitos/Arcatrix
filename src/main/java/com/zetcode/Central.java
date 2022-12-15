@@ -103,4 +103,12 @@ public class Central {
     public void cargarPartidasGuardadas(int codUsu) throws SQLException {
         GestorBD.getInstance().cargarPartidasUsuario(codUsu);
     }
+
+    public void iniciarPartida(int codigoUsuario, int codPartida, String nivelElegido, Shape.Tetrominoe[] casillasOcupadas, int puntos){
+        try {
+            new Tetris(codigoUsuario,codPartida,nivelElegido,casillasOcupadas ,puntos);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }
