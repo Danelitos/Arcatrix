@@ -140,11 +140,10 @@ public class VentanaNivelElegido extends JFrame {
             } catch (SQLException throwables) {
                 throwables.printStackTrace();
             }
-            try {
-                new Tetris(codigoUsuario,codPartida,nivelElegido,null ,0);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+
+            //CREAMOS LA PARTIDA NUEVA
+            Central.getInstance().iniciarPartida(codigoUsuario,codPartida,nivelElegido,null ,0);
+
 
 
     }
