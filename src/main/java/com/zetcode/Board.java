@@ -359,25 +359,22 @@ public class Board extends JPanel {
             //TODO REVISAR SI HAY TIEMPO
             //int result = JOptionPane.showConfirmDialog(parent, "Quieres guardar la partida?", "GUARDAR PARTIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
             //if (result == JOptionPane.YES_OPTION) {
-            System.out.println(parent.codigoUsuario);
             VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
-            Date fechaActual = new Date();
             //actualizar puntos
             parent.puntos = numLinesRemoved;
             //AÑADIR A BD LA PARTIDA Y COGER SU CODIGO PARTIDA
+            Date fechaActual = new Date();
             String ladrillosTexto = Central.getInstance().pasarLadrillosTexto(parent.getCasillasOcupadas());
             try {
-                codPartida = GestorBD.getInstance().insertPartida(parent.codigoUsuario, parent.nivel, parent.getPuntos(), fechaActual.toString(), ladrillosTexto);
+                codPartida = Central.getInstance().guardarPartidaEnBD(parent.codigoUsuario,parent.nivel,parent.getPuntos(),fechaActual.toString(),ladrillosTexto);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
             //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
             parent.codigoPartida = codPartida;
 
-            Partida partida = new Partida(parent.codigoPartida, parent.nivel, parent.codigoUsuario, parent.getCasillasOcupadas(), parent.puntos);
-
-            Central.getInstance().guardarPartida(parent.codigoUsuario, partida, fechaActual.toString());
+            Central.getInstance().guardarPartida(parent.codigoPartida, parent.nivel, parent.codigoUsuario, parent.getCasillasOcupadas(), parent.puntos,fechaActual.toString());
             //Central.getInstance().guardarPartida(parent.codigoUsuario, parent, fechaActual);
             System.out.println("Partida guardada");
             /*} else {

@@ -1,13 +1,8 @@
 package com.zetcode;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 public class Central {
 
@@ -30,7 +25,8 @@ public class Central {
         GestorUsuarios.getInstance().actualizarDatosPersonaliza(codUsu, colorFondo, colorZHSAPE, colorSSHAPE, colorLINESHAPE, colorSQUARESHAPE, colorTSHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonido);
     }
 
-    public void guardarPartida(int codUsuario, Partida laPartida, String fechaActual) {
+    public void guardarPartida(int codPartida, String nivel, int codUsuario, Shape.Tetrominoe[] board,int puntos, String fechaActual) {
+        Partida laPartida = new Partida(codPartida, nivel, codUsuario, board, puntos);
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         if (user != null) {
             if (laPartida != null && fechaActual != null) {
@@ -110,5 +106,10 @@ public class Central {
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public int guardarPartidaEnBD(int codUsu, String nivel, int puntos, String fecha, String ladrillos) throws SQLException {
+        int codPartida = GestorBD.getInstance().insertPartida(codUsu,nivel,puntos,fecha,ladrillos);
+        return codPartida;
     }
 }
