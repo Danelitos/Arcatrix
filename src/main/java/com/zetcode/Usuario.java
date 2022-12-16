@@ -75,17 +75,20 @@ public class Usuario {
         Partida partida = null;
         JsonArray array = new JsonArray();
         boolean enc = false;
-        while (itr.hasNext() && !enc) {
-            partidaGuardada = itr.next();
-            if (partidaGuardada.obtFechaHora().toString().equals(fechaHora)) {
-                enc = true;
-                partida = partidaGuardada.getLaPartida();
-                array.add(partida.codigoUsuario);
-                array.add(partida.codigoPartida);
-                array.add(partida.nivel);
-                array.add(partida.getPuntos());
+        if (fechaHora != null) {
+            while (itr.hasNext() && !enc) {
+                partidaGuardada = itr.next();
+                if (partidaGuardada.obtFechaHora().toString().equals(fechaHora)) {
+                    enc = true;
+                    partida = partidaGuardada.getLaPartida();
+                    array.add(partida.codigoUsuario);
+                    array.add(partida.codigoPartida);
+                    array.add(partida.nivel);
+                    array.add(partida.getPuntos());
+                }
             }
         }
+        if (array.size() == 0){System.out.println("ERROR, no existe la partida");}
         return array;
     }
 

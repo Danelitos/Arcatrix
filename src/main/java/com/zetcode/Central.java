@@ -29,7 +29,7 @@ public class Central {
         Partida laPartida = new Partida(codPartida, nivel, codUsuario, board, puntos);
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         if (user != null) {
-            if (laPartida != null && fechaActual != null) {
+            if (laPartida.getCasillasOcupadas() != null && fechaActual != null) {
                 PartidaGuardada partidaCreada = GestorUsuarios.getInstance().crearPartidaGuardada(laPartida, user, fechaActual);
                 GestorUsuarios.getInstance().anadirPartidaGuardada(user, partidaCreada);
                 user.partidasGuardadasUsuario();
@@ -44,7 +44,7 @@ public class Central {
 
                 }
             }
-            else {System.out.println("ERROR, la partida y/o la fecha es null");}
+            else {System.out.println("ERROR, el tablero y/o la fecha es null");}
         }
         else {System.out.println("ERROR, no existe el usuario");}
         //System.out.println(tableroTexto);
@@ -67,14 +67,24 @@ public class Central {
 
     public JsonArray cargarPartida(int codUsuario, String fechaHora) {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
-        JsonArray partida = user.obtPartida(fechaHora);
+        JsonArray partida = new JsonArray();
+        if (user != null) {
+            if (fechaHora != null) {
+                partida = user.obtPartida(fechaHora);
+            }
+            else {System.out.println("ERROR, la fecha es null");}
+        }
+        else {System.out.println("ERROR, no existe el usuario");}
         return partida;
     }
 
     public String[] obtLadrillos(int codUsuario, int codPartida) {
         Usuario user = GestorUsuarios.getInstance().buscarUsuario(codUsuario);
         String[] array = null;
-        array = user.getBoard(codPartida);
+        if (user != null) {
+            array = user.getBoard(codPartida);
+        }
+        else {System.out.println("ERROR, el usuario no existe");}
         return array;
     }
 

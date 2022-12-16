@@ -218,25 +218,23 @@ public class CentralTest {
 
         //No existe el usuario
         Partida p11 = new Partida(11,"Facil",-1,new Shape.Tetrominoe[240],0);
-        //Central.getInstance().guardarPartida(,Date.from(Instant.now()).toString());
+        Central.getInstance().guardarPartida(p11.codigoPartida, p11.nivel,  p11.codigoUsuario, p11.getCasillasOcupadas(), p11.puntos,Date.from(Instant.now()).toString());
         //Printea un error porque no existe el usuario
 
-        //La partida es null
-        //Central.getInstance().guardarPartida(,Date.from(Instant.now()).toString());
+        //El tablero es null
+        Central.getInstance().guardarPartida(p11.codigoPartida, p11.nivel,  1, null, p11.puntos,Date.from(Instant.now()).toString());
         //Printea un error porque la partida es null
 
         //La fecha es null
-        Partida p12 = new Partida(12,"Facil",1,new Shape.Tetrominoe[240],0);
-        //Central.getInstance().guardarPartida(1,p11,null);
+        Central.getInstance().guardarPartida(p11.codigoPartida, p11.nivel,  1, p11.getCasillasOcupadas(), p11.puntos,null);
         //Printea un error porque la fecha es null
 
         //La partida y la fecha son null
-        //Central.getInstance().guardarPartida(1,null,null);
+        Central.getInstance().guardarPartida(p11.codigoPartida, p11.nivel,  1, null, p11.puntos,null);
         //Printea un error porque la partida y la fecha son null
 
     }
 
-    /*
     @Test
     public void obtPartidasGuardadas() {
         //¡¡¡¡IMPORTANTE!!!!
@@ -252,7 +250,7 @@ public class CentralTest {
         //Guardar tres partidas
         Date fecha10 = new Date();
         Partida partidaFacil10 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil10,fecha10.toString());
+        Central.getInstance().guardarPartida(partidaFacil10.codigoPartida, partidaFacil10.nivel, partidaFacil10.codigoUsuario, partidaFacil10.getCasillasOcupadas(), partidaFacil10.puntos, fecha10.toString());
         //PARO EL HILO PARA QUE CAMBIE LA FECHA
         try {
             Thread.sleep(1000);
@@ -261,7 +259,7 @@ public class CentralTest {
         }
         Date fecha11 = new Date();
         Partida partidaFacil11 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil11,fecha11.toString());
+        Central.getInstance().guardarPartida(partidaFacil11.codigoPartida, partidaFacil11.nivel, partidaFacil11.codigoUsuario, partidaFacil11.getCasillasOcupadas(),partidaFacil11.puntos,fecha11.toString());
         //PARO EL HILO PARA QUE CAMBIE LA FECHA
         try {
             Thread.sleep(1000);
@@ -270,7 +268,7 @@ public class CentralTest {
         }
         Date fecha12 = new Date();
         Partida partidaFacil12 = new Partida(1,"Facil", usu1.getCodUsuario(),new Shape.Tetrominoe[240],0);
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil12,fecha12.toString());
+        Central.getInstance().guardarPartida(partidaFacil12.codigoPartida, partidaFacil12.nivel, partidaFacil12.codigoUsuario, partidaFacil12.getCasillasOcupadas(), partidaFacil12.puntos, fecha12.toString());
         String s10 = Central.getInstance().obtPartidasGuardadas(usu1.getCodUsuario()).get(0).toString();
         s10 = s10.replaceAll("\"", "");
         assertEquals(s10, fecha10.toString());
@@ -292,6 +290,10 @@ public class CentralTest {
 
     @Test
     public void cargarPartida() {
+        //¡¡¡¡IMPORTANTE!!!!
+        //REALIZAR LAS PRUEBAS SÓLO DEL MÉTODO EN CUESTIÓN
+        //USO THREAD.STOP PARA QUE CAMBIEN LAS FECHAS
+
         Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
         Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
 
@@ -305,7 +307,7 @@ public class CentralTest {
         }
         Partida partidaFacil1 = new Partida(1,"Facil", usu1.getCodUsuario(),boardFacil ,0);
         //Guardas la partida
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaFacil1,fecha.toString());
+        Central.getInstance().guardarPartida(partidaFacil1.codigoPartida, partidaFacil1.nivel, partidaFacil1.codigoUsuario, partidaFacil1.getCasillasOcupadas(), partidaFacil1.puntos, fecha.toString());
         //Cargas la partida
         JsonArray jsonArray1 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha.toString());
         String[] ladrillos1 = Central.getInstance().obtLadrillos(jsonArray1.get(0).getAsInt(),jsonArray1.get(1).getAsInt());
@@ -337,7 +339,7 @@ public class CentralTest {
         }
         Partida partidaMedio1 = new Partida(2,"Medio", usu1.getCodUsuario(),boardMedio ,0);
         //Guardas la partida
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaMedio1,fecha1.toString());
+        Central.getInstance().guardarPartida(partidaMedio1.codigoPartida,partidaMedio1.nivel, partidaMedio1.codigoUsuario, partidaMedio1.getCasillasOcupadas(), partidaMedio1.puntos, fecha1.toString());
         //Cargas la partida
         JsonArray jsonArray2 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha1.toString());
         String[] ladrillos2 = Central.getInstance().obtLadrillos(jsonArray2.get(0).getAsInt(),jsonArray2.get(1).getAsInt());
@@ -368,7 +370,7 @@ public class CentralTest {
         }
         Partida partidaDificil1 = new Partida(3,"Dificil", usu1.getCodUsuario(),boardDificil ,0);
         //Guardas la partida
-        Central.getInstance().guardarPartida(usu1.getCodUsuario(),partidaDificil1,fecha2.toString());
+        Central.getInstance().guardarPartida(partidaDificil1.codigoPartida, partidaDificil1.nivel, partidaDificil1.codigoUsuario,partidaDificil1.getCasillasOcupadas(), partidaDificil1.puntos, fecha2.toString());
         //Cargas la partida
         JsonArray jsonArray3 = Central.getInstance().cargarPartida(usu1.getCodUsuario(),fecha2.toString());
         String[] ladrillos3 = Central.getInstance().obtLadrillos(jsonArray3.get(0).getAsInt(),jsonArray3.get(1).getAsInt());
@@ -383,13 +385,102 @@ public class CentralTest {
         assertEquals(partidaDificil1.nivel,s2);
         assertEquals(partidaDificil1.puntos,jsonArray3.get(3).getAsInt());
         assertEquals(boardDificil,board3);
+
+        //CAJA BLANCA
+
+        //El usuario no está
+        Central.getInstance().cargarPartida(-1,Date.from(Instant.now()).toString());
+        //Printea un error porque no existe el usuario
+
+        //La fecha hora es null
+        Central.getInstance().cargarPartida(1,null);
+        //Printea un error porque la fecha es null
+
+
+        //PARO EL HILO PARA QUE CAMBIE LA FECHA
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        //La partida no existe
+        Central.getInstance().cargarPartida(1,Date.from(Instant.now()).toString());
+        //Printea un error porque la partida no existe
     }
 
 
-     */
     @Test
     public void obtLadrillos() {
         //Este método se usa tanto en guardarPartida como cargarPartida
+
+        //Primero creamos tres partidas con sus distintos niveles
+        Usuario usu1=new Usuario(1,"Adrián","1",personalizacion1);
+        Central.getInstance().crearUsuario(usu1.getCodUsuario(), usu1.getNombre(),"1");
+
+        //Guardar tres partidas
+
+        //FÁCIL
+        Date fecha = new Date();
+        Shape.Tetrominoe[] boardFacil = new Shape.Tetrominoe[220];
+        for (int i=0;i<boardFacil.length;i++){
+            boardFacil[i] = Shape.Tetrominoe.NoShape;
+        }
+        Partida partidaFacil1 = new Partida(1,"Facil", usu1.getCodUsuario(),boardFacil ,0);
+        //Guardas la partida
+        Central.getInstance().guardarPartida(partidaFacil1.codigoPartida, partidaFacil1.nivel, partidaFacil1.codigoUsuario, partidaFacil1.getCasillasOcupadas(), partidaFacil1.puntos, fecha.toString());
+        //Compruebas que los ladrillos son todos NoShape como hemos definido antes
+        String[] board = Central.getInstance().obtLadrillos(partidaFacil1.codigoUsuario, partidaFacil1.codigoPartida);
+        com.zetcode.Shape.Tetrominoe[] boardFacilNuevo = new com.zetcode.Shape.Tetrominoe[board.length];
+        for (int i = 0; i < board.length; i++) {
+            boardFacilNuevo[i] = Shape.Tetrominoe.valueOf(board[i]);
+        }
+        assertEquals(boardFacil,boardFacilNuevo);
+
+        //MEDIO
+        Date fecha1 = new Date();
+        Shape.Tetrominoe[] boardMedio = new Shape.Tetrominoe[405];
+        for (int i=0;i<boardMedio.length;i++){
+            boardMedio[i] = Shape.Tetrominoe.LineShape;
+        }
+        Partida partidaMedio1 = new Partida(2,"Medio", usu1.getCodUsuario(),boardMedio ,0);
+        //Guardas la partida
+        Central.getInstance().guardarPartida(partidaMedio1.codigoPartida,partidaMedio1.nivel, partidaMedio1.codigoUsuario, partidaMedio1.getCasillasOcupadas(), partidaMedio1.puntos, fecha1.toString());
+        //Compruebas que los ladrillos son todos NoShape como hemos definido antes
+        String[] board1 = Central.getInstance().obtLadrillos(partidaMedio1.codigoUsuario, partidaMedio1.codigoPartida);
+        com.zetcode.Shape.Tetrominoe[] boardMedioNuevo = new com.zetcode.Shape.Tetrominoe[board1.length];
+        for (int i = 0; i < board1.length; i++) {
+            boardMedioNuevo[i] = Shape.Tetrominoe.valueOf(board1[i]);
+        }
+        assertEquals(boardMedio,boardMedioNuevo);
+
+        //DIFÍCIL
+        Date fecha2 = new Date();
+        Shape.Tetrominoe[] boardDificil = new Shape.Tetrominoe[640];
+        for (int i=0;i<boardDificil.length;i++){
+            boardDificil[i] = Shape.Tetrominoe.SShape;
+        }
+        Partida partidaDificil1 = new Partida(3,"Dificil", usu1.getCodUsuario(),boardDificil ,0);
+        //Guardas la partida
+        Central.getInstance().guardarPartida(partidaDificil1.codigoPartida, partidaDificil1.nivel, partidaDificil1.codigoUsuario,partidaDificil1.getCasillasOcupadas(), partidaDificil1.puntos, fecha2.toString());
+        //Compruebas que los ladrillos son todos NoShape como hemos definido antes
+        String[] board3 = Central.getInstance().obtLadrillos(partidaDificil1.codigoUsuario, partidaDificil1.codigoPartida);
+        com.zetcode.Shape.Tetrominoe[] boardDificilNuevo = new com.zetcode.Shape.Tetrominoe[board3.length];
+        for (int i = 0; i < board3.length; i++) {
+            boardDificilNuevo[i] = Shape.Tetrominoe.valueOf(board3[i]);
+        }
+        assertEquals(boardDificil,boardDificilNuevo);
+
+        //CAJA BLANCA
+
+        //El usuario no existe
+        Central.getInstance().obtLadrillos(-1,1);
+        //Printea un error porque no existe el usuario
+
+        //La partida no existe
+        Central.getInstance().obtLadrillos(1,4);
+        //Printea un error porque la partida no existe
+
     }
 
     @Test
