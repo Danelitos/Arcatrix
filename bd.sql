@@ -68,3 +68,10 @@ CREATE TABLE IF NOT EXISTS `Ranking` (
 PRIMARY KEY(CodRanking)
 );
 
+CREATE TABLE IF NOT EXISTS `RecuperarContraseña` (
+    `CodigoUsu` int NOT NULL AUTO_INCREMENT,
+    `Pregunta` varchar(30) NOT NULL,
+    `Respuesta` varchar(40) NOT NULL,
+PRIMARY KEY(CodigoUsu)
+);
+
