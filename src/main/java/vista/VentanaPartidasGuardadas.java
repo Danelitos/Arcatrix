@@ -113,6 +113,6 @@ public class VentanaPartidasGuardadas extends JFrame {
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }
-        //VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).setVisible(false);
+
     }
 }

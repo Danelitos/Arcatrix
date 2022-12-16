@@ -375,7 +375,6 @@ public class Board extends JPanel {
             parent.codigoPartida = codPartida;
 
             Central.getInstance().guardarPartida(parent.codigoPartida, parent.nivel, parent.codigoUsuario, parent.getCasillasOcupadas(), parent.puntos,fechaActual.toString());
-            //Central.getInstance().guardarPartida(parent.codigoUsuario, parent, fechaActual);
             System.out.println("Partida guardada");
             /*} else {
                 String sonidoElegido = null;

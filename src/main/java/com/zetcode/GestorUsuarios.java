@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 
+import static vista.VentanaElegirNivel.nivel;
+
 public class GestorUsuarios {
 
     private static GestorUsuarios miGestorUsuarios;
@@ -45,7 +47,7 @@ public class GestorUsuarios {
     }
 
     public PartidaGuardada anadirPartidaGuardada(Usuario elUsuario, PartidaGuardada laPartidaGuardada) {
-        if (this.buscarUsuario(elUsuario.getCodUsuario()) != null) {
+        if (elUsuario != null) {
             elUsuario.getListaPartidasGuardadas().add(laPartidaGuardada);
         }
         return laPartidaGuardada;
@@ -55,8 +57,9 @@ public class GestorUsuarios {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-    public JsonArray buscarPartidaGuardada(Usuario elUsuario, String fechaHora) {
-        return elUsuario.obtPartida(fechaHora);
+    public Partida crearPartida(int codPartida, String nivel, int codUsuario, Shape.Tetrominoe[] board, int puntos){
+        Partida partida = new Partida(codPartida, nivel, codUsuario, board, puntos);
+        return partida;
     }
 
     public void crearUsuario(int codUsu, String nombre, String password) {
@@ -81,4 +84,12 @@ public class GestorUsuarios {
     }
 
     public ArrayList<Usuario> getLista(){return lista;}
+
+    public JsonArray obtenerPartida(Usuario elUsuario, String fechaHora){
+        return elUsuario.obtPartida(fechaHora);
+    }
+
+    public String[] getBoardUsuario(Usuario elUsuario, int codPartida){
+        return elUsuario.getBoard(codPartida);
+    }
 }
