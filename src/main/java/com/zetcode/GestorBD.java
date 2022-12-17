@@ -330,6 +330,20 @@ public class GestorBD {
         return nombre;
     }
 
+    public int conseguirIdConNombre(String nombreUsu) throws SQLException{
+        int id =-1;
+
+        PreparedStatement sql = con.prepareStatement("Select Id from Usuario where Nombre=?");
+        sql.setString(1,nombreUsu);
+        ResultSet rs1 = sql.executeQuery();
+
+        if (rs1.next()) {
+            id= rs1.getInt("Id");
+        }
+
+        return id;
+    }
+
     public String recuperarContraseña(String correo,String preguntaVerificar,String respuestaVerificar) throws SQLException {
         int codigoUsu=0;
         String pregunta=null;
@@ -347,7 +361,7 @@ public class GestorBD {
 
         PreparedStatement sql1 = con.prepareStatement("SELECT * FROM `RecuperarContrasena` WHERE CodigoUsu=?");
         sql1.setInt(1,codigoUsu);
-        ResultSet rs2=sql.executeQuery();
+        ResultSet rs2=sql1.executeQuery();
         if (rs2.next()) {
             pregunta = rs2.getString("Pregunta");
             respuesta = rs2.getString("Respuesta");
@@ -358,8 +372,8 @@ public class GestorBD {
         if(pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)){
             PreparedStatement sql2 = con.prepareStatement("select Contraseña from Usuario WHERE Id=?");
             sql2.setInt(1,codigoUsu);
-            ResultSet rs3=sql.executeQuery();
-            if (rs1.next()) {
+            ResultSet rs3=sql2.executeQuery();
+            if (rs3.next()) {
                 password = rs3.getString("Contraseña");
             }
         }
