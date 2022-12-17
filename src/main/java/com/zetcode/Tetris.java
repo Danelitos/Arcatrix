@@ -23,6 +23,7 @@ public class Tetris extends JFrame {
     public int puntos;
     private Ranking rankings;
     private JLabel statusbar;
+    public Board board;
 
     public Tetris(int codUsuario, int codPartida, String pNivel, Shape.Tetrominoe[] pCasillasOcupadas, int pPuntos) throws SQLException {
         codigoUsuario = codUsuario;
@@ -52,7 +53,7 @@ public class Tetris extends JFrame {
         getContentPane().add(statusbar);
 
         //Habrá que añadir los métodos para completar el tablero con las piezas en el caso de cargarPartida
-        var board = new Board(this, codPartida, nivel,codigoUsuario);
+        board = new Board(this, codPartida, nivel,codigoUsuario);
         board.setBounds(0, 0, 264, 344);
         getContentPane().add(board);
 
