@@ -18,7 +18,7 @@ public class CentralTest {
 
     @Before
     public void setUp() throws SQLException {
-        GestorBD.getInstance().addUsuario("Danel","Danel","1");
+        GestorBD.getInstance().addUsuario("Danel","Danel","1","Hola como te llamas?","Danel");
         DatosPersonalizacion personalizacion1=new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido");
         Usuario usu1=new Usuario(1,"Danel","1",personalizacion1);
         Central.getInstance().crearUsuario(1,"Danel","1");

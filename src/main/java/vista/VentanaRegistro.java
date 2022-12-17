@@ -7,9 +7,12 @@ import com.zetcode.GestorUsuarios;
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
+import java.util.Objects;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class VentanaRegistro extends JFrame {
-    private static VentanaRegistro miMenu;
+    public static VentanaRegistro miMenu;
 
     private JPanel panelRegistro;
 
@@ -193,8 +196,10 @@ public class VentanaRegistro extends JFrame {
             String correoInsert = correo.getText();
             String passwordInsert = new String(password.getPassword());
             String repetirPInsert = new String(repetirPassword.getPassword());
+            String preguntaInsert= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
+            String respuestaInsert= respuestaSeguridad.getText();
             if (passwordInsert.equals(repetirPInsert)) {
-                boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert);
+                boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert,preguntaInsert,respuestaInsert);
                 if (registroCorrecto) {
                     JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro ha sido exitoso", "REGISTRO EXITOSO", JOptionPane.INFORMATION_MESSAGE);
                 } else {
@@ -223,7 +228,14 @@ public class VentanaRegistro extends JFrame {
         String passwordValidar=new String(password.getPassword());
         String repPasswordValidar= new String(repetirPassword.getPassword());
         String preguntaValidar= respuestaSeguridad.getText();
-        System.out.println(preguntaValidar);
+        // Patrón para validar el email
+        Pattern patternCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+        //Para validar el correo
+        Pattern patternPsw = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$");
+        Matcher matherCorreo = patternCorreo.matcher(correoValidar);
+        Matcher matcherPsw=patternPsw.matcher(passwordValidar);
+        Matcher matcherRepPsw=patternPsw.matcher(repPasswordValidar);
         if(usuarioValidar.isEmpty()){
             avisoUsuario.setText("\u2715");
         }else{
@@ -231,28 +243,15 @@ public class VentanaRegistro extends JFrame {
             avisoUsuario.setForeground(Color.GREEN);
         }
 
-        if(correoValidar.isEmpty()){
-            avisoCorreo.setText("\u2715");
-        }else if(!correo.getText().contains("@") || !correo.getText().contains(".")){
-            avisoCorreo.setText("¡no es válido!");
-        }else{
+
+        if(matherCorreo.find()){
             avisoCorreo.setText("\u2713");
             avisoCorreo.setForeground(Color.GREEN);
         }
-
-        if(passwordValidar.isEmpty()){
-            avisoPassword.setText("\u2715");
-        }else{
-            avisoPassword.setText("\u2713");
-            avisoPassword.setForeground(Color.GREEN);
+        else{
+            avisoCorreo.setText("\u2715");
         }
 
-        if(repPasswordValidar.isEmpty()){
-            avisoRepetirPassword.setText("\u2715");
-        }else{
-            avisoRepetirPassword.setText("\u2713");
-            avisoRepetirPassword.setForeground(Color.GREEN);
-        }
 
         if(preguntaValidar.isEmpty()){
             avisoPregunta.setText("\u2715");
@@ -261,7 +260,24 @@ public class VentanaRegistro extends JFrame {
             avisoPregunta.setForeground(Color.GREEN);
         }
 
-        if(!usuarioValidar.isEmpty() && !correoValidar.isEmpty() && !passwordValidar.isEmpty() && !repPasswordValidar.isEmpty() && !preguntaValidar.isEmpty()){
+        if(passwordValidar.equals(repPasswordValidar)) {
+            if (matcherPsw.find() && matcherRepPsw.find()) {
+                avisoPassword.setText("\u2713");
+                avisoPassword.setForeground(Color.GREEN);
+                avisoRepetirPassword.setText("\u2713");
+                avisoRepetirPassword.setForeground(Color.GREEN);
+            } else {
+                avisoPassword.setText("\u2715");
+                avisoRepetirPassword.setText("\u2715");
+                //TODO BUBLE INFINITO (?)
+                //JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Contraseña de 8-16 caracteres.\nAl menos una letra mayúscula y minúscula y un caracter especial).\nSin espacios en blanco", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+        else{
+            JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Las contraseñas no coinciden.\nVuelve a escribir la contraseña", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
+        }
+
+        if(!usuarioValidar.isEmpty() && patternCorreo.matcher(correoValidar).find() && patternPsw.matcher(passwordValidar).find() && patternPsw.matcher(repPasswordValidar).find() && !preguntaValidar.isEmpty()){
             validacion=true;
         }
 

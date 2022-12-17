@@ -126,6 +126,7 @@ public class VentanaLogin extends JFrame {
     }
 
     public void registro() throws SQLException {
+        VentanaRegistro.miMenu=null;
         VentanaLogin.getInstance().setVisible(false);
         VentanaRegistro.getInstance().setVisible(true);
     }

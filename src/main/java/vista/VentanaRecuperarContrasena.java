@@ -1,7 +1,11 @@
 package vista;
 
+import com.zetcode.GestorBD;
+
 import javax.swing.*;
 import java.awt.*;
+import java.sql.SQLException;
+import java.util.Objects;
 
 public class VentanaRecuperarContrasena extends JFrame {
     private static VentanaRecuperarContrasena miMenu;
@@ -95,8 +99,14 @@ public class VentanaRecuperarContrasena extends JFrame {
         return VentanaRecuperarContrasena.miMenu;
     }
 
-    public void recuperarContraseña(){
-
+    public void recuperarContraseña() {
+        /*String correoVerificar=correoText.getText();
+        String preguntaVerificar= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
+        String respuestaVerifivar=respuestaSeguridadText.getText();
+        boolean recuperarExito= GestorBD.getInstance().recuperarContraseña(correoVerificar,preguntaVerificar,respuestaVerifivar);
+        if(recuperarExito){
+            JOptionPane.showConfirmDialog(VentanaRecuperarContrasena.getInstance(),"")
+        }*/
     }
 
     public void volverMenu(){
