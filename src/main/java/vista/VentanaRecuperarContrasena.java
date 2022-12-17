@@ -111,7 +111,7 @@ public class VentanaRecuperarContrasena extends JFrame {
         String respuestaVerifivar=respuestaSeguridad.getText();
         String recuerdoContrasena= GestorBD.getInstance().recuperarContraseña(correoVerificar,preguntaVerificar,respuestaVerifivar);
         if(recuerdoContrasena!=null){
-            JOptionPane.showConfirmDialog(VentanaRecuperarContrasena.getInstance(),"Tu contraseña es: " + recuerdoContrasena,"RECUERDO CONTRASEÑA",JOptionPane.INFORMATION_MESSAGE);
+            JOptionPane.showMessageDialog(VentanaRecuperarContrasena.getInstance(),"Tu contraseña es: " + recuerdoContrasena,"RECUERDO CONTRASEÑA",JOptionPane.INFORMATION_MESSAGE);
         }
         else {
             JOptionPane.showMessageDialog(VentanaRecuperarContrasena.getInstance(), "Algo ha salido mal, vuelve a intertarlo", "RECUPERACIÓN CONTRASEÑA ERRONEO", JOptionPane.ERROR_MESSAGE);

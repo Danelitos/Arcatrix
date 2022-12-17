@@ -191,29 +191,36 @@ public class VentanaRegistro extends JFrame {
 
     private void registro() throws SQLException {
         boolean validacion=this.validar();
-        if(validacion) {
-            String usuarioInsert = usuario.getText();
-            String correoInsert = correo.getText();
-            String passwordInsert = new String(password.getPassword());
-            String repetirPInsert = new String(repetirPassword.getPassword());
-            String preguntaInsert= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
-            String respuestaInsert= respuestaSeguridad.getText();
-            if (passwordInsert.equals(repetirPInsert)) {
-                boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert,preguntaInsert,respuestaInsert);
-                if (registroCorrecto) {
-                    JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro ha sido exitoso", "REGISTRO EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+        int codUsu=GestorBD.getInstance().conseguirIdConNombre(usuario.getText());
+        if(codUsu==-1){
+            if(validacion) {
+                String usuarioInsert = usuario.getText();
+                String correoInsert = correo.getText();
+                String passwordInsert = new String(password.getPassword());
+                String repetirPInsert = new String(repetirPassword.getPassword());
+                String preguntaInsert= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
+                String respuestaInsert= respuestaSeguridad.getText();
+                if (passwordInsert.equals(repetirPInsert)) {
+                    boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert,preguntaInsert,respuestaInsert);
+                    if (registroCorrecto) {
+                        JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro ha sido exitoso", "REGISTRO EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+                    } else {
+                        JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Ha habido un error al registrarse", "REGISTRO ERRONEO", JOptionPane.ERROR_MESSAGE);
+                    }
+                    VentanaRegistro.getInstance().setVisible(false);
+                    VentanaLogin.getInstance().setVisible(true);
                 } else {
-                    JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Ha habido un error al registrarse", "REGISTRO ERRONEO", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Las contraseñas no coinciden.\nVuelve a escribir la contraseña", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
                 }
-                VentanaRegistro.getInstance().setVisible(false);
-                VentanaLogin.getInstance().setVisible(true);
-            } else {
-                JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Las contraseñas no coinciden.\nVuelve a escribir la contraseña", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
+            }
+            else{
+                JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro no es valido", "REGISTRO INVALIDO", JOptionPane.ERROR_MESSAGE);
             }
         }
-        else{
-            JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro no es valido", "REGISTRO INVALIDO", JOptionPane.ERROR_MESSAGE);
+        else {
+            JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El nombre de usuario ya existe, pruebe otro", "REGISTRO INVALIDO", JOptionPane.ERROR_MESSAGE);
         }
+
     }
 
     public void volver() {
