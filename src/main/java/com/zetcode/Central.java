@@ -111,4 +111,13 @@ public class Central {
     public boolean actualizarPersonalizacion(String colorFondoActualizado, String colorZSHAPE, String colorSSHAPE, String colorLINESHAPE, String colorTSHAPE, String colorSQUARESHAPE, String colorLSHAPE, String colorMIRROREDLSHAPE, String sonidoActualizado,int codUsu) throws SQLException {
         return GestorBD.getInstance().actualizarPersonalizacion(colorFondoActualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
     }
+
+    //Para TEST
+    public Tetris testIniciarPartida(int codigoUsuario, int codPartida, String nivelElegido, Shape.Tetrominoe[] casillasOcupadas, int puntos){
+        try {
+            return new Tetris(codigoUsuario,codPartida,nivelElegido,casillasOcupadas ,puntos);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
 }

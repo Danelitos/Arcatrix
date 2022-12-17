@@ -525,5 +525,10 @@ public class Board extends JPanel {
 
     }
 
+    //PARA TEST
+    public int getBoardWidth(){return this.BOARD_WIDTH;}
+    public int getBoardHeight(){return this.BOARD_HEIGHT;}
+    public int getVelocidad(){return this.PERIOD_INTERVAL;}
+
 
 }

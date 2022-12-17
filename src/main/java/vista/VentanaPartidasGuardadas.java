@@ -85,9 +85,13 @@ public class VentanaPartidasGuardadas extends JFrame {
     public void cargarPartida() {
         System.out.println("Se carga la partida");
         //TODO PARA QUE FUNCIONE DE MOMENTO
-        VentanaPartidasGuardadas.getInstance().setVisible(false);
+
         //Obtenemos la fechaHora de la ventana de Partidas guardadas y el código de usuario de la VentanaMenu
         String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
+        if (s==null){
+            return;
+        }
+        VentanaPartidasGuardadas.getInstance().setVisible(false);
         JsonArray laPartida = Central.getInstance().cargarPartida(VentanaMenu.getInstance(0).codigoUsu, s);
         //Crear la partida
         Integer codUsuarioPartida = laPartida.get(0).getAsInt();

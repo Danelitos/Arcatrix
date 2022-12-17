@@ -14,11 +14,22 @@ public class GestorBD {
         //con = DriverManager.getConnection(sURL,"root","");
         String dir = System.getProperty("user.dir");
         System.out.println(dir);
-        String sURL = "jdbc:h2:" + dir + "/src/main/resources/baseDatos/tetrisBD";
+        String sURL = "jdbc:h2:" + dir + "/src/main/resources/baseDatos/tetrisBD;DB_CLOSE_ON_EXIT=FALSE";
         con = DriverManager.getConnection(sURL, "admin", "");
 
         PreparedStatement sql = con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
         sql.execute();
+
+        //AÑADIR USUARIO ADMIN SI NO EXISTE
+        Statement s = con.createStatement();
+        ResultSet rs = s.executeQuery("select * from Usuario WHERE Nombre='admin'");
+
+        if (!rs.next()){
+            sql = con.prepareStatement("INSERT INTO Usuario(Nombre,Email,Contraseña,CodigoPersonalizacion) Values('admin','','test',0)");
+            sql.executeUpdate();
+        }
+
+
 
     }
 
