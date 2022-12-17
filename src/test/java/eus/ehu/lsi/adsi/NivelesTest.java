@@ -26,7 +26,7 @@ public class NivelesTest {
     @Before
     public void setUp() throws SQLException {
         //añadir usuario a base datos
-        GestorBD.getInstance().addUsuario("Adrian","adrian@gmail.com","12345678");
+        GestorBD.getInstance().addUsuario("Adrian","adrian@gmail.com","12345678","Hola como te llamas?","Adrian");
 
         //añadir usuario a objetos con su personalizacion
         DatosPersonalizacion personalizacion1=new DatosPersonalizacion("Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Classic Color","Sonido");

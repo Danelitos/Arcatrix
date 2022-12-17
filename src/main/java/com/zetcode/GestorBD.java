@@ -65,7 +65,7 @@ public class GestorBD {
     }
 
     //TODO REGISTRO
-    public boolean addUsuario(String nombreUsuario, String correo, String password) throws SQLException {
+    public boolean addUsuario(String nombreUsuario, String correo, String password,String pregunta, String repuesta) throws SQLException {
         int codigoPersonalizacion;
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery("select CodigoPersonalizacion from Usuario order by CodigoPersonalizacion desc limit 1");
@@ -90,14 +90,22 @@ public class GestorBD {
 
         sql1.executeUpdate();
 
-        PreparedStatement sql2 = con.prepareStatement("INSERT INTO Usuario(Nombre,Email, Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)");
+        PreparedStatement sql2 = con.prepareStatement("INSERT INTO RecuperarContrasena(CodigoUsu,Pregunta,Respuesta) VALUES(?,?,?)");
 
-        sql2.setString(1, nombreUsuario);
-        sql2.setString(2, correo);
-        sql2.setString(3, password);
-        sql2.setInt(4, codigoPersonalizacion + 1);
+        sql2.setInt(1, codigoPersonalizacion +1);
+        sql2.setString(2, pregunta);
+        sql2.setString(3, repuesta);
 
-        return sql2.executeUpdate() > 0 ? true : false;
+        sql2.executeUpdate();
+
+        PreparedStatement sql3 = con.prepareStatement("INSERT INTO Usuario(Nombre,Email, Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)");
+
+        sql3.setString(1, nombreUsuario);
+        sql3.setString(2, correo);
+        sql3.setString(3, password);
+        sql3.setInt(4, codigoPersonalizacion + 1);
+
+        return sql3.executeUpdate() > 0 ? true : false;
 
     }
 
@@ -311,6 +319,20 @@ public class GestorBD {
 
         return nombre;
     }
+
+    /*public boolean recuperarContraseña(String correo,String pregunta,String respuesta) throws SQLException {
+        int codigoUsu;
+        PreparedStatement sql = con.prepareStatement("select Id from Usuario WHERE Email=?");
+        sql.setString(correo);
+        ResultSet rs1=sql.executeQuery();
+        if (rs1.next()) {
+            codigoUsu = rs1.getInt("Id");
+        }
+
+
+
+
+    }*/
 
 
 }
