@@ -11,7 +11,7 @@ import java.util.Date;
 import java.util.Objects;
 
 public class VentanaMenu extends JFrame {
-    private static VentanaMenu miVentanaMenu;
+    public static VentanaMenu miVentanaMenu;
 
     private JPanel panelMenu;
 
