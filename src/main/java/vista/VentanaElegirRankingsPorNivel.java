@@ -41,7 +41,7 @@ public class VentanaElegirRankingsPorNivel extends JFrame implements ActionListe
 
         //crear TEXTO
         JLabel texto = new JLabel();
-        texto.setText("Tipo de Rancking:");
+        texto.setText("Tipo de Ranking:");
         texto.setBounds(150,75,200,20);
         texto.setFont(new Font(null,Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);

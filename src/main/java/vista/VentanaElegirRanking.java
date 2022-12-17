@@ -43,7 +43,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
         //crear TEXTO
         JLabel texto = new JLabel();
-        texto.setText("Tipo de Rancking:");
+        texto.setText("Tipo de Ranking:");
         texto.setBounds(150,75,200,20);
         texto.setFont(new Font(null,Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
@@ -62,7 +62,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         //crear BOTONES
         btnGeneral= new JButton();
         btnGeneral.setBounds(150,150,200,35);
-        btnGeneral.setText("Rancking General");
+        btnGeneral.setText("Ranking General");
         btnGeneral.setBackground(new Color(146, 248, 133));
         btnGeneral.setFocusPainted(false);
         panel.add(btnGeneral);
@@ -70,7 +70,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
         btnPorNiveles= new JButton();
         btnPorNiveles.setBounds(150,200,200,35);
-        btnPorNiveles.setText("Ranckings por Niveles ");
+        btnPorNiveles.setText("Rankings por Niveles ");
         btnPorNiveles.setBackground(new Color(248, 248, 133));
         btnPorNiveles.setFocusPainted(false);
         panel.add(btnPorNiveles);
@@ -79,7 +79,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
         btnMiRancking= new JButton();
         btnMiRancking.setBounds(150,250,200,35);
-        btnMiRancking.setText("RanckingPersonal");
+        btnMiRancking.setText("RankingPersonal");
         btnMiRancking.setBackground(new Color(248, 133, 133));
         btnMiRancking.setFocusPainted(false);
         panel.add(btnMiRancking);
@@ -107,6 +107,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         } else if (btnPorNiveles.equals(source)) {
             this.setVisible(false);
             VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel=null;
+
             VentanaElegirRankingsPorNivel.getInstance(codUsuario);
 
         } else if (btnMiRancking.equals(source)) {
@@ -115,7 +116,8 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
             VentanaRankings.getInstance("Personal",codUsuario);
         } else if (btnAtras.equals(source)) {
             this.setVisible(false);
-
+            VentanaMenu.miVentanaMenu=null;
+            VentanaMenu.getInstance(this.codUsuario);
 
         }
 
