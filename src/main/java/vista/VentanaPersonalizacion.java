@@ -304,32 +304,38 @@ public class VentanaPersonalizacion extends JFrame {
 
     public void actualizarPersonalizacion() throws SQLException {
         boolean personActualizado;
+        //Por defecto
+        String classicColor = "Classic Color";
+        //Opciones elegidas
+        String colorFondoAtualizado = Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
+
+        String colorZSHAPE = Objects.requireNonNull(ZShape.getSelectedItem()).toString();
+        String colorSSHAPE = Objects.requireNonNull(SShape.getSelectedItem()).toString();
+        String colorLINESHAPE = Objects.requireNonNull(LineShape.getSelectedItem()).toString();
+        String colorTSHAPE = Objects.requireNonNull(TShape.getSelectedItem()).toString();
+        String colorSQUARESHAPE = Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
+        String colorLSHAPE = Objects.requireNonNull(LShape.getSelectedItem()).toString();
+        String colorMIRROREDLSHAPE = Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
+        String sonidoActualizado = Objects.requireNonNull(sonido.getSelectedItem()).toString();
         int result = JOptionPane.showConfirmDialog(VentanaPersonalizacion.getInstance(codUsu), "Quieres guardar la personalización?", "GUARDAR PERSONALIZACIÓN", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             if (!classicTetris.isSelected()) {
-                String colorFondoAtualizado = Objects.requireNonNull(colorFondo.getSelectedItem()).toString();
-
-                String colorZSHAPE = Objects.requireNonNull(ZShape.getSelectedItem()).toString();
-                String colorSSHAPE = Objects.requireNonNull(SShape.getSelectedItem()).toString();
-                String colorLINESHAPE = Objects.requireNonNull(LineShape.getSelectedItem()).toString();
-                String colorTSHAPE = Objects.requireNonNull(TShape.getSelectedItem()).toString();
-                String colorSQUARESHAPE = Objects.requireNonNull(SquareShape.getSelectedItem()).toString();
-                String colorLSHAPE = Objects.requireNonNull(LShape.getSelectedItem()).toString();
-                String colorMIRROREDLSHAPE = Objects.requireNonNull(MirroredLShape.getSelectedItem()).toString();
-                String sonidoActualizado = Objects.requireNonNull(sonido.getSelectedItem()).toString();
-                personActualizado = GestorBD.getInstance().actualizarPersonalizacion(colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
-                Central.getInstance().actualizarDatosPersonaliza(codUsu, colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado);
+                personActualizado =Central.getInstance().actualizarPersonalizacion(colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
+                if (personActualizado) {
+                    Central.getInstance().actualizarDatosPersonaliza(codUsu, colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado);
+                    JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Se ha actualizado con exito", "ACTUALIZACIÓN EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+                    Central.getInstance().obtPersonalizacion(codUsu);
+                } else {
+                    JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Ha habido un error al actualizar los datos", "ACTUALIZACIÓN ERRONEO", JOptionPane.ERROR_MESSAGE);
+                }
             } else {
-                String classicColor = "Classic Color";
-                personActualizado = GestorBD.getInstance().actualizarPersonalizacion(classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original", codUsu);
-                Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original");
-                Central.getInstance().obtPersonalizacion(codUsu);
-            }
-            if (personActualizado) {
-                JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Se ha actualizado con exito", "ACTUALIZACIÓN EXITOSO", JOptionPane.INFORMATION_MESSAGE);
-                Central.getInstance().obtPersonalizacion(codUsu);
-            } else {
-                JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Ha habido un error al actualizar los datos", "ACTUALIZACIÓN ERRONEO", JOptionPane.ERROR_MESSAGE);
+                personActualizado = Central.getInstance().actualizarPersonalizacion(classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original", codUsu);
+                if (personActualizado) {Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original");
+                    JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Se ha actualizado con exito", "ACTUALIZACIÓN EXITOSO", JOptionPane.INFORMATION_MESSAGE);
+                    Central.getInstance().obtPersonalizacion(codUsu);
+                } else {
+                    JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Ha habido un error al actualizar los datos", "ACTUALIZACIÓN ERRONEO", JOptionPane.ERROR_MESSAGE);
+                }
             }
         }
 
