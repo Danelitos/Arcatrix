@@ -72,7 +72,13 @@ public class VentanaRecuperarContrasena extends JFrame {
         recuperarButton.setBounds(140, 285, 200, 50);
         recuperarButton.setBackground(new Color(51, 159, 221));
         recuperarButton.setHorizontalAlignment(SwingConstants.CENTER);
-        recuperarButton.addActionListener(evento -> recuperarContraseña());
+        recuperarButton.addActionListener(evento -> {
+            try {
+                recuperarContraseña();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
 
         volverMenu = new JButton("VOLVER MENÚ");
         volverMenu.setBounds(140, 360, 200, 50);
@@ -99,14 +105,17 @@ public class VentanaRecuperarContrasena extends JFrame {
         return VentanaRecuperarContrasena.miMenu;
     }
 
-    public void recuperarContraseña() {
-        /*String correoVerificar=correoText.getText();
+    public void recuperarContraseña() throws SQLException {
+        String correoVerificar=correo.getText();
         String preguntaVerificar= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
-        String respuestaVerifivar=respuestaSeguridadText.getText();
-        boolean recuperarExito= GestorBD.getInstance().recuperarContraseña(correoVerificar,preguntaVerificar,respuestaVerifivar);
-        if(recuperarExito){
-            JOptionPane.showConfirmDialog(VentanaRecuperarContrasena.getInstance(),"")
-        }*/
+        String respuestaVerifivar=respuestaSeguridad.getText();
+        String recuerdoContrasena= GestorBD.getInstance().recuperarContraseña(correoVerificar,preguntaVerificar,respuestaVerifivar);
+        if(recuerdoContrasena!=null){
+            JOptionPane.showConfirmDialog(VentanaRecuperarContrasena.getInstance(),"Tu contraseña es: " + recuerdoContrasena,"RECUERDO CONTRASEÑA",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(VentanaRecuperarContrasena.getInstance(), "Algo ha salido mal, vuelve a intertarlo", "RECUPERACIÓN CONTRASEÑA ERRONEO", JOptionPane.ERROR_MESSAGE);
+        }
     }
 
     public void volverMenu(){
