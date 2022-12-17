@@ -23,6 +23,7 @@ public class VentanaRegistro extends JFrame {
     private JLabel avisoCorreo;
     private JLabel avisoPassword;
     private JLabel avisoRepetirPassword;
+    private JLabel avisoPregunta;
 
     private JTextField usuario;
     private JTextField correo;
@@ -145,6 +146,12 @@ public class VentanaRegistro extends JFrame {
         avisoRepetirPassword.setForeground(Color.red);
         avisoRepetirPassword.setHorizontalAlignment(SwingConstants.CENTER);
 
+        avisoPregunta = new JLabel();
+        avisoPregunta.setBounds(290, 345, 200, 30);
+        avisoPregunta.setFont(new Font(null, Font.BOLD, 20));
+        avisoPregunta.setForeground(Color.red);
+        avisoPregunta.setHorizontalAlignment(SwingConstants.CENTER);
+
         panelRegistro.add(usuarioText);
         panelRegistro.add(usuario);
         panelRegistro.add(correoText);
@@ -160,6 +167,7 @@ public class VentanaRegistro extends JFrame {
         panelRegistro.add(avisoCorreo);
         panelRegistro.add(avisoPassword);
         panelRegistro.add(avisoRepetirPassword);
+        panelRegistro.add(avisoPregunta);
 
         panelRegistro.add(preguntaSeguridadText);
         panelRegistro.add(preguntaSeguridad);
@@ -214,6 +222,8 @@ public class VentanaRegistro extends JFrame {
         String correoValidar=correo.getText();
         String passwordValidar=new String(password.getPassword());
         String repPasswordValidar= new String(repetirPassword.getPassword());
+        String preguntaValidar= respuestaSeguridad.getText();
+        System.out.println(preguntaValidar);
         if(usuarioValidar.isEmpty()){
             avisoUsuario.setText("\u2715");
         }else{
@@ -244,7 +254,14 @@ public class VentanaRegistro extends JFrame {
             avisoRepetirPassword.setForeground(Color.GREEN);
         }
 
-        if(!usuarioValidar.isEmpty() && !correoValidar.isEmpty() && !passwordValidar.isEmpty() && !repPasswordValidar.isEmpty()){
+        if(preguntaValidar.isEmpty()){
+            avisoPregunta.setText("\u2715");
+        }else{
+            avisoPregunta.setText("\u2713");
+            avisoPregunta.setForeground(Color.GREEN);
+        }
+
+        if(!usuarioValidar.isEmpty() && !correoValidar.isEmpty() && !passwordValidar.isEmpty() && !repPasswordValidar.isEmpty() && !preguntaValidar.isEmpty()){
             validacion=true;
         }
 
