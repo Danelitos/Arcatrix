@@ -68,8 +68,13 @@ CREATE TABLE IF NOT EXISTS `Ranking` (
 PRIMARY KEY(CodRanking)
 );
 
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `RecuperarContrena`
+--
 CREATE TABLE IF NOT EXISTS `RecuperarContrasena` (
-    `CodigoUsu` int NOT NULL AUTO_INCREMENT,
+    `CodigoUsu` int NOT NULL,
     `Pregunta` varchar(30) NOT NULL,
     `Respuesta` varchar(40) NOT NULL,
 PRIMARY KEY(CodigoUsu)

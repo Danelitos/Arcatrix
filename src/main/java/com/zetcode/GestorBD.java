@@ -67,6 +67,7 @@ public class GestorBD {
     //TODO REGISTRO
     public boolean addUsuario(String nombreUsuario, String correo, String password,String pregunta, String repuesta) throws SQLException {
         int codigoPersonalizacion;
+        int codigoUsu=0;
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery("select CodigoPersonalizacion from Usuario order by CodigoPersonalizacion desc limit 1");
         if (rs.next()) {
@@ -90,13 +91,6 @@ public class GestorBD {
 
         sql1.executeUpdate();
 
-        PreparedStatement sql2 = con.prepareStatement("INSERT INTO RecuperarContrasena(CodigoUsu,Pregunta,Respuesta) VALUES(?,?,?)");
-
-        sql2.setInt(1, codigoPersonalizacion +1);
-        sql2.setString(2, pregunta);
-        sql2.setString(3, repuesta);
-
-        sql2.executeUpdate();
 
         PreparedStatement sql3 = con.prepareStatement("INSERT INTO Usuario(Nombre,Email, Contraseña,CodigoPersonalizacion) VALUES(?,?,?,?)");
 
@@ -105,7 +99,23 @@ public class GestorBD {
         sql3.setString(3, password);
         sql3.setInt(4, codigoPersonalizacion + 1);
 
-        return sql3.executeUpdate() > 0 ? true : false;
+        sql3.executeUpdate();
+
+        PreparedStatement sql = con.prepareStatement("SELECT Id FROM `Usuario` WHERE Nombre=?");
+        sql.setString(1,nombreUsuario);
+        ResultSet rs1=sql.executeQuery();
+        if (rs1.next()) {
+            codigoUsu = rs1.getInt("Id");
+            System.out.println(codigoUsu);
+        }
+
+        PreparedStatement sql2 = con.prepareStatement("INSERT INTO RecuperarContrasena(CodigoUsu,Pregunta,Respuesta) VALUES(?,?,?)");
+
+        sql2.setInt(1, codigoUsu);
+        sql2.setString(2, pregunta);
+        sql2.setString(3, repuesta);
+
+        return sql2.executeUpdate() > 0 ? true : false;
 
     }
 
@@ -320,19 +330,45 @@ public class GestorBD {
         return nombre;
     }
 
-    /*public boolean recuperarContraseña(String correo,String pregunta,String respuesta) throws SQLException {
-        int codigoUsu;
-        PreparedStatement sql = con.prepareStatement("select Id from Usuario WHERE Email=?");
-        sql.setString(correo);
+    public String recuperarContraseña(String correo,String preguntaVerificar,String respuestaVerificar) throws SQLException {
+        int codigoUsu=0;
+        String pregunta=null;
+        String respuesta=null;
+        String password=null;
+        PreparedStatement sql = con.prepareStatement("SELECT Id FROM `Usuario` WHERE Email=?");
+        sql.setString(1,correo);
         ResultSet rs1=sql.executeQuery();
         if (rs1.next()) {
             codigoUsu = rs1.getInt("Id");
+            System.out.println(codigoUsu);
         }
 
 
 
+        PreparedStatement sql1 = con.prepareStatement("SELECT * FROM `RecuperarContrasena` WHERE CodigoUsu=?");
+        sql1.setInt(1,codigoUsu);
+        ResultSet rs2=sql.executeQuery();
+        if (rs2.next()) {
+            pregunta = rs2.getString("Pregunta");
+            respuesta = rs2.getString("Respuesta");
+            System.out.println(pregunta);
+            System.out.println(respuesta);
+        }
 
-    }*/
+        if(pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)){
+            PreparedStatement sql2 = con.prepareStatement("select Contraseña from Usuario WHERE Id=?");
+            sql2.setInt(1,codigoUsu);
+            ResultSet rs3=sql.executeQuery();
+            if (rs1.next()) {
+                password = rs3.getString("Contraseña");
+            }
+        }
+        return password;
+
+
+
+
+    }
 
 
 }
