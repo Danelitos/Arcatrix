@@ -343,7 +343,7 @@ public class GestorBD {
         int codigoUsu = 0;
         String pregunta = null;
         String respuesta = null;
-        String password = null;
+        String password = "no existe este usuario";
         PreparedStatement sql = con.prepareStatement("SELECT Id FROM `Usuario` WHERE Email=?");
         sql.setString(1, correo);
         ResultSet rs1 = sql.executeQuery();
@@ -362,15 +362,17 @@ public class GestorBD {
             System.out.println(pregunta);
             System.out.println(respuesta);
         }
-
-        if (pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)) {
-            PreparedStatement sql2 = con.prepareStatement("select Contraseña from Usuario WHERE Id=?");
-            sql2.setInt(1, codigoUsu);
-            ResultSet rs3 = sql2.executeQuery();
-            if (rs3.next()) {
-                password = rs3.getString("Contraseña");
+        if (pregunta!=null){
+            if (pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)) {
+                PreparedStatement sql2 = con.prepareStatement("select Contraseña from Usuario WHERE Id=?");
+                sql2.setInt(1, codigoUsu);
+                ResultSet rs3 = sql2.executeQuery();
+                if (rs3.next()) {
+                    password = rs3.getString("Contraseña");
+                }
             }
         }
+
         return password;
     }
 
