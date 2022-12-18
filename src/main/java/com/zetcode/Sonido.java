@@ -17,7 +17,6 @@ public class Sonido {
     public Clip reproducirSonido(String nombreSonido, String clipS) {
         Clip clip = null;
         try {
-            //AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido));
             AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource(nombreSonido)));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);

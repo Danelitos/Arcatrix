@@ -234,7 +234,7 @@ public class VentanaRegistro extends JFrame {
         Pattern patternCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                 + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         //Para validar el correo
-        Pattern patternPsw = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$");
+        Pattern patternPsw = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[?=.*@#$%^&-+=|()!¿¡])(?=\\S+$).{8,16}$");
         Matcher matherCorreo = patternCorreo.matcher(correoValidar);
         Matcher matcherPsw = patternPsw.matcher(passwordValidar);
         Matcher matcherRepPsw = patternPsw.matcher(repPasswordValidar);
