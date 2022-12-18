@@ -154,7 +154,7 @@ public class VentanaMenu extends JFrame {
     }
 
     public void logOut() {
-        System.out.println(codigoUsu);
+        VentanaLogin.miMenu=null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaLogin.getInstance().setVisible(true);
     }
