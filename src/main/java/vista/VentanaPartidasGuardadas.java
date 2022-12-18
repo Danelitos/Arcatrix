@@ -104,7 +104,7 @@ public class VentanaPartidasGuardadas extends JFrame {
         System.out.println("partida instancia: " + codigoPartida++);
         try {
             String sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", VentanaMenu.getInstance(0).codigoUsu);
-            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
+            Sonido.getInstance().reproducirSonido("/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
 
             //creamos la partida con los datos cargados
             Central.getInstance().iniciarPartida(codUsuarioPartida, codigoPartida++, nivel, board, puntos);
