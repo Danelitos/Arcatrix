@@ -8,7 +8,7 @@ import java.awt.*;
 import java.sql.SQLException;
 
 public class VentanaLogin extends JFrame {
-    private static VentanaLogin miMenu;
+    public static VentanaLogin miMenu;
 
     private JPanel panelLogin;
 
@@ -109,16 +109,22 @@ public class VentanaLogin extends JFrame {
         int loginCorrecto = GestorBD.getInstance().verificarLogin(usuarioVerificar, passwordVerificar);
         if (loginCorrecto != 0) {
             System.out.println(loginCorrecto);
-            VentanaLogin.getInstance().setVisible(false);
-            VentanaMenu.getInstance(loginCorrecto).setVisible(true);
-            VentanaMenu.setCodigoUsu(loginCorrecto);
-            int codUsu = GestorBD.getInstance().buscarUsuario(usuarioVerificar, passwordVerificar);
-            Central.getInstance().crearUsuario(codUsu, usuarioVerificar, passwordVerificar);
-            try {
-                Central.getInstance().cargarPartidasGuardadas(codUsu);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
+            if(usuarioVerificar.equals("admin")){
+                VentanaLogin.getInstance().setVisible(false);
+                VentanaPanelAdmin.getInstance().setVisible(true);
+            }else{
+                VentanaLogin.getInstance().setVisible(false);
+                VentanaMenu.getInstance(loginCorrecto).setVisible(true);
+                VentanaMenu.setCodigoUsu(loginCorrecto);
+                int codUsu = GestorBD.getInstance().buscarUsuario(usuarioVerificar, passwordVerificar);
+                Central.getInstance().crearUsuario(codUsu, usuarioVerificar, passwordVerificar);
+                try {
+                    Central.getInstance().cargarPartidasGuardadas(codUsu);
+                } catch (SQLException e) {
+                    throw new RuntimeException(e);
+                }
             }
+
         } else {
             JOptionPane.showMessageDialog(VentanaLogin.getInstance(), "Ha habido un error al logearse", "LOGIN ERRONEO", JOptionPane.ERROR_MESSAGE);
         }
