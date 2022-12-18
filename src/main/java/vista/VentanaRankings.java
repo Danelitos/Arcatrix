@@ -18,7 +18,6 @@ public class VentanaRankings extends JFrame implements ActionListener {
     public static VentanaRankings miVentanaRankings;
 
     private JPanel panel;
-   // private JList rankings = null;
 
     private JTable tabla = null;
     private JsonArray lista;
@@ -43,7 +42,7 @@ public class VentanaRankings extends JFrame implements ActionListener {
 
     }
 
-    private void setComponentes()  {
+    private void setComponentes() {
 
 
         //crear panel
@@ -56,26 +55,25 @@ public class VentanaRankings extends JFrame implements ActionListener {
         //crear TEXTO
         JLabel texto = new JLabel();
         texto.setText("Ranking " + tipo);
-        texto.setBounds(150,75,200,20);
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        texto.setBounds(150, 75, 200, 20);
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
 
         //crear boton atras
         btnAtras = new JButton();
-        btnAtras.setBounds(0,0,75,50);
+        btnAtras.setBounds(0, 0, 75, 50);
         btnAtras.setText("Atras");
-        btnAtras.setBackground(new Color(0,255,255));
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        btnAtras.setBackground(new Color(0, 255, 255));
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         panel.add(btnAtras);
         btnAtras.addActionListener(this);
 
         //crear lista
 
-        if (tipo == "General"){
+        if (tipo == "General") {
             lista = ListaRankings.getInstance().getListaGeneral();
-            //rankings = new JList<>( this.jsonArrayToStringArray( lista) );
             this.crearTabla(lista);
 
         } else if (tipo == "Personal") {
@@ -96,56 +94,43 @@ public class VentanaRankings extends JFrame implements ActionListener {
         }
 
 
-
-        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION );
+        tabla.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
         JScrollPane scrollLista = new JScrollPane();
         scrollLista.setViewportView(tabla);
         scrollLista.setVisible(true);
-        scrollLista.setBounds(120,110,260,260);
+        scrollLista.setBounds(120, 110, 260, 260);
         panel.add(scrollLista);
 
     }
 
     public static VentanaRankings getInstance(String pTipo, int pCodUsu) {
-        if(VentanaRankings.miVentanaRankings ==null){
-            VentanaRankings.miVentanaRankings =new VentanaRankings(pTipo,pCodUsu) ;
+        if (VentanaRankings.miVentanaRankings == null) {
+            VentanaRankings.miVentanaRankings = new VentanaRankings(pTipo, pCodUsu);
         }
         return VentanaRankings.miVentanaRankings;
     }
 
-    /*public String[] jsonArrayToStringArray(JsonArray jsonArray) {
-        int arraySize = jsonArray.size();
-        String[] stringArray = new String[arraySize];
-
-        Gson gson = new Gson();
-        for(int i=0; i<arraySize; i++) {
-           String r = gson.toJson(jsonArray.get(i));
-           stringArray[i] = r;
-        }
-
-        return stringArray;
-    };*/
-
-    private void crearTabla (JsonArray jArray){
+    private void crearTabla(JsonArray jArray) {
         String[] nombreCol = {"Nombre", "Puntuacion"};
-        Object [][] datos = new Object [jArray.size()][2];
+        Object[][] datos = new Object[jArray.size()][2];
 
-        for (int i=0; i<jArray.size(); i++){
+        for (int i = 0; i < jArray.size(); i++) {
             JsonObject o = jArray.get(i).getAsJsonObject();
             datos[i][0] = o.get("Nombre Usuario").getAsString();
             datos[i][1] = o.get("Puntuacion").getAsInt();
         }
 
-        tabla = new JTable(datos,nombreCol);
+        tabla = new JTable(datos, nombreCol);
 
 
     }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         Object source = e.getSource();
-        if (btnAtras.equals(source)){
+        if (btnAtras.equals(source)) {
             this.setVisible(false);
-            VentanaElegirRanking.miVentanaElegirRanking=null;
+            VentanaElegirRanking.miVentanaElegirRanking = null;
             VentanaElegirRanking.getInstance(codUsusario);
         }
 

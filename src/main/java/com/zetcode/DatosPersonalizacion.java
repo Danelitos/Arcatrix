@@ -74,5 +74,4 @@ public class DatosPersonalizacion {
     public String getSonido() {
         return sonido;
     }
-
 }

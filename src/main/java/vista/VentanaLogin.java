@@ -109,10 +109,10 @@ public class VentanaLogin extends JFrame {
         int loginCorrecto = GestorBD.getInstance().verificarLogin(usuarioVerificar, passwordVerificar);
         if (loginCorrecto != 0) {
             System.out.println(loginCorrecto);
-            if(usuarioVerificar.equals("admin")){
+            if (usuarioVerificar.equals("admin")) {
                 VentanaLogin.getInstance().setVisible(false);
                 VentanaPanelAdmin.getInstance().setVisible(true);
-            }else{
+            } else {
                 VentanaLogin.getInstance().setVisible(false);
                 VentanaMenu.getInstance(loginCorrecto).setVisible(true);
                 VentanaMenu.setCodigoUsu(loginCorrecto);
@@ -132,10 +132,11 @@ public class VentanaLogin extends JFrame {
     }
 
     public void registro() throws SQLException {
-        VentanaRegistro.miMenu=null;
+        VentanaRegistro.miMenu = null;
         VentanaLogin.getInstance().setVisible(false);
         VentanaRegistro.getInstance().setVisible(true);
     }
+
     public void recuperarContrasena() throws SQLException {
         VentanaLogin.getInstance().setVisible(false);
         VentanaRecuperarContrasena.getInstance().setVisible(true);

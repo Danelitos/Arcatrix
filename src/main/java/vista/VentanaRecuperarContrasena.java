@@ -20,7 +20,6 @@ public class VentanaRecuperarContrasena extends JFrame {
     private JLabel preguntaSeguridadText;
     private JLabel respuestaSeguridadText;
 
-
     private VentanaRecuperarContrasena() {
         super("ARCATRIX - RECUPERAR CONTRASEÑA");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

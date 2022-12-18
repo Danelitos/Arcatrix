@@ -48,12 +48,12 @@ public class Tetris extends JFrame {
 
         getContentPane().setLayout(null);
 
-        statusbar = new JLabel(puntos+"");
+        statusbar = new JLabel(puntos + "");
         statusbar.setBounds(0, 344, 264, 28);
         getContentPane().add(statusbar);
 
         //Habrá que añadir los métodos para completar el tablero con las piezas en el caso de cargarPartida
-        board = new Board(this, codPartida, nivel,codigoUsuario);
+        board = new Board(this, codPartida, nivel, codigoUsuario);
         board.setBounds(0, 0, 264, 344);
         getContentPane().add(board);
 
@@ -67,7 +67,6 @@ public class Tetris extends JFrame {
         getContentPane().add(botonFinalizar);
         botonFinalizar.addActionListener(evento -> board.finalizar());
         board.start();
-
 
 
         setTitle("Tetris");

@@ -33,7 +33,10 @@ public class GestorUsuarios {
                 enc = true;
             }
         }
-        if (!enc) {user = null;};
+        if (!enc) {
+            user = null;
+        }
+        ;
         return (user);
     }
 
@@ -57,7 +60,7 @@ public class GestorUsuarios {
         return elUsuario.partidasGuardadasUsuario();
     }
 
-    public Partida crearPartida(int codPartida, String nivel, int codUsuario, Shape.Tetrominoe[] board, int puntos){
+    public Partida crearPartida(int codPartida, String nivel, int codUsuario, Shape.Tetrominoe[] board, int puntos) {
         Partida partida = new Partida(codPartida, nivel, codUsuario, board, puntos);
         return partida;
     }
@@ -74,22 +77,24 @@ public class GestorUsuarios {
     }
 
     public DatosPersonalizacion obtPersonalizacion(int codUsu) {
-        DatosPersonalizacion personalizacion=null;
+        DatosPersonalizacion personalizacion = null;
         Usuario user = buscarUsuario(codUsu);
         if (!(user == null)) {
-            personalizacion=user.obtPersonalizacion();
+            personalizacion = user.obtPersonalizacion();
 
         }
         return personalizacion;
     }
 
-    public ArrayList<Usuario> getLista(){return lista;}
+    public ArrayList<Usuario> getLista() {
+        return lista;
+    }
 
-    public JsonArray obtenerPartida(Usuario elUsuario, String fechaHora){
+    public JsonArray obtenerPartida(Usuario elUsuario, String fechaHora) {
         return elUsuario.obtPartida(fechaHora);
     }
 
-    public String[] getBoardUsuario(Usuario elUsuario, int codPartida){
+    public String[] getBoardUsuario(Usuario elUsuario, int codPartida) {
         return elUsuario.getBoard(codPartida);
     }
 }

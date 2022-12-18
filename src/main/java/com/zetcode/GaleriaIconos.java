@@ -9,7 +9,6 @@ public class GaleriaIconos {
     private String path = "/img/";
 
     private final String[] imagenes = {"tetrisFondo.png"};
-
     private final ArrayList<ImageIcon> listaImagenes;
 
     private GaleriaIconos() {

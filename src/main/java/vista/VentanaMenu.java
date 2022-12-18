@@ -1,13 +1,8 @@
 package vista;
 
-import com.zetcode.Central;
-import com.zetcode.Sonido;
-import com.zetcode.Tetris;
-
 import javax.swing.*;
 import java.awt.*;
 import java.sql.SQLException;
-import java.util.Date;
 import java.util.Objects;
 
 public class VentanaMenu extends JFrame {
@@ -58,11 +53,6 @@ public class VentanaMenu extends JFrame {
         panelMenu = new JPanel();
         //TODO MIRAR ESTO (DANEL)
         fondo = new JPanelImagen("MENU");
-        //this.getContentPane().add(fondo,BorderLayout.EAST);
-
-        //this.getContentPane().add(panelMenu);
-        //panelMenu.setLayout(null);
-        //panelMenu.setVisible(true);
 
         //TODO UNA MANERA
         panelMenu.setLayout(new GridLayout(5, 1, 5, 5));
@@ -120,17 +110,6 @@ public class VentanaMenu extends JFrame {
         cerrarSesion.addActionListener(evento -> logOut());
     }
 
-    static class ImagenFondo extends JPanel {
-        private Image imagen;
-
-        public void paint(Graphics g) {
-            imagen = new ImageIcon(Objects.requireNonNull(getClass().getResource("/main/java/img/tetrisFondo.png"))).getImage();
-            g.drawImage(imagen, 0, 0, getWidth(), getHeight(), this);
-            //setOpaque(false);
-            super.paintChildren(g);
-        }
-    }
-
     public void jugar() {
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaElegirNivel.getInstance(codigoUsu).setVisible(true);
@@ -154,7 +133,7 @@ public class VentanaMenu extends JFrame {
     }
 
     public void logOut() {
-        VentanaLogin.miMenu=null;
+        VentanaLogin.miMenu = null;
         VentanaMenu.getInstance(codigoUsu).setVisible(false);
         VentanaLogin.getInstance().setVisible(true);
     }
