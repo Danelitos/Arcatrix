@@ -4,7 +4,7 @@ import java.util.Random;
 
 public class Shape {
 
-    protected enum Tetrominoe { NoShape, ZShape, SShape, LineShape,
+    public enum Tetrominoe { NoShape, ZShape, SShape, LineShape,
         TShape, SquareShape, LShape, MirroredLShape }
 
     private Tetrominoe pieceShape;
@@ -35,7 +35,7 @@ public class Shape {
         setShape(Tetrominoe.NoShape);
     }
 
-    protected void setShape(Tetrominoe shape) {
+    public void setShape(Tetrominoe shape) {
 
         for (int i = 0; i < 4 ; i++) {
 
@@ -122,7 +122,6 @@ public class Shape {
             result.setX(i, -y(i));
             result.setY(i, x(i));
         }
-
         return result;
     }
 }
