@@ -135,7 +135,7 @@ public class VentanaNivelElegido extends JFrame {
         //INICIAR JUEGO TETRIS
         try {
             String sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", codigoUsuario);
-            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
+            Sonido.getInstance().reproducirSonido("/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
             Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
         } catch (SQLException throwables) {
             throwables.printStackTrace();

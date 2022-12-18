@@ -3,6 +3,7 @@ package com.zetcode;
 import javax.sound.sampled.*;
 import java.io.File;
 import java.io.IOException;
+import java.util.Objects;
 
 public class Sonido {
     private static Sonido miSonido;
@@ -16,7 +17,8 @@ public class Sonido {
     public Clip reproducirSonido(String nombreSonido, String clipS) {
         Clip clip = null;
         try {
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido).getAbsoluteFile());
+            //AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(new File(nombreSonido));
+            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Objects.requireNonNull(getClass().getResource(nombreSonido)));
             clip = AudioSystem.getClip();
             clip.open(audioInputStream);
             clip.start();

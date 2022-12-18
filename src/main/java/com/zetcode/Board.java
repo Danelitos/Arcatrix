@@ -229,14 +229,14 @@ public class Board extends JPanel {
     }
 
     private void newPiece() {
-        Sonido.getInstance().reproducirSonido("src/main/resources/audio/Beep.wav", "Clip Beep");
+        Sonido.getInstance().reproducirSonido("/audio/Beep.wav", "Clip Beep");
         curPiece.setRandomShape();
         curX = BOARD_WIDTH / 2 + 1;
         curY = BOARD_HEIGHT - 1 + curPiece.minY();
 
         if (!tryMove(curPiece, curX, curY)) {
             Sonido.getInstance().stop("Clip Cancion");
-            Sonido.getInstance().reproducirSonido("src/main/resources/audio/GameOver.wav", "Clip Cancion");
+            Sonido.getInstance().reproducirSonido("/audio/GameOver.wav", "Clip Cancion");
             curPiece.setShape(Tetrominoe.NoShape);
             timer.stop();
             gameOver = true;

@@ -13,7 +13,7 @@ public class GestorBD {
         //con = DriverManager.getConnection(sURL,"root","");
         String dir = System.getProperty("user.dir");
         System.out.println(dir);
-        String sURL = "jdbc:h2:" + dir + "/src/main/resources/baseDatos/tetrisBD;DB_CLOSE_ON_EXIT=FALSE";
+        String sURL = "jdbc:h2:" + dir + "/baseDatos/tetrisBD;DB_CLOSE_ON_EXIT=FALSE";
         con = DriverManager.getConnection(sURL, "admin", "");
 
         PreparedStatement sql = con.prepareStatement("RUNSCRIPT FROM 'bd.sql'");
