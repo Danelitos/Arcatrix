@@ -9,7 +9,7 @@ import java.awt.event.MouseListener;
 import java.nio.file.FileSystemNotFoundException;
 import java.sql.SQLException;
 
-public class VentanaElegirRanking extends JFrame implements ActionListener{
+public class VentanaElegirRanking extends JFrame implements ActionListener {
 
     public static VentanaElegirRanking miVentanaElegirRanking;
     private JButton btnGeneral, btnPorNiveles, btnMiRancking, btnAtras;
@@ -19,7 +19,7 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
     public int codUsuario;
 
-    private VentanaElegirRanking(int pCodUsu){
+    private VentanaElegirRanking(int pCodUsu) {
 
         this.codUsuario = pCodUsu;
         // crear ventana
@@ -33,7 +33,8 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         setComponentes();
 
     }
-    private void setComponentes(){
+
+    private void setComponentes() {
         //crear panel
         panel = new JPanel();
         panel.setBackground(Color.darkGray);
@@ -44,32 +45,32 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         //crear TEXTO
         JLabel texto = new JLabel();
         texto.setText("Tipo de Ranking:");
-        texto.setBounds(150,75,200,20);
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        texto.setBounds(150, 75, 200, 20);
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
 
         //crear boton atras
         btnAtras = new JButton();
-        btnAtras.setBounds(0,0,75,50);
+        btnAtras.setBounds(0, 0, 75, 50);
         btnAtras.setText("Atras");
-        btnAtras.setBackground(new Color(0,255,255));
-        texto.setFont(new Font(null,Font.PLAIN, 20));
+        btnAtras.setBackground(new Color(0, 255, 255));
+        texto.setFont(new Font(null, Font.PLAIN, 20));
         panel.add(btnAtras);
         btnAtras.addActionListener(this);
 
         //crear BOTONES
-        btnGeneral= new JButton();
-        btnGeneral.setBounds(150,150,200,35);
+        btnGeneral = new JButton();
+        btnGeneral.setBounds(150, 150, 200, 35);
         btnGeneral.setText("Ranking General");
         btnGeneral.setBackground(new Color(146, 248, 133));
         btnGeneral.setFocusPainted(false);
         panel.add(btnGeneral);
         btnGeneral.addActionListener(this);
 
-        btnPorNiveles= new JButton();
-        btnPorNiveles.setBounds(150,200,200,35);
+        btnPorNiveles = new JButton();
+        btnPorNiveles.setBounds(150, 200, 200, 35);
         btnPorNiveles.setText("Rankings por Niveles ");
         btnPorNiveles.setBackground(new Color(248, 248, 133));
         btnPorNiveles.setFocusPainted(false);
@@ -77,8 +78,8 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         btnPorNiveles.setHorizontalAlignment(SwingConstants.CENTER);
         btnPorNiveles.addActionListener(this);
 
-        btnMiRancking= new JButton();
-        btnMiRancking.setBounds(150,250,200,35);
+        btnMiRancking = new JButton();
+        btnMiRancking.setBounds(150, 250, 200, 35);
         btnMiRancking.setText("RankingPersonal");
         btnMiRancking.setBackground(new Color(248, 133, 133));
         btnMiRancking.setFocusPainted(false);
@@ -87,9 +88,9 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
 
     }
 
-    public static VentanaElegirRanking getInstance(int codUsuario){
-        if(VentanaElegirRanking.miVentanaElegirRanking ==null){
-            VentanaElegirRanking.miVentanaElegirRanking =new VentanaElegirRanking(codUsuario);
+    public static VentanaElegirRanking getInstance(int codUsuario) {
+        if (VentanaElegirRanking.miVentanaElegirRanking == null) {
+            VentanaElegirRanking.miVentanaElegirRanking = new VentanaElegirRanking(codUsuario);
         }
         return VentanaElegirRanking.miVentanaElegirRanking;
     }
@@ -101,22 +102,22 @@ public class VentanaElegirRanking extends JFrame implements ActionListener{
         Object source = e.getSource();
         if (btnGeneral.equals(source)) {
             this.setVisible(false);
-            VentanaRankings.miVentanaRankings=null;
-            VentanaRankings.getInstance("General",codUsuario);
+            VentanaRankings.miVentanaRankings = null;
+            VentanaRankings.getInstance("General", codUsuario);
 
         } else if (btnPorNiveles.equals(source)) {
             this.setVisible(false);
-            VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel=null;
+            VentanaElegirRankingsPorNivel.miVentanaElegirRankingsPorNivel = null;
 
             VentanaElegirRankingsPorNivel.getInstance(codUsuario);
 
         } else if (btnMiRancking.equals(source)) {
             this.setVisible(false);
-            VentanaRankings.miVentanaRankings=null;
-            VentanaRankings.getInstance("Personal",codUsuario);
+            VentanaRankings.miVentanaRankings = null;
+            VentanaRankings.getInstance("Personal", codUsuario);
         } else if (btnAtras.equals(source)) {
             this.setVisible(false);
-            VentanaMenu.miVentanaMenu=null;
+            VentanaMenu.miVentanaMenu = null;
             VentanaMenu.getInstance(this.codUsuario);
 
         }

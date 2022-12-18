@@ -9,8 +9,6 @@ import java.awt.*;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-
-import javax.sound.sampled.Clip;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 
@@ -88,7 +86,7 @@ public class VentanaPartidasGuardadas extends JFrame {
 
         //Obtenemos la fechaHora de la ventana de Partidas guardadas y el código de usuario de la VentanaMenu
         String s = VentanaPartidasGuardadas.getInstance().getListaString().getSelectedValue();
-        if (s==null){
+        if (s == null) {
             return;
         }
         VentanaPartidasGuardadas.getInstance().setVisible(false);
@@ -104,13 +102,9 @@ public class VentanaPartidasGuardadas extends JFrame {
             board[i] = Shape.Tetrominoe.valueOf(array[i]);
         }
         System.out.println("partida instancia: " + codigoPartida++);
-        //hacer cuenta atras
-        //VentanaNivelElegido.getInstance(codUsuarioPartida, nivel).cuentaAtras();
-        //crear interfaz del juego
         try {
-            String sonidoElegido= GestorBD.getInstance().obtColorPieza("SONIDO",VentanaMenu.getInstance(0).codigoUsu);
-            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav","Clip Cancion");
-            //Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
+            String sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", VentanaMenu.getInstance(0).codigoUsu);
+            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
 
             //creamos la partida con los datos cargados
             Central.getInstance().iniciarPartida(codUsuarioPartida, codigoPartida++, nivel, board, puntos);

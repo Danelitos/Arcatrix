@@ -320,7 +320,7 @@ public class VentanaPersonalizacion extends JFrame {
         int result = JOptionPane.showConfirmDialog(VentanaPersonalizacion.getInstance(codUsu), "Quieres guardar la personalización?", "GUARDAR PERSONALIZACIÓN", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
         if (result == JOptionPane.YES_OPTION) {
             if (!classicTetris.isSelected()) {
-                personActualizado =Central.getInstance().actualizarPersonalizacion(colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
+                personActualizado = Central.getInstance().actualizarPersonalizacion(colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado, codUsu);
                 if (personActualizado) {
                     Central.getInstance().actualizarDatosPersonaliza(codUsu, colorFondoAtualizado, colorZSHAPE, colorSSHAPE, colorLINESHAPE, colorTSHAPE, colorSQUARESHAPE, colorLSHAPE, colorMIRROREDLSHAPE, sonidoActualizado);
                     JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Se ha actualizado con exito", "ACTUALIZACIÓN EXITOSO", JOptionPane.INFORMATION_MESSAGE);
@@ -330,7 +330,8 @@ public class VentanaPersonalizacion extends JFrame {
                 }
             } else {
                 personActualizado = Central.getInstance().actualizarPersonalizacion(classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original", codUsu);
-                if (personActualizado) {Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original");
+                if (personActualizado) {
+                    Central.getInstance().actualizarDatosPersonaliza(codUsu, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, classicColor, "Tetris Original");
                     JOptionPane.showMessageDialog(VentanaPersonalizacion.getInstance(codUsu), "Se ha actualizado con exito", "ACTUALIZACIÓN EXITOSO", JOptionPane.INFORMATION_MESSAGE);
                     Central.getInstance().obtPersonalizacion(codUsu);
                 } else {

@@ -122,7 +122,6 @@ public class Shape {
             result.setX(i, -y(i));
             result.setY(i, x(i));
         }
-
         return result;
     }
 }

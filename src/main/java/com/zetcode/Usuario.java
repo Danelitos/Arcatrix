@@ -1,15 +1,8 @@
 package com.zetcode;
 
-import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 
-import java.io.PrintStream;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
 import java.util.Iterator;
 
 public class Usuario {
@@ -88,7 +81,9 @@ public class Usuario {
                 }
             }
         }
-        if (array.size() == 0){System.out.println("ERROR, no existe la partida");}
+        if (array.size() == 0) {
+            System.out.println("ERROR, no existe la partida");
+        }
         return array;
     }
 
@@ -100,8 +95,9 @@ public class Usuario {
             for (int i = 0; i < partida.getCasillasOcupadas().length; i++) {
                 pieza[i] = partida.getCasillasOcupadas()[i].toString();
             }
+        } else {
+            System.out.println("Error, no existe la partida");
         }
-        else {System.out.println("Error, no existe la partida");}
         return pieza;
     }
 

@@ -4,8 +4,6 @@ import com.zetcode.GaleriaIconos;
 
 
 import javax.swing.*;
-import java.awt.*;
-import java.util.Objects;
 
 public class JPanelImagen extends JPanel {
     private ImageIcon imagen;

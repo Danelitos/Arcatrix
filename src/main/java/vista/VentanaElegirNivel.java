@@ -41,8 +41,6 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         texto.setText("Nivel de dificultad:");
         texto.setBounds(150, 75, 200, 20);
         texto.setFont(new Font(null, Font.PLAIN, 20));
-        //texto.setOpaque(true);
-        //texto.setBackground(Color.red);
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setForeground(Color.white);
         panel.add(texto);
@@ -54,7 +52,6 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         btnFacil.setBackground(new Color(146, 248, 133));
         btnFacil.setFocusPainted(false);
         panel.add(btnFacil);
-        //btnFacil.addMouseListener(ControladorVentanaElegirNivel.getInstance());
         btnFacil.addActionListener(this);
 
         btnMedio = new JButton();
@@ -64,7 +61,6 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         btnMedio.setFocusPainted(false);
         panel.add(btnMedio);
         btnMedio.setHorizontalAlignment(SwingConstants.CENTER);
-        //btnMedio.addMouseListener(ControladorVentanaElegirNivel.getInstance());
         btnMedio.addActionListener(this);
 
         btnDificil = new JButton();
@@ -73,7 +69,6 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         btnDificil.setBackground(new Color(248, 133, 133));
         btnDificil.setFocusPainted(false);
         panel.add(btnDificil);
-        //btnDificil.addMouseListener(ControladorVentanaElegirNivel.getInstance());
         btnDificil.addActionListener(this);
     }
 
@@ -104,10 +99,6 @@ public class VentanaElegirNivel extends JFrame implements ActionListener {
         this.setVisible(false);
         VentanaNivelElegido.miNivelElegido = null;
         VentanaNivelElegido.getInstance(codUsuario, nivel).setVisible(true);
-        //this.setVisible(false);
-        //panelElegido.setVisible(true);
-
-
     }
 
 }

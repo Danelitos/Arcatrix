@@ -23,11 +23,10 @@ public class GestorBD {
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery("select * from Usuario WHERE Nombre='admin'");
 
-        if (!rs.next()){
+        if (!rs.next()) {
             sql = con.prepareStatement("INSERT INTO Usuario(Nombre,Email,Contraseña,CodigoPersonalizacion) Values('admin','','test',0)");
             sql.executeUpdate();
         }
-
 
 
     }
@@ -40,7 +39,7 @@ public class GestorBD {
         return miBaseDeDatos;
     }
 
-    public int insertPartida(int codUsuario, String nivel, int puntos,String fechaActual, String ladrillos) throws SQLException {
+    public int insertPartida(int codUsuario, String nivel, int puntos, String fechaActual, String ladrillos) throws SQLException {
 
         PreparedStatement sql = con.prepareStatement("INSERT INTO Partida(codUsuario,nivel,puntos,listaLadrillos,fechaHora) VALUES(?,?,?,?,?)", Statement.RETURN_GENERATED_KEYS);
 
@@ -48,7 +47,7 @@ public class GestorBD {
         sql.setString(2, nivel);
         sql.setInt(3, puntos);
         sql.setString(4, ladrillos);
-        sql.setString(5,fechaActual);
+        sql.setString(5, fechaActual);
 
         sql.executeUpdate();
 
@@ -64,9 +63,9 @@ public class GestorBD {
     }
 
     //TODO REGISTRO
-    public boolean addUsuario(String nombreUsuario, String correo, String password,String pregunta, String repuesta) throws SQLException {
+    public boolean addUsuario(String nombreUsuario, String correo, String password, String pregunta, String repuesta) throws SQLException {
         int codigoPersonalizacion;
-        int codigoUsu=0;
+        int codigoUsu = 0;
         Statement s = con.createStatement();
         ResultSet rs = s.executeQuery("select CodigoPersonalizacion from Usuario order by CodigoPersonalizacion desc limit 1");
         if (rs.next()) {
@@ -101,8 +100,8 @@ public class GestorBD {
         sql3.executeUpdate();
 
         PreparedStatement sql = con.prepareStatement("SELECT Id FROM `Usuario` WHERE Nombre=?");
-        sql.setString(1,nombreUsuario);
-        ResultSet rs1=sql.executeQuery();
+        sql.setString(1, nombreUsuario);
+        ResultSet rs1 = sql.executeQuery();
         if (rs1.next()) {
             codigoUsu = rs1.getInt("Id");
             System.out.println(codigoUsu);
@@ -144,7 +143,6 @@ public class GestorBD {
         ResultSet rs = sql1.executeQuery();
         if (rs.next()) {
             codigoPersonalizacion = rs.getInt("CodigoPersonalizacion");
-            System.out.println(codigoPersonalizacion);
         }
 
         PreparedStatement sql2 = con.prepareStatement("Update DatosPersonalizacion set ColorFondo=?,ColorZSHAPE=?,ColorSSHAPE=?,ColorLINESHAPE=?,ColorSQUARESHAPE=?,ColorTSHAPE=?,ColorLSHAPE=?,ColorMIRROREDLSHAPE=?,Sonido=? where CodigoPersonalizacion=?");
@@ -183,7 +181,6 @@ public class GestorBD {
         ResultSet rs1 = sql1.executeQuery();
         if (rs1.next()) {
             codigoPersonalizacion = rs1.getInt("CodigoPersonalizacion");
-            System.out.println(codigoPersonalizacion);
         }
 
         String colorFondo = null;
@@ -209,7 +206,6 @@ public class GestorBD {
             colorLSHAPE = rs2.getString("COLORLSHAPE");
             colorMIRRROREDLSHAPE = rs2.getString("COLORMIRROREDLSHAPE");
             sonido = rs2.getString("SONIDO");
-            System.out.println(codigoPersonalizacion);
         }
         if (columna.equals("COLORFONDO")) {
             return colorFondo;
@@ -235,20 +231,20 @@ public class GestorBD {
 
     public void cargarPartidasUsuario(int codUsu) throws SQLException {
 
-        Usuario usuario= GestorUsuarios.getInstance().buscarUsuario(codUsu);
+        Usuario usuario = GestorUsuarios.getInstance().buscarUsuario(codUsu);
 
         //COGER LAS PARTIDAS DEL USUARIO
         PreparedStatement sql1 = con.prepareStatement("select * from Partida where codUsuario=?");
         sql1.setInt(1, codUsu);
         ResultSet rs1 = sql1.executeQuery();
-        Partida partida=null;
-        while (rs1.next()){
-            int codPartida= rs1.getInt("codPartida");
-            int codUsuario= rs1.getInt("codUsuario");
+        Partida partida = null;
+        while (rs1.next()) {
+            int codPartida = rs1.getInt("codPartida");
+            int codUsuario = rs1.getInt("codUsuario");
             String nivel = rs1.getString("nivel");
             int puntos = rs1.getInt("puntos");
-            String ladrillos= rs1.getString("listaLadrillos");
-            String fecha= rs1.getString("fechaHora");
+            String ladrillos = rs1.getString("listaLadrillos");
+            String fecha = rs1.getString("fechaHora");
 
             //tenemos los datos
 
@@ -262,37 +258,37 @@ public class GestorBD {
             }
 
             //creamos la partida
-            partida=new Partida(codPartida,nivel,codUsuario,casillasOcupadas,puntos);
+            partida = new Partida(codPartida, nivel, codUsuario, casillasOcupadas, puntos);
 
             //creamos la partida guardada
-            PartidaGuardada partGuardada= new PartidaGuardada(usuario,partida,fecha);
+            PartidaGuardada partGuardada = new PartidaGuardada(usuario, partida, fecha);
 
             usuario.getListaPartidasGuardadas().add(partGuardada);
 
         }
     }
 
-    public ArrayList<Ranking> cargarRankings() throws SQLException{
+    public ArrayList<Ranking> cargarRankings() throws SQLException {
 
         ArrayList<Ranking> result = new ArrayList<Ranking>();
 
         PreparedStatement sql = con.prepareStatement("Select IdUsr,NombreUsr,Nivel,Puntuacion from Ranking");
         ResultSet rs1 = sql.executeQuery();
-        while (rs1.next()){
+        while (rs1.next()) {
             int UdSur = rs1.getInt("IdUsr");
             String Nombre = rs1.getString("NombreUsr");
             String Nivel = rs1.getString("Nivel");
             int Puntuacion = rs1.getInt("Puntuacion");
-            Ranking r = new Ranking(UdSur,Nombre,Puntuacion,Nivel);
+            Ranking r = new Ranking(UdSur, Nombre, Puntuacion, Nivel);
             result.add(r);
         }
 
         return result;
     }
 
-    public boolean anadirRanking(Ranking r) throws SQLException{
+    public boolean anadirRanking(Ranking r) throws SQLException {
 
-        int CodRanking=0;
+        int CodRanking = 0;
         PreparedStatement sql1 = con.prepareStatement("select CodRanking from Ranking order by CodRanking desc limit 1");
         ResultSet rs1 = sql1.executeQuery();
 
@@ -303,8 +299,8 @@ public class GestorBD {
         }
 
 
-        PreparedStatement sql2 = con.prepareStatement("Insert into Ranking(CodRanking,IdUsr,NombreUsr,Nivel,Puntuacion) values(?,?,?,?,?)" );
-        sql2.setInt(1,CodRanking);
+        PreparedStatement sql2 = con.prepareStatement("Insert into Ranking(CodRanking,IdUsr,NombreUsr,Nivel,Puntuacion) values(?,?,?,?,?)");
+        sql2.setInt(1, CodRanking);
         sql2.setInt(2, r.getIdUsr());
         sql2.setString(3, r.getNombreUsr());
         sql2.setString(4, r.getNivel());
@@ -314,53 +310,52 @@ public class GestorBD {
         return sql2.executeUpdate() > 0 ? true : false;
     }
 
-    public String conseguirNombreUsr(int codUsr) throws SQLException{
-        String nombre ="";
+    public String conseguirNombreUsr(int codUsr) throws SQLException {
+        String nombre = "";
 
         PreparedStatement sql = con.prepareStatement("Select Nombre from Usuario where Id=?");
-        sql.setInt(1,codUsr);
+        sql.setInt(1, codUsr);
         ResultSet rs1 = sql.executeQuery();
 
         if (rs1.next()) {
-            nombre= rs1.getString("Nombre");
+            nombre = rs1.getString("Nombre");
         }
 
 
         return nombre;
     }
 
-    public int conseguirIdConNombre(String nombreUsu) throws SQLException{
-        int id =-1;
+    public int conseguirIdConNombre(String nombreUsu) throws SQLException {
+        int id = -1;
 
         PreparedStatement sql = con.prepareStatement("Select Id from Usuario where Nombre=?");
-        sql.setString(1,nombreUsu);
+        sql.setString(1, nombreUsu);
         ResultSet rs1 = sql.executeQuery();
 
         if (rs1.next()) {
-            id= rs1.getInt("Id");
+            id = rs1.getInt("Id");
         }
 
         return id;
     }
 
-    public String recuperarContraseña(String correo,String preguntaVerificar,String respuestaVerificar) throws SQLException {
-        int codigoUsu=0;
-        String pregunta=null;
-        String respuesta=null;
-        String password=null;
+    public String recuperarContraseña(String correo, String preguntaVerificar, String respuestaVerificar) throws SQLException {
+        int codigoUsu = 0;
+        String pregunta = null;
+        String respuesta = null;
+        String password = null;
         PreparedStatement sql = con.prepareStatement("SELECT Id FROM `Usuario` WHERE Email=?");
-        sql.setString(1,correo);
-        ResultSet rs1=sql.executeQuery();
+        sql.setString(1, correo);
+        ResultSet rs1 = sql.executeQuery();
         if (rs1.next()) {
             codigoUsu = rs1.getInt("Id");
             System.out.println(codigoUsu);
         }
 
 
-
         PreparedStatement sql1 = con.prepareStatement("SELECT * FROM `RecuperarContrasena` WHERE CodigoUsu=?");
-        sql1.setInt(1,codigoUsu);
-        ResultSet rs2=sql1.executeQuery();
+        sql1.setInt(1, codigoUsu);
+        ResultSet rs2 = sql1.executeQuery();
         if (rs2.next()) {
             pregunta = rs2.getString("Pregunta");
             respuesta = rs2.getString("Respuesta");
@@ -368,26 +363,25 @@ public class GestorBD {
             System.out.println(respuesta);
         }
 
-        if(pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)){
+        if (pregunta.equals(preguntaVerificar) && respuesta.equals(respuestaVerificar)) {
             PreparedStatement sql2 = con.prepareStatement("select Contraseña from Usuario WHERE Id=?");
-            sql2.setInt(1,codigoUsu);
-            ResultSet rs3=sql2.executeQuery();
+            sql2.setInt(1, codigoUsu);
+            ResultSet rs3 = sql2.executeQuery();
             if (rs3.next()) {
                 password = rs3.getString("Contraseña");
             }
         }
         return password;
     }
-    public boolean eliminarUsuario(String usuario) throws SQLException{
+
+    public boolean eliminarUsuario(String usuario) throws SQLException {
 
         PreparedStatement sql = con.prepareStatement("DELETE FROM `Usuario` WHERE Nombre=?");
-        sql.setString(1,usuario);
+        sql.setString(1, usuario);
 
         return sql.executeUpdate() > 0 ? true : false;
 
     }
-
-
 
 
 }

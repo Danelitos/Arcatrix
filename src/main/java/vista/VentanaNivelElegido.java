@@ -13,13 +13,14 @@ public class VentanaNivelElegido extends JFrame {
     public static VentanaNivelElegido miNivelElegido;
     public static String nivelElegido;
     public int codigoUsuario;
-    JLabel texto,numero,nombre;
+    JLabel texto, numero, nombre;
     JPanel panel;
     JButton btnEmpPartida;
     Tetris ventana;
-    public VentanaNivelElegido(int codUsuario,String nivel){
+
+    public VentanaNivelElegido(int codUsuario, String nivel) {
         codigoUsuario = codUsuario;
-        nivelElegido=nivel;
+        nivelElegido = nivel;
         // crear ventana
         setTitle("Tetris");
         setSize(500, 500);
@@ -30,7 +31,7 @@ public class VentanaNivelElegido extends JFrame {
         setComponentes(nivel);
     }
 
-    private void setComponentes(String nivel){
+    private void setComponentes(String nivel) {
         // crear panel
         panel = new JPanel();
         panel.setBackground(Color.darkGray);
@@ -42,7 +43,7 @@ public class VentanaNivelElegido extends JFrame {
         nombre = new JLabel();
         nombre.setText("ARCATRIX");
         nombre.setForeground(Color.white);
-        nombre.setBounds(50,10,400,100);
+        nombre.setBounds(50, 10, 400, 100);
         nombre.setHorizontalAlignment(SwingConstants.CENTER);
         nombre.setFont(new Font("arial", Font.BOLD, 70));
         panel.add(nombre);
@@ -52,7 +53,7 @@ public class VentanaNivelElegido extends JFrame {
         texto = new JLabel();
         texto.setText("NIVEL " + nivel.toUpperCase());
         texto.setForeground(Color.white);
-        texto.setBounds(50,250,400,100);
+        texto.setBounds(50, 250, 400, 100);
         texto.setHorizontalAlignment(SwingConstants.CENTER);
         texto.setFont(new Font("arial", Font.BOLD, 50));
         panel.add(texto);
@@ -62,7 +63,7 @@ public class VentanaNivelElegido extends JFrame {
 
         numero.setForeground(Color.white);
 
-        numero.setBounds(75,75,350,200);
+        numero.setBounds(75, 75, 350, 200);
         numero.setHorizontalAlignment(SwingConstants.CENTER);
         numero.setFont(new Font("arial", Font.BOLD, 150));
         panel.add(numero);
@@ -72,8 +73,8 @@ public class VentanaNivelElegido extends JFrame {
         btnEmpPartida = new JButton();
         btnEmpPartida.setText("START");
         btnEmpPartida.setForeground(Color.white);
-        btnEmpPartida.setFont(new Font("Arial Bold", Font.BOLD,30));
-        btnEmpPartida.setBounds(175,350,150,30);
+        btnEmpPartida.setFont(new Font("Arial Bold", Font.BOLD, 30));
+        btnEmpPartida.setBounds(175, 350, 150, 30);
         btnEmpPartida.setBackground(new Color(245, 52, 52));
         btnEmpPartida.setFocusPainted(false);
         panel.add(btnEmpPartida);
@@ -82,14 +83,14 @@ public class VentanaNivelElegido extends JFrame {
 
     }
 
-    public static VentanaNivelElegido getInstance(int codigoUsuario,String nivelElegido) {
-        if(miNivelElegido==null){
-            miNivelElegido=new VentanaNivelElegido(codigoUsuario,nivelElegido);
+    public static VentanaNivelElegido getInstance(int codigoUsuario, String nivelElegido) {
+        if (miNivelElegido == null) {
+            miNivelElegido = new VentanaNivelElegido(codigoUsuario, nivelElegido);
         }
         return miNivelElegido;
     }
 
-    public void cuentaAtras(){
+    public void cuentaAtras() {
         try {
             btnEmpPartida.setVisible(false);
 
@@ -102,7 +103,6 @@ public class VentanaNivelElegido extends JFrame {
             Thread.sleep(1000);
             numero.setText("2");
 
-            //this.update(this.getGraphics());
             this.paint(this.getGraphics());
             Thread.sleep(1000);
             System.out.println("");
@@ -117,33 +117,32 @@ public class VentanaNivelElegido extends JFrame {
             this.paint(this.getGraphics());
 
 
+        } catch (InterruptedException e) {
         }
-        catch (InterruptedException e) {}
     }
 
     public void start() {
-            int codPartida=0;
-            //hacer cuenta atras
-            VentanaNivelElegido.getInstance(codigoUsuario,"Nada").cuentaAtras();
+        int codPartida = 0;
+        //hacer cuenta atras
+        VentanaNivelElegido.getInstance(codigoUsuario, "Nada").cuentaAtras();
 
-            //ToDo
-            //crear instancia partida con nivel como param
+        //ToDo
+        //crear instancia partida con nivel como param
 
-            System.out.println("START  jeje!!");
-            this.setVisible(false);
+        System.out.println("START  jeje!!");
+        this.setVisible(false);
 
-            //INICIAR JUEGO TETRIS
-            try {
-                String sonidoElegido=GestorBD.getInstance().obtColorPieza("SONIDO",codigoUsuario);
-                Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav","Clip Cancion");
-                Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
-            }
+        //INICIAR JUEGO TETRIS
+        try {
+            String sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", codigoUsuario);
+            Sonido.getInstance().reproducirSonido("src/main/resources/audio/" + sonidoElegido.toString() + ".wav", "Clip Cancion");
+            Sonido.getInstance().getClip("Clip Cancion").loop(Clip.LOOP_CONTINUOUSLY);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
 
-            //CREAMOS LA PARTIDA NUEVA
-            Central.getInstance().iniciarPartida(codigoUsuario,codPartida,nivelElegido,null ,0);
-
+        //CREAMOS LA PARTIDA NUEVA
+        Central.getInstance().iniciarPartida(codigoUsuario, codPartida, nivelElegido, null, 0);
 
 
     }

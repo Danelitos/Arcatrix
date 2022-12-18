@@ -1,11 +1,11 @@
 package com.zetcode;
 
-public class Ranking implements Comparable<Ranking>{
+public class Ranking implements Comparable<Ranking> {
 
-    private String  nombreUsr, nivel;
+    private String nombreUsr, nivel;
     private int idUsr, puntuacion;
 
-    public Ranking(int IdUsr, String NombreUsr, int Puntuacion, String Nivel){
+    public Ranking(int IdUsr, String NombreUsr, int Puntuacion, String Nivel) {
         this.idUsr = IdUsr;
         this.nombreUsr = NombreUsr;
         this.puntuacion = Puntuacion;
@@ -14,28 +14,32 @@ public class Ranking implements Comparable<Ranking>{
 
     }
 
-    public String getNombreUsr(){
+    public String getNombreUsr() {
 
         return nombreUsr;
     }
-    public int getIdUsr(){
+
+    public int getIdUsr() {
 
         return idUsr;
     }
-    public int getPuntuacion(){
+
+    public int getPuntuacion() {
 
         return puntuacion;
     }
-    public String getNivel(){
-        return this.nivel;}
+
+    public String getNivel() {
+        return this.nivel;
+    }
 
     @Override
     public int compareTo(Ranking r) {
-        if(r.getPuntuacion()>this.puntuacion){
+        if (r.getPuntuacion() > this.puntuacion) {
             return 1;
-        }else if(r.getPuntuacion()==this.puntuacion){
+        } else if (r.getPuntuacion() == this.puntuacion) {
             return 0;
-        }else{
+        } else {
             return -1;
         }
 

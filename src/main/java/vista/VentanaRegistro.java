@@ -1,8 +1,6 @@
 package vista;
 
-import com.zetcode.Central;
 import com.zetcode.GestorBD;
-import com.zetcode.GestorUsuarios;
 
 import javax.swing.*;
 import java.awt.*;
@@ -178,7 +176,6 @@ public class VentanaRegistro extends JFrame {
         panelRegistro.add(respuestaSeguridad);
 
 
-
     }
 
     public static VentanaRegistro getInstance() {
@@ -190,18 +187,18 @@ public class VentanaRegistro extends JFrame {
 
 
     private void registro() throws SQLException {
-        boolean validacion=this.validar();
-        int codUsu=GestorBD.getInstance().conseguirIdConNombre(usuario.getText());
-        if(codUsu==-1){
-            if(validacion) {
+        boolean validacion = this.validar();
+        int codUsu = GestorBD.getInstance().conseguirIdConNombre(usuario.getText());
+        if (codUsu == -1) {
+            if (validacion) {
                 String usuarioInsert = usuario.getText();
                 String correoInsert = correo.getText();
                 String passwordInsert = new String(password.getPassword());
                 String repetirPInsert = new String(repetirPassword.getPassword());
-                String preguntaInsert= Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
-                String respuestaInsert= respuestaSeguridad.getText();
+                String preguntaInsert = Objects.requireNonNull(preguntaSeguridad.getSelectedItem()).toString();
+                String respuestaInsert = respuestaSeguridad.getText();
                 if (passwordInsert.equals(repetirPInsert)) {
-                    boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert,preguntaInsert,respuestaInsert);
+                    boolean registroCorrecto = GestorBD.getInstance().addUsuario(usuarioInsert, correoInsert, passwordInsert, preguntaInsert, respuestaInsert);
                     if (registroCorrecto) {
                         JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro ha sido exitoso", "REGISTRO EXITOSO", JOptionPane.INFORMATION_MESSAGE);
                     } else {
@@ -212,12 +209,10 @@ public class VentanaRegistro extends JFrame {
                 } else {
                     JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Las contraseñas no coinciden.\nVuelve a escribir la contraseña", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
                 }
-            }
-            else{
+            } else {
                 JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El registro no es valido", "REGISTRO INVALIDO", JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else {
+        } else {
             JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "El nombre de usuario ya existe, pruebe otro", "REGISTRO INVALIDO", JOptionPane.ERROR_MESSAGE);
         }
 
@@ -228,46 +223,45 @@ public class VentanaRegistro extends JFrame {
         VentanaLogin.getInstance().setVisible(true);
     }
 
-    public boolean validar(){
-        boolean validacion=false;
-        String usuarioValidar=usuario.getText();
-        String correoValidar=correo.getText();
-        String passwordValidar=new String(password.getPassword());
-        String repPasswordValidar= new String(repetirPassword.getPassword());
-        String preguntaValidar= respuestaSeguridad.getText();
+    public boolean validar() {
+        boolean validacion = false;
+        String usuarioValidar = usuario.getText();
+        String correoValidar = correo.getText();
+        String passwordValidar = new String(password.getPassword());
+        String repPasswordValidar = new String(repetirPassword.getPassword());
+        String preguntaValidar = respuestaSeguridad.getText();
         // Patrón para validar el email
         Pattern patternCorreo = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
-                        + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+                + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
         //Para validar el correo
         Pattern patternPsw = Pattern.compile("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[@#$%^&+=])(?=\\S+$).{8,16}$");
         Matcher matherCorreo = patternCorreo.matcher(correoValidar);
-        Matcher matcherPsw=patternPsw.matcher(passwordValidar);
-        Matcher matcherRepPsw=patternPsw.matcher(repPasswordValidar);
-        if(usuarioValidar.isEmpty()){
+        Matcher matcherPsw = patternPsw.matcher(passwordValidar);
+        Matcher matcherRepPsw = patternPsw.matcher(repPasswordValidar);
+        if (usuarioValidar.isEmpty()) {
             avisoUsuario.setText("\u2715");
-        }else{
+        } else {
             avisoUsuario.setText("\u2713");
             avisoUsuario.setForeground(Color.GREEN);
         }
 
 
-        if(matherCorreo.find()){
+        if (matherCorreo.find()) {
             avisoCorreo.setText("\u2713");
             avisoCorreo.setForeground(Color.GREEN);
-        }
-        else{
+        } else {
             avisoCorreo.setText("\u2715");
         }
 
 
-        if(preguntaValidar.isEmpty()){
+        if (preguntaValidar.isEmpty()) {
             avisoPregunta.setText("\u2715");
-        }else{
+        } else {
             avisoPregunta.setText("\u2713");
             avisoPregunta.setForeground(Color.GREEN);
         }
 
-        if(passwordValidar.equals(repPasswordValidar)) {
+        if (passwordValidar.equals(repPasswordValidar)) {
             if (matcherPsw.find() && matcherRepPsw.find()) {
                 avisoPassword.setText("\u2713");
                 avisoPassword.setForeground(Color.GREEN);
@@ -279,13 +273,12 @@ public class VentanaRegistro extends JFrame {
                 //TODO BUBLE INFINITO (?)
                 //JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Contraseña de 8-16 caracteres.\nAl menos una letra mayúscula y minúscula y un caracter especial).\nSin espacios en blanco", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
             }
-        }
-        else{
+        } else {
             JOptionPane.showMessageDialog(VentanaRegistro.getInstance(), "Las contraseñas no coinciden.\nVuelve a escribir la contraseña", "CONTRASEÑA INVALIDA", JOptionPane.ERROR_MESSAGE);
         }
 
-        if(!usuarioValidar.isEmpty() && patternCorreo.matcher(correoValidar).find() && patternPsw.matcher(passwordValidar).find() && patternPsw.matcher(repPasswordValidar).find() && !preguntaValidar.isEmpty()){
-            validacion=true;
+        if (!usuarioValidar.isEmpty() && patternCorreo.matcher(correoValidar).find() && patternPsw.matcher(passwordValidar).find() && patternPsw.matcher(repPasswordValidar).find() && !preguntaValidar.isEmpty()) {
+            validacion = true;
         }
 
         return validacion;

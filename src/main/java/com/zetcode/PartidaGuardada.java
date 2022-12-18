@@ -1,11 +1,5 @@
 package com.zetcode;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-
-import java.util.Date;
-
 public class PartidaGuardada {
     private Usuario elUsuario;
     private Partida laPartida;

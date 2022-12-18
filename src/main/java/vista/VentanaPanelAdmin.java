@@ -81,22 +81,21 @@ public class VentanaPanelAdmin extends JFrame {
         return VentanaPanelAdmin.miMenu;
     }
 
-    public void eliminarUsuario() throws SQLException{
+    public void eliminarUsuario() throws SQLException {
         String nombre = usuario.getText();
         System.out.println(nombre);
         boolean borrarUsuario = GestorBD.getInstance().eliminarUsuario(nombre);
 
-        if(borrarUsuario){
-            JOptionPane.showMessageDialog(VentanaPanelAdmin.getInstance(),"Se ha borrado el usuario correctamente: " + nombre,"USUARIO BORRADO",JOptionPane.INFORMATION_MESSAGE);
-        }
-        else {
+        if (borrarUsuario) {
+            JOptionPane.showMessageDialog(VentanaPanelAdmin.getInstance(), "Se ha borrado el usuario correctamente: " + nombre, "USUARIO BORRADO", JOptionPane.INFORMATION_MESSAGE);
+        } else {
             JOptionPane.showMessageDialog(VentanaPanelAdmin.getInstance(), "Error al eliminar el usuario, inténtalo de nuevo", "ERROR", JOptionPane.ERROR_MESSAGE);
         }
     }
 
 
     public void volver() {
-        VentanaLogin.miMenu=null;
+        VentanaLogin.miMenu = null;
         VentanaPanelAdmin.getInstance().setVisible(false);
         VentanaLogin.getInstance().setVisible(true);
     }

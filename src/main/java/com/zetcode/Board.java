@@ -36,12 +36,11 @@ public class Board extends JPanel {
     private boolean gameOver;
 
 
-
-    public Board(Tetris pParent, int pCodPartida, String pNivel,int codUsr) throws SQLException {
+    public Board(Tetris pParent, int pCodPartida, String pNivel, int codUsr) throws SQLException {
         parent = pParent;
         codPartida = pCodPartida;
         nivel = pNivel;
-        this.codUsr=codUsr;
+        this.codUsr = codUsr;
         setTamanoYVelocidad(nivel);
         String colorFondo = GestorBD.getInstance().obtColorPieza("COLORFONDO", parent.codigoUsuario);
         if (!colorFondo.equals("Classic Color")) {
@@ -243,19 +242,20 @@ public class Board extends JPanel {
             gameOver = true;
             var msg = String.format("Game over. Score: %d", numLinesRemoved);
             statusbar.setText(msg);
-        //ACTUALIZAR RANKINGS
+            //ACTUALIZAR RANKINGS
 
-            String nombre ="";
+            String nombre = "";
             try {
                 nombre = GestorBD.getInstance().conseguirNombreUsr(codUsr);
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
             try {
-            ListaRankings.getInstance().anadirRanking(codUsr,nombre,numLinesRemoved,nivel);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }}
+                ListaRankings.getInstance().anadirRanking(codUsr, nombre, numLinesRemoved, nivel);
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
+            }
+        }
     }
 
     private boolean tryMove(Shape newPiece, int newX, int newY) {
@@ -356,9 +356,6 @@ public class Board extends JPanel {
         if (!gameOver) {
             this.timer.stop();
             Sonido.getInstance().stop("Clip Cancion");
-            //TODO REVISAR SI HAY TIEMPO
-            //int result = JOptionPane.showConfirmDialog(parent, "Quieres guardar la partida?", "GUARDAR PARTIDA", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-            //if (result == JOptionPane.YES_OPTION) {
             VentanaMenu.getInstance(parent.codigoUsuario).setVisible(true);
             parent.setVisible(false);
             //actualizar puntos
@@ -367,27 +364,15 @@ public class Board extends JPanel {
             Date fechaActual = new Date();
             String ladrillosTexto = Central.getInstance().pasarLadrillosTexto(parent.getCasillasOcupadas());
             try {
-                codPartida = Central.getInstance().guardarPartidaEnBD(parent.codigoUsuario,parent.nivel,parent.getPuntos(),fechaActual.toString(),ladrillosTexto);
+                codPartida = Central.getInstance().guardarPartidaEnBD(parent.codigoUsuario, parent.nivel, parent.getPuntos(), fechaActual.toString(), ladrillosTexto);
             } catch (SQLException ex) {
                 throw new RuntimeException(ex);
             }
             //ACTUALIZAMOS CODIGO PARTIDA INSERTADA EN LA BD
             parent.codigoPartida = codPartida;
 
-            Central.getInstance().guardarPartida(parent.codigoPartida, parent.nivel, parent.codigoUsuario, parent.getCasillasOcupadas(), parent.puntos,fechaActual.toString());
+            Central.getInstance().guardarPartida(parent.codigoPartida, parent.nivel, parent.codigoUsuario, parent.getCasillasOcupadas(), parent.puntos, fechaActual.toString());
             System.out.println("Partida guardada");
-            /*} else {
-                String sonidoElegido = null;
-                try {
-                    sonidoElegido = GestorBD.getInstance().obtColorPieza("SONIDO", parent.codigoUsuario);
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
-                }
-                Clip clip = Sonido.getInstance().getClip("Clip Cancion");
-                clip.start();
-                clip.loop(Clip.LOOP_CONTINUOUSLY);
-                this.timer.start();
-            }*/
         }
     }
 
@@ -526,9 +511,17 @@ public class Board extends JPanel {
     }
 
     //PARA TEST
-    public int getBoardWidth(){return this.BOARD_WIDTH;}
-    public int getBoardHeight(){return this.BOARD_HEIGHT;}
-    public int getVelocidad(){return this.PERIOD_INTERVAL;}
+    public int getBoardWidth() {
+        return this.BOARD_WIDTH;
+    }
+
+    public int getBoardHeight() {
+        return this.BOARD_HEIGHT;
+    }
+
+    public int getVelocidad() {
+        return this.PERIOD_INTERVAL;
+    }
 
 
 }
