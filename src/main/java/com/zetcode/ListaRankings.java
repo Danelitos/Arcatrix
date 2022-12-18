@@ -67,7 +67,7 @@ public class ListaRankings {
         return resultado;
     }
 
-    private void ordenar() {
+    public void ordenar() {
 
         //Ordenar Arraylist de objetos
         Collections.sort(listaRankings);
