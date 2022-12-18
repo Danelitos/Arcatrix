@@ -1,6 +1,5 @@
 package com.zetcode;
 
-import java.security.GeneralSecurityException;
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -378,8 +377,18 @@ public class GestorBD {
             }
         }
         return password;
+    }
 
+    public boolean eliminarUsuario(String usuario) throws SQLException{
 
+        PreparedStatement sql = con.prepareStatement("DELETE FROM `Usuario` WHERE Nombre=?");
+        sql.setString(1,usuario);
+
+        return sql.executeUpdate() > 0 ? true : false;
+        //if (rs1.next()) {
+        //    usu = rs1.getString("Nombre");
+        //    System.out.println(usu);
+        // }
 
 
     }

@@ -17,6 +17,7 @@ public class VentanaPanelAdmin extends JFrame {
     private JTextField usuario;
 
     private JButton eliminarButton;
+    private JButton volverButton;
 
 
     private VentanaPanelAdmin() {
@@ -41,6 +42,19 @@ public class VentanaPanelAdmin extends JFrame {
         eliminarButton.setBounds(140, 240, 200, 50);
         eliminarButton.setBackground(new Color(51, 159, 221));
         eliminarButton.setHorizontalAlignment(SwingConstants.CENTER);
+        eliminarButton.addActionListener(evento -> {
+            try {
+                eliminarUsuario();
+            } catch (SQLException throwables) {
+                throwables.printStackTrace();
+            }
+        });
+
+        volverButton = new JButton("Volver");
+        volverButton.setBounds(140, 300, 200, 50);
+        volverButton.setBackground(new Color(51, 159, 221));
+        volverButton.setHorizontalAlignment(SwingConstants.CENTER);
+        volverButton.addActionListener(evento -> volver());
 
 
         usuarioText = new JLabel("Usuario");
@@ -54,6 +68,7 @@ public class VentanaPanelAdmin extends JFrame {
         panelAdmin.add(usuarioText);
         panelAdmin.add(usuario);
         panelAdmin.add(eliminarButton);
+        panelAdmin.add(volverButton);
 
     }
 
@@ -62,6 +77,24 @@ public class VentanaPanelAdmin extends JFrame {
             VentanaPanelAdmin.miMenu = new VentanaPanelAdmin();
         }
         return VentanaPanelAdmin.miMenu;
+    }
+
+    public void eliminarUsuario() throws SQLException{
+        String nombre = usuario.getText();
+
+        boolean borrarUsuario = GestorBD.getInstance().eliminarUsuario(nombre);
+
+        if(borrarUsuario){
+            JOptionPane.showMessageDialog(VentanaPanelAdmin.getInstance(),"Se ha borrado el usuario correctamente: " + borrarUsuario,"USUARIO BORRADO",JOptionPane.INFORMATION_MESSAGE);
+        }
+        else {
+            JOptionPane.showMessageDialog(VentanaPanelAdmin.getInstance(), "Error al eliminar el usuario, inténtalo de nuevo", "ERROR", JOptionPane.ERROR_MESSAGE);
+        }
+    }
+
+    public void volver() {
+        VentanaPanelAdmin.getInstance().setVisible(false);
+        VentanaLogin.getInstance().setVisible(true);
     }
 
 
